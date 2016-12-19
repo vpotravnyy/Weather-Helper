@@ -12,26 +12,29 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
+app.use(Express.static(__dirname + '/dist'))
+
 // Catch all requests and forward them to index.html
-app.use(function (req, res) {
-  var file,
-      type
-  switch (req.url) {
-    case "/main.css":
-      file = __dirname + '/dist/main.css'
-      type = 'text/css'
-      break;
-    default:
-      file = __dirname + '/dist/index.html'
-      type = 'text/html'
-      break;
-  }
-  fs.readFile(file, (err, indexData) => {
-    if (err) throw err
-    res.set('Content-Type', type)
-    res.send(indexData)
-  })
-})
+// app.use(function (req, res) {
+//   var file,
+//       type
+//   console.log(req.url.parse(req.url))
+//   switch (req.url) {
+//     case "/main.css":
+//       file = __dirname + '/dist/main.css'
+//       type = 'text/css'
+//       break;
+//     default:
+//       file = __dirname + '/dist/index.html'
+//       type = 'text/html'
+//       break;
+//   }
+//   fs.readFile(file, (err, indexData) => {
+//     if (err) throw err
+//     res.set('Content-Type', type)
+//     res.send(indexData)
+//   })
+// })
 
 app.listen(port, function (error) {
   if (error) {

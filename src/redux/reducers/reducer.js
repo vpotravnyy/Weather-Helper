@@ -3,20 +3,42 @@ import {
   REMOVE_PLACE
 } from '_constants/actions'
 
-export const initialState = ['My location']
+import initialState from '_redux/initState'
 
 export default function reducer (state = initialState, action) {
   switch (action.type) {
     case ADD_PLACE:
-      return [
-        ...state,
-        'Location ' + state.length
-      ]
+      var maxPlaceId = state.places.reduce((memo, el) => {
+        return el.placeID > memo ? el.placeID : memo
+      }, -1)
+      console.log(maxPlaceId)
+      var placeIdArray = state.places.reduce((memo, el) => {
+        memo[el.placeID] = el.placeID
+        return memo
+      }, Array(maxPlaceId + 2).fill(-1))
+      console.log(placeIdArray)
+      var newID
+      placeIdArray.some((el, i) => {
+        if(el < 0) newID = i
+        return el < 0
+      })
+      console.log(newID)
+      return Object.assign({}, state, {
+        places: [
+          ...state.places,
+          {
+            "place": 'CityName' + newID,
+            "placeID": newID,
+            "lat": undefined,
+            "lng": undefined,
+            "weather": ""
+          }
+        ]
+      })
     case REMOVE_PLACE:
-      return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
-      ]
+      return Object.assign({}, state, {
+        places: state.places.filter(item => item.place !== action.place)
+      })
     default:
       return state
   }

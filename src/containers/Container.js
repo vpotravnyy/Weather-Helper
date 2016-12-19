@@ -13,7 +13,7 @@ import PlaceList from '_components/PlaceList'
 class Container extends Component {
   render () {
     const {
-      places,
+      state,
       addPlace,
       removePlace
     } = this.props
@@ -21,35 +21,35 @@ class Container extends Component {
     return (
       <div className='container'>
         <header>
-          <a href="https://www.yahoo.com/?ilc=401" target="_blank">
-            <img src="https://poweredby.yahoo.com/purple_retina.png" width="134" height="29"/>
+          <a href="https://darksky.net/poweredby/" target="_blank">
+            <img src="/img/poweredby.png" />
           </a>
           Weather Helper
           <button onClick={addPlace}>Add city</button>
         </header>
         
-        <PlaceList places={places} clickHandler={removePlace} />
+        <PlaceList places={state.places} clickHandler={removePlace} />
       </div>
     )
   }
 }
 
 Container.propTypes = {
-  places: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
   addPlace: PropTypes.func.isRequired,
   removePlace: PropTypes.func.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    places: state.reducer
+    state: state.reducer
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     addPlace: () => dispatch(addPlace()),
-    removePlace: (i) => dispatch(removePlace(i))
+    removePlace: (place) => dispatch(removePlace(place))
   }
 }
 

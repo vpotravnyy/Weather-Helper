@@ -1,7 +1,7 @@
 {
   "name": "weather_helper",
   "version": "1.0.0",
-  "description": "Helps to get weather in your location and selected sities",
+  "description": "Helps to get weather for your location and selected sities",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
@@ -10,7 +10,7 @@
   "author": "potravniy",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potravniy/WeatherHelper"
+    "url": "git+https://github.com/potravniy/Weather-Helper.git"
   },
   "license": "MIT",
   "devDependencies": {

@@ -8,9 +8,9 @@ export const addPlace = () => {
     type: ADD_PLACE
   }
 }
-export const removePlace = (i) => {
+export const removePlace = (place) => {
   return {
     type: REMOVE_PLACE,
-    index: i
+    place: place
   }
 }
