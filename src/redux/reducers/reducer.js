@@ -3,26 +3,13 @@ import {
   REMOVE_PLACE
 } from '_constants/actions'
 
+import getNewPlaceId from '_lib/getNewPlaceId'
 import initialState from '_redux/initState'
 
 export default function reducer (state = initialState, action) {
   switch (action.type) {
     case ADD_PLACE:
-      var maxPlaceId = state.places.reduce((memo, el) => {
-        return el.placeID > memo ? el.placeID : memo
-      }, -1)
-      console.log(maxPlaceId)
-      var placeIdArray = state.places.reduce((memo, el) => {
-        memo[el.placeID] = el.placeID
-        return memo
-      }, Array(maxPlaceId + 2).fill(-1))
-      console.log(placeIdArray)
-      var newID
-      placeIdArray.some((el, i) => {
-        if(el < 0) newID = i
-        return el < 0
-      })
-      console.log(newID)
+      var newID = getNewPlaceId(state)
       return Object.assign({}, state, {
         places: [
           ...state.places,
