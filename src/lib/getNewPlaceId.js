@@ -1,10 +1,10 @@
-export default function getNewPlaceId (state) {
+export default function getNewPlaceId (places) {
 
-  const maxPlaceId = state.places.reduce((memo, el) => {
+  const maxPlaceId = places.reduce((memo, el) => {
     return el.placeID > memo ? el.placeID : memo
   }, -1)
   
-  const placeIdArray = state.places.reduce((memo, el) => {
+  const placeIdArray = places.reduce((memo, el) => {
     memo[el.placeID] = el.placeID
     return memo
   }, Array(maxPlaceId + 2).fill(-1))

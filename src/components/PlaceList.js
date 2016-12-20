@@ -3,7 +3,7 @@ import Place from '_components/Place'
 
 export default function PlaceList (props) {
   const places = props.places.map(p => {
-    return <Place key={p.placeID} data={p} clickHandler={props.clickHandler} index={p.placeID}/>
+    return <Place key={p.placeID} place={p} removeHandler={props.removeHandler} />
   })
   return (
     <main>
@@ -14,5 +14,5 @@ export default function PlaceList (props) {
 
 PlaceList.propTypes = {
   places: PropTypes.array.isRequired,
-  clickHandler: PropTypes.func.isRequired
+  removeHandler: PropTypes.func.isRequired
 }

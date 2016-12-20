@@ -1,20 +1,20 @@
 import React, { PropTypes } from 'react'
 
 export default function Place (props) {
-  const clickHandler = props.clickHandler.bind(null, props.data.place)
-  const btnDel = <button onClick={clickHandler}>Delete</button>
+  const removeHandler = props.removeHandler.bind(null, props.place.placeID)
+  const btnDel = <button onClick={removeHandler}>Delete</button>
   
   return (
     <article>
-      <p>{props.data.place}</p>
-      <p>lat: {props.data.lat}</p>
-      <p>lng: {props.data.lng}</p>
-      {props.index === 0 ? null : btnDel}
+      <p>{props.place.place}</p>
+      <p>lat: {props.place.lat}</p>
+      <p>lng: {props.place.lng}</p>
+      {props.place.placeID === 0 ? null : btnDel}
     </article>
   )
 }
 
 Place.propTypes = {
-  data: PropTypes.any,
-  clickHandler: PropTypes.func.isRequired
+  place: PropTypes.object.isRequired,
+  removeHandler: PropTypes.func.isRequired
 }

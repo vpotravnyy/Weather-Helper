@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import reducer from './reducer'
+import places from '_reducers/places'
+import lang from '_reducers/lang'
 
 const rootReducer = combineReducers({
-  reducer
+  lang,
+  places
 })
 
 export default rootReducer

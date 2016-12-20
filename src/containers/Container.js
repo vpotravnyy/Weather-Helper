@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 // Actions
 import {
   addPlace,
-  removePlace
+  removePlace,
+  getCoords
 } from '_actions/actions'
+
 
 // Components
 import PlaceList from '_components/PlaceList'
@@ -13,11 +15,17 @@ import PlaceList from '_components/PlaceList'
 class Container extends Component {
   render () {
     const {
-      state,
+      lang,
+      places,
       addPlace,
-      removePlace
+      removePlace,
+      getCoords
     } = this.props
-
+    console.log('Component\nlang: ', lang, 'places: ', places)
+    if(places[0].lat === undefined && !places[0].isFetching){
+      getCoords()
+    }
+    
     return (
       <div className='container'>
         <header>
@@ -28,28 +36,32 @@ class Container extends Component {
           <button onClick={addPlace}>Add city</button>
         </header>
         
-        <PlaceList places={state.places} clickHandler={removePlace} />
+        <PlaceList places={places} removeHandler={removePlace} />
       </div>
     )
   }
 }
 
 Container.propTypes = {
-  state: PropTypes.object.isRequired,
+  lang: PropTypes.string.isRequired,
+  places: PropTypes.array.isRequired,
   addPlace: PropTypes.func.isRequired,
-  removePlace: PropTypes.func.isRequired
+  removePlace: PropTypes.func.isRequired,
+  getCoords: PropTypes.func.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    state: state.reducer
+    lang: state.lang,
+    places: state.places
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     addPlace: () => dispatch(addPlace()),
-    removePlace: (place) => dispatch(removePlace(place))
+    removePlace: (place) => dispatch(removePlace(place)),
+    getCoords: () => dispatch(getCoords())
   }
 }
 

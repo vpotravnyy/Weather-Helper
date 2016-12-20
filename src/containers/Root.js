@@ -5,6 +5,7 @@ import createStore from '_redux/createStore'
 import Container from '_containers/Container'
 
 const store = createStore()
+console.log("Root: ", store)
 
 export default class Root extends Component {
   render () {
