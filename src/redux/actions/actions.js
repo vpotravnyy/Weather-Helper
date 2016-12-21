@@ -34,3 +34,32 @@ export const getCoords = () => {
     }
   }
 }
+
+export const getWeather = (placeID, lat, lng) => {
+  console.log("getWeather: ", lat, lng)
+  return {
+    [CALL_API]: {
+      endpoint: "/api/"+ lat +","+ lng +"?units=si&lang=uk&exclude=minutely,flags",
+      method: 'GET',
+      headers: {
+        'Accept': 'text/plain',
+        'Content-Language': 'uk, ru, en',
+        'Content-Type': 'text/plain'
+      },
+      types: [
+        {
+          type: GET_WEATHER_REQUEST,
+          meta: placeID
+        },
+        {
+          type: GET_WEATHER_SUCCESS,
+          meta: placeID
+        },
+        {
+          type: GET_WEATHER_FAILURE,
+          meta: placeID
+        }
+      ]
+    }
+  }
+}

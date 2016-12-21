@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import {
   addPlace,
   removePlace,
-  getCoords
+  getCoords,
+  getWeather
 } from '_actions/actions'
 
 
@@ -19,12 +20,19 @@ class Container extends Component {
       places,
       addPlace,
       removePlace,
-      getCoords
+      getCoords,
+      getWeather
     } = this.props
     console.log('Component\nlang: ', lang, 'places: ', places)
-    if(places[0].lat === undefined && !places[0].isFetching){
+    if(!places[0].lat && !places[0].isFetching){
       getCoords()
     }
+    if(places[0].lat > -90 && places[0].lat < 90 && places[0].weather === null && !places[0].isFetching){
+      setTimeout(() => {
+        getWeather(0, places[0].lat, places[0].lng)
+      }, 100)
+    }
+
     
     return (
       <div className='container'>
@@ -47,7 +55,8 @@ Container.propTypes = {
   places: PropTypes.array.isRequired,
   addPlace: PropTypes.func.isRequired,
   removePlace: PropTypes.func.isRequired,
-  getCoords: PropTypes.func.isRequired
+  getCoords: PropTypes.func.isRequired,
+  getWeather: PropTypes.func.isRequired
 }
 
 function mapStateToProps (state) {
@@ -61,7 +70,8 @@ function mapDispatchToProps (dispatch) {
   return {
     addPlace: () => dispatch(addPlace()),
     removePlace: (place) => dispatch(removePlace(place)),
-    getCoords: () => dispatch(getCoords())
+    getCoords: () => dispatch(getCoords()),
+    getWeather: (placeID, lat, lng) => dispatch(getWeather(placeID, lat, lng))
   }
 }
 

@@ -10,7 +10,7 @@
   "author": "potravniy",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/potravniy/Weather-Helper.git"
+    "url": "https://github.com/potravniy/Weather-Helper.git"
   },
   "license": "MIT",
   "devDependencies": {
@@ -38,6 +38,7 @@
     "redux": "^3.6.0",
     "redux-api-middleware": "^1.0.2",
     "redux-thunk": "^2.1.0",
+    "request": "^2.79.0",
     "webpack": "^1.13.3",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.2"

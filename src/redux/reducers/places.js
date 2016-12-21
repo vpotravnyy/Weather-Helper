@@ -3,7 +3,10 @@ import {
   REMOVE_PLACE,
   GET_COORDS_REQUEST,
   GET_COORDS_SUCCESS,
-  GET_COORDS_FAILURE
+  GET_COORDS_FAILURE,
+  GET_WEATHER_REQUEST,
+  GET_WEATHER_SUCCESS,
+  GET_WEATHER_FAILURE
 } from '_constants/actions'
 
 import getNewPlaceId from '_lib/getNewPlaceId'
@@ -29,29 +32,57 @@ export default function (places = initialState.places, action) {
       return places.filter(item => item.placeID !== action.placeID)
 
     case GET_COORDS_REQUEST:
-      return updatePlaces(places, undefined, undefined, true)
+      return setCoords(places, undefined, undefined, true)
 
     case GET_COORDS_SUCCESS:
-      return updatePlaces(places, action.payload.location.lat, action.payload.location.lng, false)
+      return setCoords(places, action.payload.location.lat, action.payload.location.lng, false)
 
     case GET_COORDS_FAILURE:
-      console.log('GET_COORDS_FAILURE', action)
-      return updatePlaces(places, undefined, undefined, false)
+      return setCoords(places, "error", "error", false)
+
+    case GET_WEATHER_REQUEST:
+      console.log("GET_WEATHER_REQUEST: ", action)
+      if(action.error){
+        return setWeather(places, action.meta, 'error', false)
+      } else {
+        return setWeather(places, action.meta, null, true)
+      }
+
+    case GET_WEATHER_SUCCESS:
+      console.log("GET_WEATHER_SUCCESS: ", action)
+      if(action.error){
+        return setWeather(places, action.meta, 'error', false)
+      } else {
+        return setWeather(places, action.meta, action.payload, false)
+      }
+
+    case GET_WEATHER_FAILURE:
+      console.log('GET_WEATHER_FAILURE', action)
+      return setWeather(places, action.meta, action.payload, false)
 
     default:
       return places
   }
 }
 
-function updatePlaces (places, lat, lng, isFetching) {
+function setCoords (places, lat, lng, isFetching) {
   return places.map(p => {
     if(p.placeID === 0){
       return {
-        "place": 'Current',
-        "placeID": 0,
+        ...p,
         "lat": lat,
         "lng": lng,
-        "weather": null,
+        'isFetching': isFetching
+      }
+    } else return p
+  })
+}
+function setWeather (places, placeID, payload, isFetching) {
+  return places.map(p => {
+    if(p.placeID === placeID){
+      return {
+        ...p,
+        "weather": payload,
         'isFetching': isFetching
       }
     } else return p
