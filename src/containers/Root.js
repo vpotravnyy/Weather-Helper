@@ -3,9 +3,14 @@ import { Provider } from 'react-redux'
 
 import createStore from '_redux/createStore'
 import Container from '_containers/Container'
+import getApiData from '_listeners/getApiData'
 
 const store = createStore()
-console.log("Root: ", store)
+
+const unsubscribeGetApiData = store.subscribe(() => {
+  getApiData( store )
+})
+getApiData( store )
 
 export default class Root extends Component {
   render () {

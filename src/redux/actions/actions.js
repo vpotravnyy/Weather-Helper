@@ -35,8 +35,14 @@ export const getCoords = () => {
   }
 }
 
-export const getWeather = (placeID, lat, lng) => {
+export const getWeather = (props) => {
+  const {
+    placeID,
+    lat,
+    lng
+  } = props
   console.log("getWeather: ", lat, lng)
+  
   return {
     [CALL_API]: {
       endpoint: "/api/"+ lat +","+ lng +"?units=si&lang=uk&exclude=minutely,flags",

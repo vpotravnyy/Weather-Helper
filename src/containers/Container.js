@@ -24,15 +24,6 @@ class Container extends Component {
       getWeather
     } = this.props
     console.log('Component\nlang: ', lang, 'places: ', places)
-    if(!places[0].lat && !places[0].isFetching){
-      getCoords()
-    }
-    if(places[0].lat > -90 && places[0].lat < 90 && places[0].weather === null && !places[0].isFetching){
-      setTimeout(() => {
-        getWeather(0, places[0].lat, places[0].lng)
-      }, 100)
-    }
-
     
     return (
       <div className='container'>
