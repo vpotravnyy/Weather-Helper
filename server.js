@@ -12,10 +12,18 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
+var corsWhiteList = ["http://localhost:3127/"]
 app.use('/api', function(req, res){
-  var apiServerHost = "https://api.darksky.net/forecast/e70e2cb13bf6e13f5e43404461836c45"
-  var url = apiServerHost + req.url
-  req.pipe(request(url)).pipe(res)
+  if( isTrusted( req.header('Referer')) ){
+    var apiServerHost = "https://api.darksky.net/forecast/e70e2cb13bf6e13f5e43404461836c45"
+    var url = apiServerHost + req.url
+    req.pipe( request(url) ).pipe( res )
+  } else {
+    res.json({
+      error: true,
+      msg: 'Cross origin requests are not allowed.'
+    })
+  }
 })
 
 app.use(Express.static(__dirname + '/dist'))
@@ -48,3 +56,8 @@ app.listen(port, function (error) {
     console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port)
   }
 })
+
+function isTrusted(referer){
+  if(corsWhiteList.indexOf(referer) === -1) return false
+  else return true
+}
