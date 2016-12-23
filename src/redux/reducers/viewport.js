@@ -4,6 +4,11 @@ const initViewPort = {
   width: window.innerWidth,
   height: window.innerHeight
 }
+if(initViewPort.height > initViewPort.width){
+  initViewPort.orientation = 'portrait'
+} else {
+  initViewPort.orientation = 'landscape'
+}
 
 export default function (viewport = initViewPort, action) {
   switch (action.type) {
@@ -11,7 +16,8 @@ export default function (viewport = initViewPort, action) {
     case ON_RESIZE:
       return {
         width: action.width,
-        height: action.height
+        height: action.height,
+        orientation: action.orientation
       }
 
     default:

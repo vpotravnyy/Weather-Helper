@@ -5,7 +5,12 @@ const saveDimentionsStore = (store) => {
     viewPortWidth: window.innerWidth,
     viewPortHeight: window.innerHeight
   }
-  store.displatch( onWindowResize )
+  if(props.viewPortHeight > props.viewPortWidth){
+    props.orientation = 'portrait'
+  } else {
+    props.orientation = 'landscape'
+  }
+  store.displatch( onWindowResize(props) )
 }
 
 const windowOnresizeListenerInit = (store) => {
