@@ -1,13 +1,7 @@
 import { ON_RESIZE } from '_constants/actions'
-import orientation from '_lib/orientation'
+import getViewPort from '_lib/getViewPort'
 
-const initViewPort = {
-  width: window.innerWidth,
-  height: window.innerHeight
-}
-initViewPort.orientation = orientation( initViewPort )
-
-export default function (viewport = initViewPort, action) {
+export default (viewport = getViewPort(), action) => {
   switch (action.type) {
 
     case ON_RESIZE:

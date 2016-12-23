@@ -1,13 +1,8 @@
 import { onWindowResize } from '_actions/actions'
-import orientation from '_lib/orientation'
+import getViewPort from '_lib/getViewPort'
 
 const saveDimentionsStore = (store) => {
-  const props = {
-    width: window.innerWidth,
-    height: window.innerHeight
-  }
-  props.orientation = orientation( props )
-  store.displatch( onWindowResize(props) )
+  store.displatch( onWindowResize( getViewPort() ) )
 }
 
 const windowOnresizeListenerInit = (store) => {
