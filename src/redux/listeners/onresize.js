@@ -1,15 +1,12 @@
 import { onWindowResize } from '_actions/actions'
+import orientation from '_lib/orientation'
 
 const saveDimentionsStore = (store) => {
   const props = {
-    viewPortWidth: window.innerWidth,
-    viewPortHeight: window.innerHeight
+    width: window.innerWidth,
+    height: window.innerHeight
   }
-  if(props.viewPortHeight > props.viewPortWidth){
-    props.orientation = 'portrait'
-  } else {
-    props.orientation = 'landscape'
-  }
+  props.orientation = orientation( props )
   store.displatch( onWindowResize(props) )
 }
 

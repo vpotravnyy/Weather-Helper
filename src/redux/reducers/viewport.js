@@ -1,14 +1,11 @@
 import { ON_RESIZE } from '_constants/actions'
+import orientation from '_lib/orientation'
 
 const initViewPort = {
   width: window.innerWidth,
   height: window.innerHeight
 }
-if(initViewPort.height > initViewPort.width){
-  initViewPort.orientation = 'portrait'
-} else {
-  initViewPort.orientation = 'landscape'
-}
+initViewPort.orientation = orientation( initViewPort )
 
 export default function (viewport = initViewPort, action) {
   switch (action.type) {

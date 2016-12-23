@@ -73,15 +73,15 @@ export const getWeather = (props) => {
 
 export const onWindowResize = (props) => {
   const {
-    viewPortWidth,
-    viewPortHeight,
+    width,
+    height,
     orientation
   } = props
 
   return {
     type: ON_RESIZE,
-    width: viewPortWidth,
-    height: viewPortHeight,
+    width: width,
+    height: height,
     orientation: orientation
   }
 }

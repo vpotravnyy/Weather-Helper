@@ -16,10 +16,11 @@ class Container extends Component {
     const {
       lang,
       places,
+      viewport,
       addPlace,
       removePlace
     } = this.props
-    console.log('Component\nlang: ', lang, 'places: ', places)
+    console.log('Component\nlang: ', lang, '\nplaces: ', places, '\nviewport: ', viewport)
     
     return (
       <div className='container'>
@@ -40,6 +41,7 @@ class Container extends Component {
 Container.propTypes = {
   lang: PropTypes.string.isRequired,
   places: PropTypes.array.isRequired,
+  viewport: PropTypes.object.isRequired,
   addPlace: PropTypes.func.isRequired,
   removePlace: PropTypes.func.isRequired
 }
@@ -47,7 +49,8 @@ Container.propTypes = {
 function mapStateToProps (state) {
   return {
     lang: state.lang,
-    places: state.places
+    places: state.places,
+    viewport: state.viewport
   }
 }
 
