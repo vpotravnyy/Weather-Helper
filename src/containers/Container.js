@@ -4,9 +4,7 @@ import { connect } from 'react-redux'
 // Actions
 import {
   addPlace,
-  removePlace,
-  getCoords,
-  getWeather
+  removePlace
 } from '_actions/actions'
 
 
@@ -19,9 +17,7 @@ class Container extends Component {
       lang,
       places,
       addPlace,
-      removePlace,
-      getCoords,
-      getWeather
+      removePlace
     } = this.props
     console.log('Component\nlang: ', lang, 'places: ', places)
     
@@ -45,9 +41,7 @@ Container.propTypes = {
   lang: PropTypes.string.isRequired,
   places: PropTypes.array.isRequired,
   addPlace: PropTypes.func.isRequired,
-  removePlace: PropTypes.func.isRequired,
-  getCoords: PropTypes.func.isRequired,
-  getWeather: PropTypes.func.isRequired
+  removePlace: PropTypes.func.isRequired
 }
 
 function mapStateToProps (state) {
@@ -60,9 +54,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     addPlace: () => dispatch(addPlace()),
-    removePlace: (place) => dispatch(removePlace(place)),
-    getCoords: () => dispatch(getCoords()),
-    getWeather: (placeID, lat, lng) => dispatch(getWeather(placeID, lat, lng))
+    removePlace: (place) => dispatch(removePlace(place))
   }
 }
 

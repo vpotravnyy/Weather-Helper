@@ -6,7 +6,8 @@ import {
   GET_COORDS_FAILURE,
   GET_WEATHER_REQUEST,
   GET_WEATHER_SUCCESS,
-  GET_WEATHER_FAILURE
+  GET_WEATHER_FAILURE,
+  ON_RESIZE
 } from '_constants/actions'
 
 import { CALL_API } from 'redux-api-middleware'
@@ -67,5 +68,18 @@ export const getWeather = (props) => {
         }
       ]
     }
+  }
+}
+
+export const onWindowResize = (props) => {
+  const {
+    viewPortWidth,
+    viewPortHeight
+  } = props
+
+  return {
+    type: ON_RESIZE,
+    width: viewPortWidth,
+    height: viewPortHeight
   }
 }
