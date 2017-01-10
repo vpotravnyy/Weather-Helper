@@ -25,7 +25,7 @@ module.exports = {
       _actions: 'src/redux/actions',
       _reducers: 'src/redux/reducers',
       _listeners: 'src/redux/listeners',
-      _lib: 'src/lib'
+      _utils: 'src/utils'
     },
     extensions: ['', '.json', '.js', '.jsx']
   },

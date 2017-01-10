@@ -1,12 +1,16 @@
 let initialState
-if( window.localStorage.state ){
+if( window.localStorage.state )
+{
   initialState = JSON.parse(window.localStorage.getItem("state"))
-} else {
+}
+else
+{
   initialState = {
     "lang": "en",
+    "viewport": null,
     "places": [
       {
-        "place": "Current",
+        "placeName": "Current position",
         "placeID": 0,
         "lat": undefined,
         "lng": undefined,

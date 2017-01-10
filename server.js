@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
 var config = require('./webpack.config')
+var secret = require('./secret.json')
 var request = require('request')
 var Express = require('express')
 var app = new Express()
@@ -13,10 +14,22 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output
 app.use(webpackHotMiddleware(compiler))
 
 var corsWhiteList = ["http://localhost:3127/"]
-app.use('/api', function(req, res){
+app.use('/weather', function(req, res){
   if( isTrusted( req.header('Referer')) ){
-    var apiServerHost = "https://api.darksky.net/forecast/e70e2cb13bf6e13f5e43404461836c45"
+    var apiServerHost = "https://api.darksky.net/forecast/" + secret.darksky
     var url = apiServerHost + req.url
+    req.pipe( request(url) ).pipe( res )
+  } else {
+    res.json({
+      error: true,
+      msg: 'Cross origin requests are not allowed.'
+    })
+  }
+})
+app.use('/coords', function(req, res){
+  if( isTrusted( req.header('Referer')) ){
+    var apiServerHost = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + secret.google
+    var url = apiServerHost
     req.pipe( request(url) ).pipe( res )
   } else {
     res.json({

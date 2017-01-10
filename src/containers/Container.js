@@ -32,7 +32,7 @@ class Container extends Component {
           <button onClick={addPlace}>Add city</button>
         </header>
         
-        <PlaceList places={places} removeHandler={removePlace} />
+        <PlaceList places={places} removeHandler={removePlace} viewport={viewport} />
       </div>
     )
   }

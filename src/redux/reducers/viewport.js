@@ -1,5 +1,5 @@
 import { ON_RESIZE } from '_constants/actions'
-import getViewPort from '_lib/getViewPort'
+import getViewPort from '_utils/getViewPort'
 
 export default (viewport = getViewPort(), action) => {
   switch (action.type) {

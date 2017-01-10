@@ -27,7 +27,7 @@ export const removePlace = (placeID) => {
 export const getCoords = () => {
   return {
     [CALL_API]: {
-      endpoint: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCfe2Q3YniK6K5Jf533t5rPsOw2WzzgRLQ",
+      endpoint: "/coords",
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: { "considerIp": "true" },
@@ -46,7 +46,7 @@ export const getWeather = (props) => {
   
   return {
     [CALL_API]: {
-      endpoint: "/api/"+ lat +","+ lng +"?units=si&lang=uk&exclude=minutely,flags",
+      endpoint: "/weather/"+ lat +","+ lng +"?units=si&lang=uk&exclude=minutely,flags",
       method: 'GET',
       headers: {
         'Accept': 'text/plain',

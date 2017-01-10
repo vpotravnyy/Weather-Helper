@@ -1,14 +1,17 @@
 import { onWindowResize } from '_actions/actions'
-import getViewPort from '_lib/getViewPort'
+import getViewPort from '_utils/getViewPort'
 
-const saveDimentionsStore = (store) => {
-  store.displatch( onWindowResize( getViewPort() ) )
-}
 
-const windowOnresizeListenerInit = (store) => {
-  window.onresize = () => {
-    saveDimentionsStore( store )
+export default function (store) {
+  const listener = () => {
+    const dimentions = getViewPort()
+    store.dispatch(onWindowResize(dimentions))
   }
-}
 
-export default windowOnresizeListenerInit
+  window.addEventListener('resize', listener)
+
+  return () => {
+    window.removeEventListener('resize', listener)
+  }
+
+}

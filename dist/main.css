@@ -3,6 +3,12 @@ body {
   background-color: #f9f9f9;
 }
 
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 header {
   position: relative;
   text-align: center;
@@ -36,6 +42,7 @@ header {
 
 article {
   position: relative;
+  display: inline-block;
   min-width: 300px;
   min-height: 200px;
   background-color: #fff;
@@ -48,4 +55,12 @@ article {
     position: absolute;
     right: 3px;
     top: 3px;
+  }
+  article .day {
+    position: relative;
+    }
+    article .day > p {
+      display: inline-block;
+      margin: 5px;
+      text-align: center;
 }

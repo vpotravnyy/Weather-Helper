@@ -9,7 +9,7 @@ import {
   GET_WEATHER_FAILURE
 } from '_constants/actions'
 
-import getNewPlaceId from '_lib/getNewPlaceId'
+import getNewPlaceId from '_utils/getNewPlaceId'
 import initialState from '_redux/initState'
 
 export default function (places = initialState.places, action) {
@@ -20,7 +20,7 @@ export default function (places = initialState.places, action) {
       return [
         ...places,
         {
-          "place": 'CityName' + newID,
+          "placeName": 'CityName' + newID,
           "placeID": newID,
           "lat": undefined,
           "lng": undefined,
