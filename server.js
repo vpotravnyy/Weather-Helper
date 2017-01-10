@@ -38,6 +38,18 @@ app.use('/coords', function(req, res){
     })
   }
 })
+app.use('/google', function(req, res){
+  if( isTrusted( req.header('Referer')) ){
+    var apiServerHost = "https://maps.googleapis.com/maps/api/js?key=" + secret.google + "&libraries=places"
+    var url = apiServerHost
+    req.pipe( request(url) ).pipe( res )
+  } else {
+    res.json({
+      error: true,
+      msg: 'Cross origin requests are not allowed.'
+    })
+  }
+})
 
 app.use(Express.static(__dirname + '/dist'))
 

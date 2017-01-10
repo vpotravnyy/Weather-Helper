@@ -42,7 +42,6 @@ export const getWeather = (props) => {
     lat,
     lng
   } = props
-  console.log("getWeather: ", lat, lng)
   
   return {
     [CALL_API]: {

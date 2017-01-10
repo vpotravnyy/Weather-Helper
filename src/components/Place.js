@@ -3,13 +3,13 @@ import Day from '_components/Day'
 import Today from '_components/Today'
 
 export default function Place (props) {
-  console.log('Place: ', props.place)
   const placeName = props.place.lat 
     ? props.place.placeName +': '+ props.place.lat +', '+ props.place.lng
     : props.place.placeName
   const removeHandler = props.removeHandler.bind(null, props.place.placeID)
   const btnDel = <button onClick={removeHandler}>Delete</button>
   let daysList = null
+
   if(props.place.weather){
     daysList = props.place.weather.daily.data.map((day, i) => {
       if(i === 0){
@@ -19,7 +19,6 @@ export default function Place (props) {
       }
     })
   }
-  console.log('daysList', daysList)
 
   return (
     <article>

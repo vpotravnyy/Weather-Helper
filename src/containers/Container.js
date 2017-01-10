@@ -20,7 +20,7 @@ class Container extends Component {
       addPlace,
       removePlace
     } = this.props
-    console.log('Component\nlang: ', lang, '\nplaces: ', places, '\nviewport: ', viewport)
+    console.log('Container:\nlang: ', lang, '\nplaces: ', places, '\nviewport: ', viewport)
     
     return (
       <div className='container'>

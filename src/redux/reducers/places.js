@@ -41,7 +41,6 @@ export default function (places = initialState.places, action) {
       return setCoords(places, "error", "error", false)
 
     case GET_WEATHER_REQUEST:
-      console.log("GET_WEATHER_REQUEST: ", action)
       if(action.error){
         return setWeather(places, action.meta, 'error', false)
       } else {
@@ -49,7 +48,6 @@ export default function (places = initialState.places, action) {
       }
 
     case GET_WEATHER_SUCCESS:
-      console.log("GET_WEATHER_SUCCESS: ", action)
       if(action.error){
         return setWeather(places, action.meta, 'error', false)
       } else {
@@ -57,7 +55,6 @@ export default function (places = initialState.places, action) {
       }
 
     case GET_WEATHER_FAILURE:
-      console.log('GET_WEATHER_FAILURE', action)
       return setWeather(places, action.meta, action.payload, false)
 
     default:

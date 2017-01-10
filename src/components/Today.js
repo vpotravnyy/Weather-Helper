@@ -5,7 +5,6 @@ import IconWeather from '_components/IconWeather'
 export default function Today (props) {
   const day = props.day
   const date = dateToDDMM(day.time)
-  console.log('Today: ', day, 'date: ', date)
 
   return(
     <div className="day_wrapper">
