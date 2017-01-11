@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
   background-color: #f9f9f9;
+  margin: 0;
 }
 
 .clearfix:after {
@@ -9,11 +10,16 @@ body {
   clear: both;
 }
 
+.container {
+  width: 100%;
+}
+
 header {
   position: relative;
   text-align: center;
   height: 2em;
-  border: 1px solid #ccc;
+  max-height: 9vw;
+  border-bottom: 1px solid #ccc;
   background-color: #eee;
   line-height: 2em;
   font-size: 1.4em;
@@ -28,6 +34,12 @@ header {
     header a img {
       height: 100%;
       width: auto;
+  }
+  header span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%,-50%,0);
   }
   header button {
     position: absolute;
@@ -51,16 +63,38 @@ article {
   margin-top: 8px;
   padding: 4px;
   }
+  article .place {
+    margin: 7px;
+  }
+  article .day_wrapper {
+    border-top: 1px solid #ccc;
+  }
   article button {
     position: absolute;
     right: 3px;
     top: 3px;
   }
+  article .day_summary {
+    margin: 7px 7px 0 7px;
+  }
   article .day {
     position: relative;
     }
-    article .day > p {
+    article .day > * {
       display: inline-block;
-      margin: 5px;
+      width: 70px;
+      height: 70px;
+      vertical-align: middle;
+    }
+    article .day > div > p {
+      margin: 3px;
       text-align: center;
+      top: 50%;
+      position: relative;
+      transform: translateY(-50%);
+      line-height: 150%;
+    }
+    article .day .icon {
+      width: 16px;
+      height: 16px;
 }

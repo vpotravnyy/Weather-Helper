@@ -15,39 +15,24 @@ app.use(webpackHotMiddleware(compiler))
 
 var corsWhiteList = ["http://localhost:3127/"]
 app.use('/weather', function(req, res){
-  if( isTrusted( req.header('Referer')) ){
+  if( isTrusted(req, res) ){
     var apiServerHost = "https://api.darksky.net/forecast/" + secret.darksky
     var url = apiServerHost + req.url
     req.pipe( request(url) ).pipe( res )
-  } else {
-    res.json({
-      error: true,
-      msg: 'Cross origin requests are not allowed.'
-    })
   }
 })
 app.use('/coords', function(req, res){
-  if( isTrusted( req.header('Referer')) ){
+  if( isTrusted(req, res) ){
     var apiServerHost = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + secret.google
     var url = apiServerHost
     req.pipe( request(url) ).pipe( res )
-  } else {
-    res.json({
-      error: true,
-      msg: 'Cross origin requests are not allowed.'
-    })
   }
 })
 app.use('/google', function(req, res){
-  if( isTrusted( req.header('Referer')) ){
+  if( isTrusted(req, res) ){
     var apiServerHost = "https://maps.googleapis.com/maps/api/js?key=" + secret.google + "&libraries=places"
     var url = apiServerHost
     req.pipe( request(url) ).pipe( res )
-  } else {
-    res.json({
-      error: true,
-      msg: 'Cross origin requests are not allowed.'
-    })
   }
 })
 
@@ -82,7 +67,13 @@ app.listen(port, function (error) {
   }
 })
 
-function isTrusted(referer){
-  if(corsWhiteList.indexOf(referer) === -1) return false
+function isTrusted(req, res){
+  if(corsWhiteList.indexOf( req.header('Referer') ) === -1) {
+    res.json({
+      error: true,
+      msg: 'Cross origin requests are not allowed.'
+    })
+    return false
+  }
   else return true
 }

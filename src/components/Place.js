@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import Day from '_components/Day'
-import Today from '_components/Today'
 
 export default function Place (props) {
   const placeName = props.place.lat 
@@ -12,17 +11,13 @@ export default function Place (props) {
 
   if(props.place.weather){
     daysList = props.place.weather.daily.data.map((day, i) => {
-      if(i === 0){
-        return <Today key={i} day={props.place.weather.currently} />
-      } else {
-        return <Day key={i} day={day} />
-      }
+      return <Day key={i} day={day} />
     })
   }
 
   return (
     <article>
-      <div>{placeName}</div>
+      <div className='place'>{placeName}</div>
       {daysList}
       {props.place.placeID === 0 ? null : btnDel}
     </article>

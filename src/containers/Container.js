@@ -28,7 +28,7 @@ class Container extends Component {
           <a href="https://darksky.net/poweredby/" target="_blank">
             <img src="/img/poweredby.png" />
           </a>
-          Weather Helper
+          <span>Weather Helper</span>
           <button onClick={addPlace}>Add city</button>
         </header>
         
