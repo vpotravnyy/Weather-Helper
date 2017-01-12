@@ -18,8 +18,10 @@ export default function Place (props) {
   return (
     <article>
       <div className='place'>{placeName}</div>
-      {daysList}
       {props.place.placeID === 0 ? null : btnDel}
+      <div className='dayslist'>
+        {daysList}
+      </div>
     </article>
   )
 }

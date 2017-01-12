@@ -20,7 +20,7 @@ header {
   height: 2em;
   max-height: 9vw;
   border-bottom: 1px solid #ccc;
-  background-color: #eee;
+  background-color: #ddd;
   line-height: 2em;
   font-size: 1.4em;
   box-shadow: 0 1px 5px #ccc;
@@ -57,17 +57,24 @@ article {
   display: inline-block;
   min-width: 300px;
   min-height: 200px;
-  background-color: #fff;
+  background-color: #eee;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 5px #ccc;
   margin-top: 8px;
-  padding: 4px;
+  padding: 3px;
   }
   article .place {
     margin: 7px;
   }
+  article .dayslist {
+    padding: 3px;
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 5px #ccc;
+  }
   article .day_wrapper {
-    border-top: 1px solid #ccc;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 5px #ccc;
+    background-color: #f5f5f5;
   }
   article button {
     position: absolute;
@@ -82,19 +89,26 @@ article {
     }
     article .day > * {
       display: inline-block;
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       vertical-align: middle;
     }
     article .day > div > p {
-      margin: 3px;
+      margin: 0 3px 5px 3px;
       text-align: center;
       top: 50%;
       position: relative;
       transform: translateY(-50%);
-      line-height: 150%;
+      line-height: 125%;
+    }
+    article .day > div > p.temperature {
+      text-align: right;
+      margin-right: 10px;
+    }
+    article .day > div > p.wind_and_precip {
+      text-align: left;
     }
     article .day .icon {
-      width: 16px;
-      height: 16px;
+      width: 1em;
+      height: 1em;
 }
