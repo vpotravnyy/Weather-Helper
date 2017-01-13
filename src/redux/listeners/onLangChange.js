@@ -11,8 +11,8 @@ moment.locale([EN, UK, RU])
 let oldLang = undefined
 
 export default function onLangChangeListener ( store ) {
-  store.subscribe(() => { changeLang( store ) })
   changeLang( store )
+  return store.subscribe(() => { changeLang( store ) })
 }
 
 function changeLang (store) {

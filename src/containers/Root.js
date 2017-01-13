@@ -5,7 +5,7 @@ import createStore from '_redux/createStore'
 import getCoordsApiInit from '_listeners/getCoordsApi'
 import getWeatherApiInit from '_listeners/getWeatherAPI'
 import windowOnresizeListenerInit from '_listeners/onresize'
-import onLangChangeListener from '_listeners/onLangCgange'
+import onLangChangeListener from '_listeners/onLangChange'
 import Container from '_containers/Container'
 
 const store = createStore()
