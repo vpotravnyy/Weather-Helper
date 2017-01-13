@@ -6,7 +6,7 @@ if( window.localStorage.state )
 else
 {
   initialState = {
-    "lang": "en",
+    "lang": "uk",
     "viewport": null,
     "places": [
       {

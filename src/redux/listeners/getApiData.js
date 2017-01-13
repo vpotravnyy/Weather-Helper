@@ -6,7 +6,7 @@ export default function getApiDataInit ( store ) {
 }
 
 function getApiData (store) {
-  const { places } = store.getState()
+  const { places, lang } = store.getState()
 
   if(!places[0].lat && !places[0].isFetching){
     store.dispatch( getCoords() )
@@ -17,7 +17,8 @@ function getApiData (store) {
       const props = {
         placeID: p.placeID,
         lat: p.lat,
-        lng: p.lng
+        lng: p.lng,
+        lang: lang
       }
       store.dispatch( getWeather(props) )
     }

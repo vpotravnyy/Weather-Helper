@@ -13,7 +13,6 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
-var corsWhiteList = ["http://localhost:3127/"]
 app.use('/weather', function(req, res){
   if( isTrusted(req, res) ){
     var apiServerHost = "https://api.darksky.net/forecast/" + secret.darksky
@@ -68,7 +67,7 @@ app.listen(port, function (error) {
 })
 
 function isTrusted(req, res){
-  if(corsWhiteList.indexOf( req.header('Referer') ) === -1) {
+  if(secret.corsWhiteList.indexOf( req.header('Referer') ) === -1) {
     res.json({
       error: true,
       msg: 'Cross origin requests are not allowed.'

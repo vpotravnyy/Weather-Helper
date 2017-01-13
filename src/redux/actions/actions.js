@@ -40,12 +40,13 @@ export const getWeather = (props) => {
   const {
     placeID,
     lat,
-    lng
+    lng,
+    lang
   } = props
   
   return {
     [CALL_API]: {
-      endpoint: "/weather/"+ lat +","+ lng +"?units=si&lang=uk&exclude=minutely,flags",
+      endpoint: "/weather/"+ lat +","+ lng +"?units=si&lang="+ lang +"&exclude=minutely,flags",
       method: 'GET',
       headers: {
         'Accept': 'text/plain',

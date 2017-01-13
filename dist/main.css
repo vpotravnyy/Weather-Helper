@@ -67,8 +67,6 @@ article {
     margin: 7px;
   }
   article .dayslist {
-    padding: 3px;
-    background-color: #f5f5f5;
     box-shadow: 0 1px 5px #ccc;
   }
   article .day_wrapper {
@@ -89,7 +87,7 @@ article {
     }
     article .day > * {
       display: inline-block;
-      width: 72px;
+      width: 25%;
       height: 72px;
       vertical-align: middle;
     }
@@ -103,7 +101,11 @@ article {
     }
     article .day > div > p.temperature {
       text-align: right;
-      margin-right: 10px;
+      max-width: 60px;
+      margin: 0 auto;
+    }
+    article .day > div > p.date:first-letter {
+      text-transform: capitalize;
     }
     article .day > div > p.wind_and_precip {
       text-align: left;

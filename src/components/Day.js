@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
-import { dateToDDMM, dateToWeekDay } from '_utils/dateConvertor'
+import moment from 'moment'
+
 import IconWeather from '_components/IconWeather'
 import WindArrow from '_components/WindArrow'
 import DropIcon from '_components/DropIcon'
@@ -7,14 +8,18 @@ import PrecipProbabilityIcon from '_components/PrecipProbabilityIcon'
 
 export default function Day (props) {
   const day = props.day
-  const date = dateToDDMM(day.time)
+  const time = day.time * 1000
+  const dayOfWeek = moment(time).isSame(moment(), 'day')
+   ? moment(time).calendar().split(' ')[0]
+   : moment(time).format("ddd")
+  const date = moment(time).format("DD.MM")
 
   return(
     <div className="day_wrapper">
       <p className="day_summary"> {day.summary} </p>
       <div className="day clearfix">
         <div>
-          <p className='date'>{dateToWeekDay(day.time)}<br/>{date}</p>
+          <p className='date'>{dayOfWeek}<br/>{date}</p>
         </div>
         <IconWeather iconName={day.icon} />
         <div>
