@@ -1,7 +1,12 @@
 import moment from 'moment'
 import { getWeather } from '_actions/actions'
+import {
+  EN,
+  UK,
+  RU
+} from '_constants/languages'
 
-moment.locale(["uk", "ru", "en"])
+moment.locale([EN, UK, RU])
 
 let oldLang = undefined
 

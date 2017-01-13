@@ -1,16 +1,12 @@
-import { getCoords, getWeather } from '_actions/actions'
+import { getWeather } from '_actions/actions'
 
-export default function getApiDataInit ( store ) {
-  store.subscribe(() => { getApiData( store ) })
-  getApiData( store )
+export default function getWeatherApiInit ( store ) {
+  getWeatherApi( store )
+  return store.subscribe(() => { getWeatherApi( store ) })
 }
 
-function getApiData (store) {
+function getWeatherApi (store) {
   const { places, lang } = store.getState()
-
-  if(!places[0].lat && !places[0].isFetching){
-    store.dispatch( getCoords() )
-  }
 
   places.forEach( p => {
     if(p.lat > -90 && p.lat < 90 && p.weather === null && !p.isFetching){
@@ -23,4 +19,5 @@ function getApiData (store) {
       store.dispatch( getWeather(props) )
     }
   })
+
 }

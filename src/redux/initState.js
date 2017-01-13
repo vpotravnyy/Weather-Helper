@@ -1,3 +1,9 @@
+import {
+  EN,
+  UK,
+  RU
+} from '_constants/languages'
+
 let initialState
 if( window.localStorage.state )
 {
@@ -6,7 +12,7 @@ if( window.localStorage.state )
 else
 {
   initialState = {
-    "lang": "uk",
+    "lang": UK,
     "viewport": null,
     "places": [
       {
