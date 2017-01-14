@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
 
-import IconWeather from '_components/IconWeather'
-import WindArrow from '_components/WindArrow'
-import DropIcon from '_components/DropIcon'
-import PrecipProbabilityIcon from '_components/PrecipProbabilityIcon'
+import IconWeather from '_icons/IconWeather'
+import WindArrow from '_icons/WindArrow'
+import DropIcon from '_icons/DropIcon'
+import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
 
 export default function Day (props) {
   const day = props.day

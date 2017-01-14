@@ -18,13 +18,14 @@ module.exports = {
   resolve: {
     root: path.resolve(__dirname),
     alias: {
+      _actions: 'src/redux/actions',
       _components: 'src/components',
       _containers: 'src/containers',
       _constants: 'src/constants',
-      _redux: 'src/redux',
-      _actions: 'src/redux/actions',
-      _reducers: 'src/redux/reducers',
+      _icons: 'src/components/icons',
       _listeners: 'src/redux/listeners',
+      _redux: 'src/redux',
+      _reducers: 'src/redux/reducers',
       _utils: 'src/utils'
     },
     extensions: ['', '.json', '.js', '.jsx']

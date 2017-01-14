@@ -3,17 +3,32 @@ var path = require('path')
 
 module.exports = {
   devtool: '#eval-source-map',
-  entry: [
-    './src/index'
-  ],
+  entry: {
+    bundle: './src/index'
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin()
   ],
+  resolve: {
+    root: path.resolve(__dirname),
+    alias: {
+      _actions: 'src/redux/actions',
+      _components: 'src/components',
+      _containers: 'src/containers',
+      _constants: 'src/constants',
+      _icons: 'src/components/icons',
+      _listeners: 'src/redux/listeners',
+      _redux: 'src/redux',
+      _reducers: 'src/redux/reducers',
+      _utils: 'src/utils'
+    },
+    extensions: ['', '.json', '.js', '.jsx']
+  },
   module: {
     loaders: [{
       test: /\.js$/,
