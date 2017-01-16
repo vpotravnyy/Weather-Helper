@@ -42,14 +42,19 @@ header {
     transform: translate3d(-50%,-50%,0);
   }
   header button {
-    position: absolute;
-    top: 0px;
-    right: 0px;
+    position: relative;
+    float: right;
     height: 100%;
     font-size: 0.8em;
     background-color: transparent;
     border: none;
     cursor: pointer;
+  }
+  header button.lang {
+      background-color: #00f;
+      color: #fff;
+      height: 80%;
+      margin: 0.3em;
 }
 
 article {

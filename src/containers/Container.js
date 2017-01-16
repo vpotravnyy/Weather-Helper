@@ -6,6 +6,9 @@ import {
   addPlace,
   removePlace
 } from '_actions/actions'
+import {
+  changeLang
+} from '_actions/langChange'
 
 
 // Components
@@ -15,12 +18,12 @@ class Container extends Component {
   render () {
     const {
       lang,
-      places,
-      viewport,
       addPlace,
-      removePlace
+      changeLang
     } = this.props
-    console.log('Container:\nlang: ', lang, '\nplaces: ', places, '\nviewport: ', viewport)
+    const langHandler = changeLang.bind(null, lang)
+
+    // console.log('Container:\nlang: ', lang, '\nplaces: ', places, '\nviewport: ', viewport)
     
     return (
       <div className='container'>
@@ -29,10 +32,11 @@ class Container extends Component {
             <img src="/img/poweredby.png" />
           </a>
           <span>Weather Helper</span>
+          <button className='lang' onClick={langHandler}>{lang.toUpperCase()}</button>
           <button onClick={addPlace}>Add city</button>
         </header>
         
-        <PlaceList places={places} removeHandler={removePlace} viewport={viewport} />
+        <PlaceList test={'test'} />
       </div>
     )
   }
@@ -40,24 +44,20 @@ class Container extends Component {
 
 Container.propTypes = {
   lang: PropTypes.string.isRequired,
-  places: PropTypes.array.isRequired,
-  viewport: PropTypes.object.isRequired,
   addPlace: PropTypes.func.isRequired,
-  removePlace: PropTypes.func.isRequired
+  changeLang: PropTypes.func.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    lang: state.lang,
-    places: state.places,
-    viewport: state.viewport
+    lang: state.lang
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    addPlace: () => dispatch(addPlace()),
-    removePlace: (place) => dispatch(removePlace(place))
+    addPlace: () => dispatch( addPlace() ),
+    changeLang: () => dispatch( changeLang() )
   }
 }
 

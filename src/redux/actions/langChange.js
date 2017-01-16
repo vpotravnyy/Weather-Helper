@@ -2,9 +2,9 @@ import {
   CHANGE_LANG
 } from '_constants/actions'
 
-export const changeLang = (lang) => {
+export const changeLang = () => {
+
   return {
-    type: CHANGE_LANG,
-    value: lang
+    type: CHANGE_LANG
   }
 }

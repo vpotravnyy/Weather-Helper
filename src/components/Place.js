@@ -1,17 +1,19 @@
 import React, { PropTypes } from 'react'
 import Day from '_components/Day'
 
-export default function Place (props) {
-  const placeName = props.place.lat 
+const Place = (props) => {
+
+  const placeName = props.place.lat && props.place.lng && props.place.placeName === "Current position"
     ? props.place.placeName +': '+ props.place.lat +', '+ props.place.lng
     : props.place.placeName
+  
   const removeHandler = props.removeHandler.bind(null, props.place.placeID)
   const btnDel = <button onClick={removeHandler}>Delete</button>
+  
   let daysList = null
-
   if(props.place.weather){
-    daysList = props.place.weather.daily.data.map((day, i) => {
-      return <Day key={i} day={day} />
+    daysList = props.place.weather.daily.data.map((day) => {
+      return <Day key={day.time} day={day} />
     })
   }
 
@@ -28,6 +30,7 @@ export default function Place (props) {
 
 Place.propTypes = {
   place: PropTypes.object.isRequired,
-  viewport: PropTypes.object.isRequired,
   removeHandler: PropTypes.func.isRequired
 }
+
+export default Place
