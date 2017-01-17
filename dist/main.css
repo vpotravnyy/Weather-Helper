@@ -35,7 +35,7 @@ header {
       height: 100%;
       width: auto;
   }
-  header span {
+  header > span {
     position: absolute;
     top: 50%;
     left: 50%;

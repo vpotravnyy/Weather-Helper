@@ -1,0 +1,8 @@
+{
+  "TITLE": "Помічник з погоди",
+  "CURRENT_POSITION": "Там, де Ви зараз",
+  "BTN_ADD_PLACE": "Додати місце",
+  "BTN_REMOVE": "Видалити",
+  "WIND_SPEED": " {speed}м/с",
+  "PRECIP_INTENSITY": " {intensity}мм"
+}

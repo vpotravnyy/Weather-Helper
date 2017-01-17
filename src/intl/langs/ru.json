@@ -1,0 +1,8 @@
+{
+  "TITLE": "Погодный помощник",
+  "CURRENT_POSITION": "Там, где Вы сейчас",
+  "BTN_ADD_PLACE": "Добавить место",
+  "BTN_REMOVE": "Удалить",
+  "WIND_SPEED": " {speed}м/с",
+  "PRECIP_INTENSITY": " {intensity}мм"
+}

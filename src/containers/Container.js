@@ -13,6 +13,8 @@ import {
 
 // Components
 import PlaceList from '_components/PlaceList'
+import HeaderTitle from '_translation/HeaderTitle'
+import BtnAddPlaceTxt from '_translation/BtnAddPlaceTxt'
 
 class Container extends Component {
   render () {
@@ -31,12 +33,14 @@ class Container extends Component {
           <a href="https://darksky.net/poweredby/" target="_blank">
             <img src="/img/poweredby.png" />
           </a>
-          <span>Weather Helper</span>
+          <HeaderTitle />
           <button className='lang' onClick={langHandler}>{lang.toUpperCase()}</button>
-          <button onClick={addPlace}>Add city</button>
+          <button onClick={addPlace}>
+            <BtnAddPlaceTxt />
+          </button>
         </header>
         
-        <PlaceList test={'test'} />
+        <PlaceList />
       </div>
     )
   }

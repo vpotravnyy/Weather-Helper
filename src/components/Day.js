@@ -5,6 +5,8 @@ import IconWeather from '_icons/IconWeather'
 import WindArrow from '_icons/WindArrow'
 import DropIcon from '_icons/DropIcon'
 import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
+import WindSpeedTxt from '_translation/WindSpeedTxt'
+import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
 
 export default function Day (props) {
   const day = props.day
@@ -31,10 +33,10 @@ export default function Day (props) {
         <div>
           <p className='wind_and_precip'>
             <WindArrow angle={ Math.round(day.windBearing) } />
-            <span> {Math.round(day.windSpeed) + 'm/s'}</span>
+            <WindSpeedTxt speed={ Math.round(day.windSpeed) } />
             <br/>
             <DropIcon />
-            <span> {Math.round(day.precipIntensity) + 'mm'}</span>
+            <PrecipIntensityTxt intensity={ Math.round(day.precipIntensity) } />
             <br/>
             <PrecipProbabilityIcon />
             <span> {Math.round(day.precipProbability * 100) + '%'}</span>

@@ -6,7 +6,6 @@ const PlaceList = (props) => {
   const places = props.places.map(p => {
     return <Place key={p.placeID} place={p} removeHandler={props.removeHandler} />
   })
-  console.log('PlaceList: ', props)
   return (
     <main>
       {places}

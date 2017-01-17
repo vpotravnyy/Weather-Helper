@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
+
 import Day from '_components/Day'
+import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
 
 const Place = (props) => {
 
@@ -19,7 +21,11 @@ const Place = (props) => {
 
   return (
     <article>
-      <div className='place'>{placeName}</div>
+      <div className='place'>{
+        props.place.placeName === "Current position"
+         ? <CurrentPlaceTxt />
+         : props.place.placeName
+      }</div>
       {props.place.placeID === 0 ? null : btnDel}
       <div className='dayslist'>
         {daysList}
