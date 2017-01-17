@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 
 import Day from '_components/Day'
 import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
+import BtnDeleteTxt from '_translation/BtnDeleteTxt'
 
 const Place = (props) => {
 
@@ -10,7 +11,7 @@ const Place = (props) => {
     : props.place.placeName
   
   const removeHandler = props.removeHandler.bind(null, props.place.placeID)
-  const btnDel = <button onClick={removeHandler}>Delete</button>
+  const btnDel = <button onClick={removeHandler}> <BtnDeleteTxt /> </button>
   
   let daysList = null
   if(props.place.weather){

@@ -20,26 +20,34 @@ export default function Day (props) {
     <div className="day_wrapper">
       <p className="day_summary"> {day.summary} </p>
       <div className="day clearfix">
+        
         <div>
           <p className='date'>{dayOfWeek}<br/>{date}</p>
         </div>
+        
         <IconWeather iconName={day.icon} />
+        
         <div>
           <p className='temperature'>
             <span>{Math.round(day.temperatureMax) + ' C°'}</span><br/>
             <span>{Math.round(day.temperatureMin) + ' C°'}</span><br/>
           </p>
         </div>
+        
         <div>
           <p className='wind_and_precip'>
+            
             <WindArrow angle={ Math.round(day.windBearing) } />
             <WindSpeedTxt speed={ Math.round(day.windSpeed) } />
             <br/>
+
             <DropIcon />
             <PrecipIntensityTxt intensity={ Math.round(day.precipIntensity) } />
             <br/>
+
             <PrecipProbabilityIcon />
             <span> {Math.round(day.precipProbability * 100) + '%'}</span>
+            
           </p>
         </div>
       </div>
