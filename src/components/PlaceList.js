@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const PlaceList = (props) => {
   const places = props.places.map(p => {
-    return <Place key={p.placeID} place={p} removeHandler={props.removeHandler} />
+    return <Place key={p.placeID} place={p} />
   })
   return (
     <main>
@@ -14,8 +14,7 @@ const PlaceList = (props) => {
 }
 
 PlaceList.propTypes = {
-  places: PropTypes.array.isRequired,
-  removeHandler: PropTypes.func.isRequired
+  places: PropTypes.array.isRequired
 }
 
 function mapStateToProps (state) {
@@ -23,10 +22,5 @@ function mapStateToProps (state) {
     places: state.places
   }
 }
-function mapDispatchToProps (dispatch) {
-  return {
-    removeHandler: (place) => dispatch(removePlace(place))
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceList)
+export default connect(mapStateToProps)(PlaceList)

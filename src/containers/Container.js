@@ -1,17 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-// Actions
-import {
-  addPlace,
-  removePlace
-} from '_actions/actions'
-import {
-  changeLang
-} from '_actions/langChange'
+import { addPlace } from '_actions/actions'
+import { changeLang } from '_actions/langChange'
 
-
-// Components
 import PlaceList from '_components/PlaceList'
 import HeaderTitle from '_translation/HeaderTitle'
 import BtnAddPlaceTxt from '_translation/BtnAddPlaceTxt'
@@ -25,8 +17,6 @@ class Container extends Component {
     } = this.props
     const langHandler = changeLang.bind(null, lang)
 
-    // console.log('Container:\nlang: ', lang, '\nplaces: ', places, '\nviewport: ', viewport)
-    
     return (
       <div className='container'>
         <header>

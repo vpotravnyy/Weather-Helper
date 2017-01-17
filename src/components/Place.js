@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
+
+import { removePlace } from '_actions/actions'
 
 import Day from '_components/Day'
 import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
@@ -6,12 +9,8 @@ import BtnDeleteTxt from '_translation/BtnDeleteTxt'
 
 const Place = (props) => {
 
-  const placeName = props.place.lat && props.place.lng && props.place.placeName === "Current position"
-    ? props.place.placeName +': '+ props.place.lat +', '+ props.place.lng
-    : props.place.placeName
-  
-  const removeHandler = props.removeHandler.bind(null, props.place.placeID)
-  const btnDel = <button onClick={removeHandler}> <BtnDeleteTxt /> </button>
+  const removePlace = props.removePlace.bind(null, props.place.placeID)
+  const btnDel = <button onClick={removePlace}> <BtnDeleteTxt /> </button>
   
   let daysList = null
   if(props.place.weather){
@@ -22,22 +21,34 @@ const Place = (props) => {
 
   return (
     <article>
-      <div className='place'>{
-        props.place.placeName === "Current position"
-         ? <CurrentPlaceTxt />
-         : props.place.placeName
-      }</div>
+      
+      <div className='place'>
+        {
+          props.place.placeName === "Current position"
+          ? <CurrentPlaceTxt />
+          : props.place.placeName
+        }
+      </div>
+
       {props.place.placeID === 0 ? null : btnDel}
+      
       <div className='dayslist'>
         {daysList}
       </div>
+
     </article>
   )
 }
 
 Place.propTypes = {
   place: PropTypes.object.isRequired,
-  removeHandler: PropTypes.func.isRequired
+  removePlace: PropTypes.func.isRequired
 }
 
-export default Place
+function mapDispatchToProps (dispatch) {
+  return {
+    removePlace: (place) => dispatch(removePlace(place))
+  }
+}
+
+export default connect( null, mapDispatchToProps )( Place )
