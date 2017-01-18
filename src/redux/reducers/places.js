@@ -1,6 +1,8 @@
 import {
   ADD_PLACE,
   REMOVE_PLACE,
+  EXPAND_PLACE,
+  COLLAPSE_PLACE,
   GET_COORDS_REQUEST,
   GET_COORDS_SUCCESS,
   GET_COORDS_FAILURE,
@@ -24,12 +26,29 @@ export default function (places = initialState.places, action) {
           "placeID": newID,
           "lat": undefined,
           "lng": undefined,
-          "weather": null
+          "weather": null,
+          "isExpanded": false
         }
       ]
 
     case REMOVE_PLACE:
       return places.filter(item => item.placeID !== action.placeID)
+
+    case EXPAND_PLACE:
+      return places.map(item => {
+        return {
+          ...item,
+          isExpanded: item.placeID === action.placeID
+        }
+      })
+
+    case COLLAPSE_PLACE:
+      return places.map(item => {
+        return {
+          ...item,
+          isExpanded: false
+        }
+      })
 
     case GET_COORDS_REQUEST:
       return setCoords(places, undefined, undefined, true)

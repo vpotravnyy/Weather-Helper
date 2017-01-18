@@ -68,10 +68,10 @@ const icon = {
   )
 }
 
-export default function IconWeather (props){
+export default function WeatherIcons (props){
   return icon[props.iconName]
 }
 
-IconWeather.propTypes = {
+WeatherIcons.propTypes = {
   iconName: PropTypes.string.isRequired
 }

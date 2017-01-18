@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-export default function WindArrow (props){
+export default function WindArrowIcon (props){
   const rotation = "rotate(" + props.angle + " 50 50)"
   return (
     <svg className='icon wind_arrow' version="1.1" xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 100 100">
@@ -9,6 +9,6 @@ export default function WindArrow (props){
   )
 }
 
-WindArrow.propTypes = {
+WindArrowIcon.propTypes = {
   angle: PropTypes.number.isRequired
 }

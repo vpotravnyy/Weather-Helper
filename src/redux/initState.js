@@ -21,7 +21,8 @@ else
         "lat": undefined,
         "lng": undefined,
         "weather": null,
-        'isFetching': false
+        'isFetching': false,
+        'isExpanded': true
       }
     ]
   }

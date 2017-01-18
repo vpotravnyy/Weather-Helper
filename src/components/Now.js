@@ -5,32 +5,41 @@ import WeatherIcons from '_icons/WeatherIcons'
 import WindArrowIcon from '_icons/WindArrowIcon'
 import DropIcon from '_icons/DropIcon'
 import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
+import TemperatureIcon from '_icons/TemperatureIcon'
+import ApparentTemperatureIcon from '_icons/ApparentTemperatureIcon'
 import WindSpeedTxt from '_translation/WindSpeedTxt'
 import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
 
-export default function Day (props) {
+export default function Now (props) {
   const day = props.day
   const time = day.time * 1000
-  const dayOfWeek = moment(time).isSame(moment(), 'day')
+  const currentDay = moment(time).isSame(moment(), 'day')
    ? moment(time).calendar().split(' ')[0]
    : moment(time).format("ddd")
-  const date = moment(time).format("DD.MM")
+  const date = moment(time).format("HH:mm")
 
   return(
-    <div className="day_wrapper">
+    <div className="day_wrapper" onClick={props.onClick}>
       <p className="day_summary"> {day.summary} </p>
       <div className="day clearfix">
         
         <div>
-          <p className='date'>{dayOfWeek}<br/>{date}</p>
+          <p className='date'>{currentDay}<br/>{date}</p>
         </div>
         
         <WeatherIcons iconName={day.icon} />
         
         <div className='temp'>
           <p className='temperature'>
-            <span>{Math.round(day.temperatureMax) + ' C°'}</span><br/>
-            <span>{Math.round(day.temperatureMin) + ' C°'}</span><br/>
+            <span>
+              <TemperatureIcon/>
+              {Math.round(day.temperature) + ' C°'}
+            </span>
+            <br/>
+            <span>
+              <ApparentTemperatureIcon/>
+              {Math.round(day.apparentTemperature) + ' C°'}
+            </span>
           </p>
         </div>
         
@@ -55,6 +64,7 @@ export default function Day (props) {
   )
 }
 
-Day.propTypes = {
-  day: PropTypes.object.isRequired
+Now.propTypes = {
+  day: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
 }
