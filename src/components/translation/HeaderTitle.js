@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage, intlShape } from 'react-intl'
 
 const HeaderTitle = () => {
   return (
     <FormattedMessage
       id = "TITLE"
-      defaultMessage = "Weather Helper"
+      defaultMessage = "My Weather"
       description = "Title of the header"
     />
   )

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage, intlShape } from 'react-intl'
 
 const BtnDeleteTxt = () => {

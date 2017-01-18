@@ -23,11 +23,11 @@ class Container extends Component {
           <a href="https://darksky.net/poweredby/" target="_blank">
             <img src="/img/poweredby.png" />
           </a>
-          <HeaderTitle />
           <button className='lang' onClick={langHandler}>{lang.toUpperCase()}</button>
           <button onClick={addPlace}>
             <BtnAddPlaceTxt />
           </button>
+          <HeaderTitle />
         </header>
         
         <PlaceList />

@@ -14,4 +14,8 @@ const WindSpeedTxt = (props) => {
   )
 }
 
+WindSpeedTxt.propTypes = {
+  speed: PropTypes.number.isRequired
+}
+
 export default WindSpeedTxt

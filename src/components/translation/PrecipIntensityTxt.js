@@ -14,4 +14,8 @@ const PrecipIntensityTxt = (props) => {
   )
 }
 
+PrecipIntensityTxt.propTypes = {
+  intensity: PropTypes.number.isRequired
+}
+
 export default PrecipIntensityTxt
