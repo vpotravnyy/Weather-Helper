@@ -3,7 +3,9 @@ body {
   background-color: #f9f9f9;
   margin: 0;
 }
-
+body * {
+  box-sizing: border-box;
+}
 .clearfix:after {
   content: "";
   display: table;
@@ -45,25 +47,31 @@ header {
   header button {
     position: relative;
     float: right;
-    height: 100%;
-    font-size: 0.8em;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    font-size: 0.7em;
+    height: 2.2em;
+    margin: 0.3em;
+    border: 2px solid #7f7;
+    border-radius: 0.3em;
   }
-  header button.lang {
-      background-color: #00f;
-      color: #fff;
-      font-size: 0.7em;
-      height: 2.2em;
-      margin: 0.3em;
+  header button.add {
+    padding: 0;
+    }
+    header button.add svg {
+      width: auto;
+      height: 100%;
+    }
+    header button.add span {
+      padding: 0 0.5em;
 }
 
 article {
   position: relative;
   display: inline-block;
-  min-width: 300px;
-  min-height: 200px;
+  width: 100%;
+  min-width: 240px;
   background-color: #eee;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 5px #ccc;
@@ -120,4 +128,16 @@ article {
     article .day .icon {
       width: 1em;
       height: 1em;
+}
+
+@media screen and (max-width: 480px) {
+  header {
+    font-size: 4.666vw;
+  }
+  article .day > div.wind_precip {
+    width: 27%;
+  }
+  article .day > div.temp {
+    width: 23%;
+  }
 }

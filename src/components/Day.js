@@ -27,14 +27,14 @@ export default function Day (props) {
         
         <IconWeather iconName={day.icon} />
         
-        <div>
+        <div className='temp'>
           <p className='temperature'>
             <span>{Math.round(day.temperatureMax) + ' C°'}</span><br/>
             <span>{Math.round(day.temperatureMin) + ' C°'}</span><br/>
           </p>
         </div>
         
-        <div>
+        <div className='wind_precip'>
           <p className='wind_and_precip'>
             
             <WindArrow angle={ Math.round(day.windBearing) } />

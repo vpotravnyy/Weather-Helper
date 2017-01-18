@@ -6,14 +6,15 @@ import { changeLang } from '_actions/langChange'
 
 import PlaceList from '_components/PlaceList'
 import HeaderTitle from '_translation/HeaderTitle'
-import BtnAddPlaceTxt from '_translation/BtnAddPlaceTxt'
+import BtnAddPlace from '_translation/BtnAddPlace'
 
 class Container extends Component {
   render () {
     const {
       lang,
       addPlace,
-      changeLang
+      changeLang,
+      width
     } = this.props
     const langHandler = changeLang.bind(null, lang)
 
@@ -24,9 +25,7 @@ class Container extends Component {
             <img src="/img/poweredby.png" />
           </a>
           <button className='lang' onClick={langHandler}>{lang.toUpperCase()}</button>
-          <button onClick={addPlace}>
-            <BtnAddPlaceTxt />
-          </button>
+          <BtnAddPlace key={width} addPlace={addPlace} width={width} />
           <HeaderTitle />
         </header>
         
@@ -39,12 +38,14 @@ class Container extends Component {
 Container.propTypes = {
   lang: PropTypes.string.isRequired,
   addPlace: PropTypes.func.isRequired,
-  changeLang: PropTypes.func.isRequired
+  changeLang: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    lang: state.lang
+    lang: state.lang,
+    width: state.viewport.width
   }
 }
 
