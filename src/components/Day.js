@@ -39,5 +39,6 @@ export default function Day (props) {
 Day.propTypes = {
   day: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  daily: PropTypes.bool
 }

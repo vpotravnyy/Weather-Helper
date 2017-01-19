@@ -11,8 +11,8 @@ export default function Temperature (props) {
     return(
       <div className='temp'>
         <p className='temperature'>
-          <span>{Math.round(day.temperatureMax) + ' C°'}</span><br/>
-          <span>{Math.round(day.temperatureMin) + ' C°'}</span><br/>
+          <span>{Math.round(day.temperatureMax) + '°C'}</span><br/>
+          <span>{Math.round(day.temperatureMin) + '°C'}</span><br/>
         </p>
       </div>
     )
@@ -24,12 +24,12 @@ export default function Temperature (props) {
         <p className='temperature'>
           <span>
             <TemperatureIcon/>
-            {Math.round(day.temperature) + ' C°'}
+            {Math.round(day.temperature) + '°C'}
           </span>
           <br/>
           <span>
             <ApparentTemperatureIcon/>
-            {Math.round(day.apparentTemperature) + ' C°'}
+            {Math.round(day.apparentTemperature) + '°C'}
           </span>
         </p>
       </div>

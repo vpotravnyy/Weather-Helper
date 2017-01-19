@@ -54,7 +54,7 @@ const Place = (props) => {
       })
     } else {
       const curr = props.place.weather.currently
-      children = <Now key={curr.time} day={curr} onClick={expandHanler} />
+      children = <Day key={curr.time} day={curr} onClick={expandHanler} />
     }
   }
 
