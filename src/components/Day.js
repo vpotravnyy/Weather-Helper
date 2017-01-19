@@ -9,6 +9,7 @@ import WeatherSummary from '_components/WeatherSummary'
 import CalendarDay from '_components/CalendarDay'
 import Temperature from '_components/Temperature'
 import WindAndPrecip from '_components/WindAndPrecip'
+import Hourly from '_components/Hourly'
 
 export default function Day (props) {
   const day = props.day

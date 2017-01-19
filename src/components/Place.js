@@ -6,7 +6,6 @@ import { expandPlace, collapsePlace } from '_actions/expandPlace'
 import { expandDay, collapseDay } from '_actions/expandDay'
 
 import Day from '_components/Day'
-import Now from '_components/Now'
 
 import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
 import BtnDeleteTxt from '_translation/BtnDeleteTxt'
