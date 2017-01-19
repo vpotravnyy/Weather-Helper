@@ -24,15 +24,18 @@ export default function Day (props) {
   else if(props.onClick) expandCollapseIcon = <ExpandIcon/>
 
   return(
-    <div className="day_wrapper" onClick={props.onClick} >
-      <WeatherSummary summary={day.summary} />
-      <div className="day clearfix">
-        <CalendarDay dayOfWeek={dayOfWeek} dateOrTime={dateOrTime} />
-        <WeatherIcons iconName={day.icon} />
-        <Temperature day={day} daily={props.daily} />
-        <WindAndPrecip day={day} />
+    <div>
+      <div className="day_wrapper" onClick={props.onClick} >
+        <WeatherSummary summary={day.summary} />
+        <div className="day clearfix">
+          <CalendarDay dayOfWeek={dayOfWeek} dateOrTime={dateOrTime} />
+          <WeatherIcons iconName={day.icon} />
+          <Temperature day={day} daily={props.daily} />
+          <WindAndPrecip day={day} />
+        </div>
+        {props.daily && expandCollapseIcon}
       </div>
-      {expandCollapseIcon}
+      { props.expanded && <Hourly day={day.time} hourly={props.hourly} /> }
     </div>
   )
 }

@@ -49,7 +49,7 @@ const Place = (props) => {
           expanded = false
           clickHandler = null
         }
-        return <Day key={day.time} day={day} expanded={expanded} daily onClick={clickHandler} />
+        return <Day key={day.time} day={day} expanded={expanded} daily hourly={props.place.weather.hourly} onClick={clickHandler} />
       })
     } else {
       const curr = props.place.weather.currently

@@ -158,7 +158,67 @@ article {
     article .day .icon {
       width: 1em;
       height: 1em;
+    }
+    .hourly {
+      background-color: #fff;
+      margin: 0 0.1em;
+      box-shadow: 0 0 3px 3px #bbb;
+      }
+      .hourly .hour,
+      .hourly .hourly_icon_header {
+        margin-bottom: -4px;
+      }
+      .hourly .hourly_icon_header {
+        padding-top: 6px;
+      }
+      article .hourly .block {
+        display: inline-block;
+        width: 12.5%;
+        height: 1.7em;
+        line-height: 1.7em;
+        text-align: center;
+        vertical-align: bottom;
+      }
+      article .hourly_icon_header .block {
+        height: 2em;
+      }
+      article .hourly .tmprtr,
+      article .hourly .wind,
+      article .hourly .wind_bearing,
+      article .hourly .cloudness {
+        border-left: 1px solid #ccc;
+      }
+      article .hourly .weather_icon.wind {
+        border: none;
+      }
+      article .hourly .block.wind_bearing svg {
+        width: 1em;
+        height: 1em;
+      }
+      article .hourly_icon_header .block.wind {
+        width: 25%;
+        position: relative;
+        }
+        article .hourly_icon_header > div > svg {
+          display: inline-block;
+          width: 1.4em;
+          height: 1.4em;
+        }
+        article .hourly_icon_header > div > svg.wind {
+          width: 2em;
+          height: 2em;
+          top: -3px;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        article .hourly_icon_header > div > svg.cloudy {
+          width: 2em;
+          height: 2em;
+          position: relative;
+          top: -6px;
 }
+
 
 @media screen and (max-width: 480px) {
   header {

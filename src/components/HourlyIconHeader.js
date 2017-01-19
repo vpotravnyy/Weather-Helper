@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 import WeatherIcons from '_icons/WeatherIcons'
 import TemperatureIcon from '_icons/TemperatureIcon'
@@ -12,25 +12,25 @@ export default function HourlyIconHeader () {
 
     return(
       <div className='hourly_icon_header'>
-        <div className='clock'>
+        <div className='block clock'>
           <TimeIcon/>
         </div>
-        <div className='tmprtr'>
+        <div className='block tmprtr'>
           <TemperatureIcon/>
         </div>
-        <div className='app_tmprtr'>
+        <div className='block app_tmprtr'>
           <ApparentTemperatureIcon/>
         </div>
-        <div className='wind'>
+        <div className='block wind'>
           <WeatherIcons iconName={'wind'} />
         </div>
-        <div className='cloudness'>
+        <div className='block cloudness'>
           <WeatherIcons iconName={'cloudy'} />
         </div>
-        <div className='precip'>
+        <div className='block precip'>
           <DropIcon/>
         </div>
-        <div className='precip_probab'>
+        <div className='block precip_probab'>
           <PrecipProbabilityIcon/>
         </div>
       </div>
