@@ -1,22 +1,25 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
+import { connect } from 'react-redux'
 
 import WindArrowIcon from '_icons/WindArrowIcon'
 
 import WindSpeedTxt from '_translation/WindSpeedTxt'
 import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
 
-export default function Hour (props) {
-const {
-  time,
-  precipIntensity,
-  precipProbability,
-  temperature,
-  apparentTemperature,
-  windSpeed,
-  windBearing,
-  cloudCover
-} = props.hour
+const Hour = (props) => {
+  const {
+    time,
+    precipIntensity,
+    precipProbability,
+    temperature,
+    apparentTemperature,
+    windSpeed,
+    windBearing,
+    cloudCover
+  } = props.hour
+  const degree = props.width > 320 ? '°C' : '°'
+  const percent = props.width > 320 ? '%' : ''
 
     return(
       <div className='hour'>
@@ -24,25 +27,34 @@ const {
           { moment(time * 1000).format("HH") }
         </div>
         <div className='block tmprtr'>
-          { Math.round(temperature) + '°C' }
+          { Math.round(temperature) + degree }
         </div>
         <div className='block app_tmprtr'>
-          { Math.round(apparentTemperature) + '°C' }
+          { Math.round(apparentTemperature) + degree }
         </div>
         <div className='block wind_bearing'>
           <WindArrowIcon angle={ Math.round(windBearing) } />
         </div>
         <div className='block wind_speed'>
-          <WindSpeedTxt speed={ Math.round(windSpeed) } />
+          {
+            props.width > 320
+             ? <WindSpeedTxt speed={ Math.round(windSpeed) } />
+             : <span>{ Math.round(windSpeed) }</span>
+          }
         </div>
         <div className='block cloudness'>
-          { Math.round(cloudCover * 100) + '%' }
+          { Math.round(cloudCover * 100) + percent }
         </div>
         <div className='block precip'>
-          <PrecipIntensityTxt intensity={ Math.round(precipIntensity) } />
+          {
+            props.width > 320
+             ? <PrecipIntensityTxt intensity={ Math.round(precipIntensity) } />
+             : <span>{ Math.round(precipIntensity) }</span>
+          }
+          
         </div>
         <div className='block precip_probab'>
-          { Math.round(precipProbability * 100) + '%' }
+          { Math.round(precipProbability * 100) + percent }
         </div>
       </div>
     )
@@ -50,5 +62,14 @@ const {
 }
 
 Hour.propTypes = {
-  hour: PropTypes.object.isRequired
+  hour: PropTypes.object.isRequired,
+  width: PropTypes.number.isRequired
 }
+
+function mapStateToProps (state) {
+  return {
+    width: state.viewport.width
+  }
+}
+
+export default connect(mapStateToProps)(Hour)

@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 import TemperatureIcon from '_icons/TemperatureIcon'
 import ApparentTemperatureIcon from '_icons/ApparentTemperatureIcon'
 
-export default function Temperature (props) {
+const Temperature = (props) => {
   const day = props.day
+  const degree = props.width > 320 ? '°C' : '°'
 
   if( props.daily ){
 
@@ -24,12 +26,12 @@ export default function Temperature (props) {
         <p className='temperature'>
           <span>
             <TemperatureIcon/>
-            {Math.round(day.temperature) + '°C'}
+            {Math.round(day.temperature) + degree}
           </span>
           <br/>
           <span>
             <ApparentTemperatureIcon/>
-            {Math.round(day.apparentTemperature) + '°C'}
+            {Math.round(day.apparentTemperature) + degree}
           </span>
         </p>
       </div>
@@ -39,5 +41,14 @@ export default function Temperature (props) {
 }
 
 Temperature.propTypes = {
-  day: PropTypes.object.isRequired
+  day: PropTypes.object.isRequired,
+  width: PropTypes.number.isRequired
 }
+
+function mapStateToProps (state) {
+  return {
+    width: state.viewport.width
+  }
+}
+
+export default connect(mapStateToProps)(Temperature)
