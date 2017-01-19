@@ -2,59 +2,42 @@ import React, { PropTypes } from 'react'
 import moment from 'moment'
 
 import WeatherIcons from '_icons/WeatherIcons'
-import WindArrowIcon from '_icons/WindArrowIcon'
-import DropIcon from '_icons/DropIcon'
-import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
-import WindSpeedTxt from '_translation/WindSpeedTxt'
-import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
+import CollapseIcon from '_icons/CollapseIcon'
+import ExpandIcon from '_icons/ExpandIcon'
+
+import WeatherSummary from '_components/WeatherSummary'
+import CalendarDay from '_components/CalendarDay'
+import Temperature from '_components/Temperature'
+import WindAndPrecip from '_components/WindAndPrecip'
 
 export default function Day (props) {
   const day = props.day
-  const time = day.time * 1000
-  const dayOfWeek = moment(time).isSame(moment(), 'day')
-   ? moment(time).calendar().split(' ')[0]
-   : moment(time).format("ddd")
-  const date = moment(time).format("DD.MM")
+  const time = moment(day.time * 1000)
+  const dayOfWeek = time.isSame(moment(), 'day')
+   ? time.calendar().split(' ')[0]
+   : time.format("ddd")
+  const formatStr = props.daily ? "DD.MM" : "HH:mm"
+  const dateOrTime = time.format(formatStr)
+  let expandCollapseIcon = null
+  if(props.expanded) expandCollapseIcon = <CollapseIcon/>
+  else if(props.onClick) expandCollapseIcon = <ExpandIcon/>
 
   return(
-    <div className="day_wrapper">
-      <p className="day_summary"> {day.summary} </p>
+    <div className="day_wrapper" onClick={props.onClick} >
+      <WeatherSummary summary={day.summary} />
       <div className="day clearfix">
-        
-        <div>
-          <p className='date'>{dayOfWeek}<br/>{date}</p>
-        </div>
-        
+        <CalendarDay dayOfWeek={dayOfWeek} dateOrTime={dateOrTime} />
         <WeatherIcons iconName={day.icon} />
-        
-        <div className='temp'>
-          <p className='temperature'>
-            <span>{Math.round(day.temperatureMax) + ' C°'}</span><br/>
-            <span>{Math.round(day.temperatureMin) + ' C°'}</span><br/>
-          </p>
-        </div>
-        
-        <div className='wind_precip'>
-          <p className='wind_and_precip'>
-            
-            <WindArrowIcon angle={ Math.round(day.windBearing) } />
-            <WindSpeedTxt speed={ Math.round(day.windSpeed) } />
-            <br/>
-
-            <DropIcon />
-            <PrecipIntensityTxt intensity={ Math.round(day.precipIntensity) } />
-            <br/>
-
-            <PrecipProbabilityIcon />
-            <span> {Math.round(day.precipProbability * 100) + '%'}</span>
-            
-          </p>
-        </div>
+        <Temperature day={day} daily={props.daily} />
+        <WindAndPrecip day={day} />
       </div>
+      {expandCollapseIcon}
     </div>
   )
 }
 
 Day.propTypes = {
-  day: PropTypes.object.isRequired
+  day: PropTypes.object.isRequired,
+  expanded: PropTypes.bool,
+  onClick: PropTypes.func
 }

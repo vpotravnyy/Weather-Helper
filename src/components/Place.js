@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 
 import { removePlace } from '_actions/actions'
 import { expandPlace, collapsePlace } from '_actions/expandPlace'
+import { expandDay, collapseDay } from '_actions/expandDay'
 
 import Day from '_components/Day'
 import Now from '_components/Now'
+
 import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
 import BtnDeleteTxt from '_translation/BtnDeleteTxt'
+
 import CollapseIcon from '_icons/CollapseIcon'
 import ExpandIcon from '_icons/ExpandIcon'
 
@@ -29,8 +32,25 @@ const Place = (props) => {
   let children = null
   if(props.place.weather){
     if( props.place.isExpanded ) {
-      children = props.place.weather.daily.data.map((day) => {
-        return <Day key={day.time} day={day} />
+      children = props.place.weather.daily.data.map((day, i) => {
+        let expanded, clickHandler
+        if( i === 0 || i === 1 ){
+          if( props.expandedDay === i ){
+            expanded = true
+            clickHandler = props.collapseDay
+          } else {
+            const data = {
+              placeID: props.place.placeID,
+              dayIndex: i
+            }
+            expanded = false
+            clickHandler = props.expandDay.bind(null, data)
+          }
+        } else {
+          expanded = false
+          clickHandler = null
+        }
+        return <Day key={day.time} day={day} expanded={expanded} daily onClick={clickHandler} />
       })
     } else {
       const curr = props.place.weather.currently
@@ -58,14 +78,21 @@ const Place = (props) => {
 
 Place.propTypes = {
   place: PropTypes.object.isRequired,
-  removePlace: PropTypes.func.isRequired
+  expandedDay: PropTypes.number.isRequired,
+  removePlace: PropTypes.func.isRequired,
+  expandPlace: PropTypes.func.isRequired,
+  collapsePlace: PropTypes.func.isRequired,
+  expandDay: PropTypes.func.isRequired,
+  collapseDay: PropTypes.func.isRequired
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     removePlace: (place) => dispatch(removePlace(place)),
     expandPlace: (placeID) => dispatch(expandPlace(placeID)),
-    collapsePlace: () => dispatch(collapsePlace())
+    collapsePlace: () => dispatch(collapsePlace()),
+    expandDay: (data) => dispatch(expandDay(data)),
+    collapseDay: () => dispatch(collapseDay())
   }
 }
 

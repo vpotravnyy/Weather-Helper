@@ -7,6 +7,7 @@ import DropIcon from '_icons/DropIcon'
 import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
 import TemperatureIcon from '_icons/TemperatureIcon'
 import ApparentTemperatureIcon from '_icons/ApparentTemperatureIcon'
+
 import WindSpeedTxt from '_translation/WindSpeedTxt'
 import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
 

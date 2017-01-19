@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const PlaceList = (props) => {
   const places = props.places.map(p => {
-    return <Place key={p.placeID} place={p} />
+    return <Place key={p.placeID} place={p} expandedDay={p.expandedDay} />
   })
   
   return (

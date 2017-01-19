@@ -3,6 +3,8 @@ import {
   REMOVE_PLACE,
   EXPAND_PLACE,
   COLLAPSE_PLACE,
+  EXPAND_DAY,
+  COLLAPSE_DAY,
   GET_COORDS_REQUEST,
   GET_COORDS_SUCCESS,
   GET_COORDS_FAILURE,
@@ -27,7 +29,8 @@ export default function (places = initialState.places, action) {
           "lat": undefined,
           "lng": undefined,
           "weather": null,
-          "isExpanded": false
+          "isExpanded": false,
+          "expandedDay": -1
         }
       ]
 
@@ -38,7 +41,8 @@ export default function (places = initialState.places, action) {
       return places.map(item => {
         return {
           ...item,
-          isExpanded: item.placeID === action.placeID
+          isExpanded: item.placeID === action.placeID,
+          expandedDay: -1
         }
       })
 
@@ -46,7 +50,24 @@ export default function (places = initialState.places, action) {
       return places.map(item => {
         return {
           ...item,
-          isExpanded: false
+          isExpanded: false,
+          expandedDay: -1
+        }
+      })
+
+    case EXPAND_DAY:
+      return places.map(item => {
+        return {
+          ...item,
+          expandedDay: item.placeID === action.placeID ? action.dayIndex : -1
+        }
+      })
+
+    case COLLAPSE_DAY:
+      return places.map(item => {
+        return {
+          ...item,
+          expandedDay: -1
         }
       })
 

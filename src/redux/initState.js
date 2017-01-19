@@ -22,7 +22,8 @@ else
         "lng": undefined,
         "weather": null,
         'isFetching': false,
-        'isExpanded': true
+        'isExpanded': true,
+        'expandedDay': -1
       }
     ]
   }
