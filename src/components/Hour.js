@@ -18,7 +18,6 @@ const {
   cloudCover
 } = props.hour
 
-
     return(
       <div className='hour'>
         <div className='block clock'>

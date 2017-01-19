@@ -22,10 +22,11 @@ export default function Day (props) {
   let expandCollapseIcon = null
   if(props.expanded) expandCollapseIcon = <CollapseIcon/>
   else if(props.onClick) expandCollapseIcon = <ExpandIcon/>
+  const style = props.onClick || !props.daily ? { cursor: 'pointer' } : {}
 
   return(
     <div>
-      <div className="day_wrapper" onClick={props.onClick} >
+      <div className="day_wrapper" onClick={props.onClick} style={style} >
         <WeatherSummary summary={day.summary} />
         <div className="day clearfix">
           <CalendarDay dayOfWeek={dayOfWeek} dateOrTime={dateOrTime} />

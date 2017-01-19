@@ -80,7 +80,8 @@ article {
   padding: 3px;
   }
   article .place {
-    margin: 7px;
+    padding: 7px;
+    cursor: pointer;
     }
     article .expand {
       position: absolute;
