@@ -11,7 +11,8 @@ import Temperature from '_components/Temperature'
 import WindAndPrecip from '_components/WindAndPrecip'
 import Hourly from '_components/Hourly'
 
-export default function Day (props) {
+function Day (props) {
+
   const day = props.day
   const time = moment(day.time * 1000)
   const dayOfWeek = time.isSame(moment(), 'day')
@@ -19,20 +20,31 @@ export default function Day (props) {
    : time.format("ddd")
   const formatStr = props.daily ? "DD.MM" : "HH:mm"
   const dateOrTime = time.format(formatStr)
-  let expandCollapseIcon = null
-  if(props.expanded) expandCollapseIcon = <CollapseIcon/>
-  else if(props.onClick) expandCollapseIcon = <ExpandIcon/>
+  const expandCollapseIcon = (
+    <div className='place__expand-icon place__expand-icon--day'>
+      {props.expanded && <CollapseIcon/>}
+      {!props.expanded && props.onClick && <ExpandIcon/>}
+    </div>
+  )
   const style = props.onClick || !props.daily ? { cursor: 'pointer' } : {}
 
   return(
     <div>
-      <div className="day_wrapper" onClick={props.onClick} style={style} >
+      <div className="day" onClick={props.onClick} style={style} >
         <WeatherSummary summary={day.summary} />
-        <div className="day clearfix">
-          <CalendarDay dayOfWeek={dayOfWeek} dateOrTime={dateOrTime} />
-          <WeatherIcons iconName={day.icon} />
-          <Temperature day={day} daily={props.daily} />
-          <WindAndPrecip day={day} />
+        <div className="day-tile clearfix">
+          <div className='day-tile__item day-tile__item-date'>
+            <CalendarDay dayOfWeek={dayOfWeek} dateOrTime={dateOrTime} />
+          </div>
+          <div className='day-tile__item day-tile__item-weather_icon'>
+            <WeatherIcons iconName={day.icon} />
+          </div>
+          <div className='day-tile__item day-tile__item-temperature'>
+            <Temperature day={day} daily={props.daily} />
+          </div>
+          <div className='day-tile__item day-tile__item-wind_and_precip'>
+            <WindAndPrecip day={day} />
+          </div>
         </div>
         {props.daily && expandCollapseIcon}
       </div>
@@ -43,6 +55,7 @@ export default function Day (props) {
 
 Day.propTypes = {
   day: PropTypes.object.isRequired,
+  viewport: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
   onClick: PropTypes.func,
   daily: PropTypes.bool

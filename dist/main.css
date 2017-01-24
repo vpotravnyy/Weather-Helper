@@ -16,58 +16,53 @@ body * {
   width: 100%;
 }
 
-header {
+.header {
   position: relative;
   text-align: center;
   height: 2em;
   max-height: 9vw;
   border-bottom: 1px solid #ccc;
-  background-color: #ddd;
+  background-color: #eee;
   line-height: 2em;
   font-size: 1.4em;
   box-shadow: 0 1px 5px #ccc;
-  }
-  header a {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    }
-    header a img {
-      height: 100%;
-      width: auto;
-  }
-  header > span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%,-50%,0);
-    white-space: nowrap;
-  }
-  header button {
-    position: relative;
-    float: right;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 0.7em;
-    height: 2.2em;
-    margin: 0.3em;
-    border: 2px solid #7f7;
-    border-radius: 0.3em;
-  }
-  header button.add {
-    padding: 0;
-    }
-    header button.add svg {
-      width: auto;
-      height: 100%;
-    }
-    header button.add span {
-      padding: 0 0.5em;
+}
+.header__link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.header__img,
+.icon-add,
+.weather_icon {
+  height: 100%;
+  width: auto;
+}
+.header__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  white-space: nowrap;
+}
+.header__button {
+  position: relative;
+  float: right;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7em;
+  height: 2.2em;
+  margin: 0.3em;
+  border-radius: 0.1em;
+  box-shadow: 1px 1px 1.2px 1.2px #aaa;
+  background-color: #f3f3f3;
+}
+.header__button--with-icon {
+  padding: 0;
 }
 
-article {
+.place {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -78,157 +73,167 @@ article {
   box-shadow: 0 1px 5px #ccc;
   margin-top: 8px;
   padding: 3px;
-  }
-  article .place {
-    padding: 7px;
-    cursor: pointer;
-    }
-    article .expand {
-      position: absolute;
-      width: 2.3em;
-      height: auto;
-      left: 50%;
-      pointer-events: none;
-      transform: translateX(-50%);
-      fill: #000;
-    }
-    article .place .expand {
-      top: 0.8em;
-    }
-    article .day_wrapper .expand {
-      bottom: -0.8em;
-  }
-  article .dayslist {
-    box-shadow: 0 1px 5px #ccc;
-  }
-  article .day_wrapper {
-    border: 1px solid #ccc;
-    box-shadow: 0 1px 5px #ccc;
-    background-color: #f5f5f5;
-    position: relative;
-  }
-  article button {
-    position: absolute;
-    right: 3px;
-    top: 3px;
-  }
-  article .day_summary {
-    margin: 7px 7px 0 7px;
-  }
-  article .day {
-    position: relative;
-    }
-    article .day > * {
-      display: inline-block;
-      width: 25%;
-      height: 72px;
-      vertical-align: middle;
-    }
-    article .day > div > p {
-      margin: 0 3px 5px 3px;
-      text-align: center;
-      top: 50%;
-      position: relative;
-      transform: translateY(-50%);
-      line-height: 125%;
-    }
-    article .day > div > p.temperature {
-      text-align: right;
-      max-width: 60px;
-      margin: 0 auto;
-      }
-      article .day > div > p.temperature span {
-        display: inline-block;
-        width: 100%;
-        position: relative;
-        margin: 0.2em 0;
-        }
-        article .day > div > p.temperature span svg {
-          position: absolute;
-          left: -9px;
-          top: -1px;
-          width: 1.4em;
-          height: auto;
-    }
-    article .day > div > p.date:first-letter {
-      text-transform: capitalize;
-    }
-    article .day > div > p.wind_and_precip {
-      text-align: left;
-    }
-    article .day .icon {
-      width: 1em;
-      height: 1em;
-    }
-    .hourly {
-      background-color: #fff;
-      margin: 0 0.1em;
-      box-shadow: 0 0 3px 3px #bbb;
-      }
-      .hourly .hour,
-      .hourly .hourly_icon_header {
-        margin-bottom: -4px;
-      }
-      .hourly .hourly_icon_header {
-        padding-top: 6px;
-      }
-      article .hourly .block {
-        display: inline-block;
-        width: 12.5%;
-        height: 1.7em;
-        line-height: 1.7em;
-        text-align: center;
-        vertical-align: bottom;
-      }
-      article .hourly_icon_header .block {
-        height: 2em;
-      }
-      article .hourly .tmprtr,
-      article .hourly .wind,
-      article .hourly .wind_bearing,
-      article .hourly .cloudness {
-        border-left: 1px solid #ccc;
-      }
-      article .hourly .weather_icon.wind {
-        border: none;
-      }
-      article .hourly .block.wind_bearing svg {
-        width: 1em;
-        height: 1em;
-      }
-      article .hourly_icon_header .block.wind {
-        width: 25%;
-        position: relative;
-        }
-        article .hourly_icon_header > div > svg {
-          display: inline-block;
-          width: 1.4em;
-          height: 1.4em;
-        }
-        article .hourly_icon_header > div > svg.wind {
-          width: 2em;
-          height: 2em;
-          top: -3px;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        article .hourly_icon_header > div > svg.cloudy {
-          width: 2em;
-          height: 2em;
-          position: relative;
-          top: -6px;
+}
+.place__title {
+  padding: 7px;
+  cursor: pointer;
+}
+.place__expand-icon {
+  position: absolute;
+  width: 2.3em;
+  height: auto;
+  left: 50%;
+  pointer-events: none;
+  transform: translateX(-50%);
+  fill: #000;
+}
+.place__expand-icon--place {
+  top: 0.8em;
+}
+.place__expand-icon--day {
+  bottom: -1.1em;
+}
+.place__dayslist {
+  box-shadow: 0 1px 5px #ccc;
+}
+
+.day {
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 5px #ccc;
+  background-color: #f5f5f5;
+  position: relative;
+}
+.place__btn-remove {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+.day__summary {
+  margin: 7px 7px 0 7px;
+}
+.day-tile {
+  position: relative;
+}
+.day-tile__item {
+  display: inline-block;
+  width: 25%;
+  height: 72px;
+  vertical-align: middle;
+  text-align: center;
+}
+.day-tile__item__content {
+  margin: 0 3px 5px 3px;
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+  line-height: 125%;
+}
+.day-tile__item-temperature__content {
+  text-align: right;
+  max-width: 3.75em;
+  margin: 0 auto;
+}
+.day-tile__item-temperature__content span {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin: 0.2em 0;
+}
+.day-tile__item-temperature__temperature-icon,
+.day-tile__item-temperature__app-temperature-icon {
+  position: absolute;
+  left: 0px;
+  top: -1px;
+  width: 1.4em;
+  height: auto;
+}
+.day-tile__item-date__content:first-letter {
+  text-transform: capitalize;
+}
+.day-tile__item-wind_and_precip__content {
+  text-align: left;
+}
+.day-tile .icon {
+  width: 1em;
+  height: 1em;
+}
+
+.hourly {
+  background-color: #fff;
+  margin: 0 0.1em;
+  box-shadow: 0 0 3px 3px #bbb;
+}
+.hourly__icon-header,
+.hourly__hour {
+  margin-bottom: -4px;
+}
+.hourly__cell {
+  display: inline-block;
+  width: 12.5%;
+  height: 1.7em;
+  line-height: 1.7em;
+  text-align: center;
+  vertical-align: bottom;
+}
+.hourly__icon-header {
+  padding-top: 6px;
+}
+.hourly__icon-header .hourly__cell {
+  height: 2em;
+}
+.hourly__cell.tmprtr,
+.hourly__cell.wind,
+.hourly__cell.wind_bearing,
+.hourly__cell.cloudness {
+  border-left: 1px solid #ccc;
+}
+.hourly__cell.wind_bearing .icon {
+  width: 1em;
+  height: 1em;
+}
+.hourly__cell.wind {
+  width: 25%;
+  position: relative;
+}
+.hourly__icon-header .icon {
+  display: inline-block;
+  position: relative;
+  width: 1.4em;
+  height: 1.4em;
+}
+.hourly__icon-header .weather_icon.wind {
+  width: 2em;
+  height: 2em;
+  top: -5px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hourly__icon-header .cloudy {
+  width: 2em;
+  height: 2em;
+  position: relative;
+  top: -6px;
+}
+
+.is_very_narrow .header,
+.is_narrow .header {
+  font-size: 4.666vw;
+}
+.is_narrow .day-tile__item-wind_and_precip {
+  width: 28%;
+}
+.is_narrow .day-tile__item-temperature {
+  width: 22%;
 }
 
 
-@media screen and (max-width: 480px) {
-  header {
-    font-size: 4.666vw;
-  }
-  article .day > div.wind_precip {
-    width: 27%;
-  }
-  article .day > div.temp {
-    width: 23%;
-  }
+.is_very_narrow .day-tile__item-wind_and_precip {
+  width: 30%;
+}
+.is_very_narrow .day-tile__item-temperature {
+  width: 20%;
+}
+.is_very_narrow .day-tile__item-temperature__content {
+  width: 2.7em;
 }

@@ -11,22 +11,20 @@ export default function WindAndPrecip (props) {
   const day = props.day
 
   return(
-    <div className='wind_precip'>
-      <p className='wind_and_precip'>
-        
-        <WindArrowIcon angle={ Math.round(day.windBearing) } />
-        <WindSpeedTxt speed={ Math.round(day.windSpeed) } />
-        <br/>
+    <p className='day-tile__item__content day-tile__item-wind_and_precip__content'>
+      
+      <WindArrowIcon angle={ Math.round(day.windBearing) } />
+      <WindSpeedTxt speed={ Math.round(day.windSpeed) } />
+      <br/>
 
-        <DropIcon />
-        <PrecipIntensityTxt intensity={ Math.round(day.precipIntensity) } />
-        <br/>
+      <DropIcon />
+      <PrecipIntensityTxt intensity={ Math.round(day.precipIntensity) } />
+      <br/>
 
-        <PrecipProbabilityIcon />
-        <span> {Math.round(day.precipProbability * 100) + '%'}</span>
-        
-      </p>
-    </div>
+      <PrecipProbabilityIcon />
+      <span> {Math.round(day.precipProbability * 100) + '%'}</span>
+      
+    </p>
   )
 }
 

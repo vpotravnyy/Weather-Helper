@@ -18,42 +18,41 @@ const Hour = (props) => {
     windBearing,
     cloudCover
   } = props.hour
-  const degree = props.width > 320 ? '°C' : '°'
-  const percent = props.width > 320 ? '%' : ''
+  const degree = props.viewport.isVeryNarrow ? '°' : '°C'
+  const percent = props.viewport.isVeryNarrow ? '' : '%'
 
     return(
-      <div className='hour'>
-        <div className='block clock'>
+      <div className='hourly__hour'>
+        <div className='hourly__cell clock'>
           { moment(time * 1000).format("HH") }
         </div>
-        <div className='block tmprtr'>
+        <div className='hourly__cell tmprtr'>
           { Math.round(temperature) + degree }
         </div>
-        <div className='block app_tmprtr'>
+        <div className='hourly__cell app_tmprtr'>
           { Math.round(apparentTemperature) + degree }
         </div>
-        <div className='block wind_bearing'>
+        <div className='hourly__cell wind_bearing'>
           <WindArrowIcon angle={ Math.round(windBearing) } />
         </div>
-        <div className='block wind_speed'>
+        <div className='hourly__cell wind_speed'>
           {
-            props.width > 320
-             ? <WindSpeedTxt speed={ Math.round(windSpeed) } />
-             : <span>{ Math.round(windSpeed) }</span>
+            props.viewport.isVeryNarrow
+             ? <span>{ Math.round(windSpeed) }</span>
+             : <WindSpeedTxt speed={ Math.round(windSpeed) } />
           }
         </div>
-        <div className='block cloudness'>
+        <div className='hourly__cell cloudness'>
           { Math.round(cloudCover * 100) + percent }
         </div>
-        <div className='block precip'>
+        <div className='hourly__cell precip'>
           {
-            props.width > 320
-             ? <PrecipIntensityTxt intensity={ Math.round(precipIntensity) } />
-             : <span>{ Math.round(precipIntensity) }</span>
+            props.viewport.isVeryNarrow
+             ? <span>{ Math.round(precipIntensity) }</span>
+             : <PrecipIntensityTxt intensity={ Math.round(precipIntensity) } />
           }
-          
         </div>
-        <div className='block precip_probab'>
+        <div className='hourly__cell precip_probab'>
           { Math.round(precipProbability * 100) + percent }
         </div>
       </div>
@@ -63,12 +62,12 @@ const Hour = (props) => {
 
 Hour.propTypes = {
   hour: PropTypes.object.isRequired,
-  width: PropTypes.number.isRequired
+  viewport: PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    width: state.viewport.width
+    viewport: state.viewport
   }
 }
 

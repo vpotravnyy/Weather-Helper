@@ -20,13 +20,15 @@ class Container extends Component {
 
     return (
       <div className='container'>
-        <header>
-          <a href="https://darksky.net/poweredby/" target="_blank">
-            <img src="/img/poweredby.png" />
+        <header className='header'>
+          <a href="https://darksky.net/poweredby/" target="_blank" className='header__link'>
+            <img src="/img/poweredby.png" className='header__img' />
           </a>
-          <button className='lang' onClick={langHandler}>{lang.toUpperCase()}</button>
+          <button onClick={langHandler} className='header__button header__button--lang'>{lang.toUpperCase()}</button>
           <BtnAddPlace key={width} addPlace={addPlace} width={width} />
-          <HeaderTitle />
+          <span className='header__title'>
+            <HeaderTitle />
+          </span>
         </header>
         
         <PlaceList />

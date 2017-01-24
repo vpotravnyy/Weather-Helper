@@ -15,17 +15,21 @@ import ExpandIcon from '_icons/ExpandIcon'
 
 const Place = (props) => {
   const removePlace = props.removePlace.bind(null, props.place.placeID)
-  const btnDel = <button onClick={removePlace}> <BtnDeleteTxt /> </button>
+  const btnDel = (
+    <button onClick={removePlace} className='place__btn-remove'>
+      <BtnDeleteTxt />
+    </button>
+  )
   const placeName = props.place.placeName === "Current position"
     ? <CurrentPlaceTxt /> : props.place.placeName
 
-  let expandIcon, expandHanler
+  let expandIcon, expandHandler
   if( props.place.isExpanded ){
     expandIcon = <CollapseIcon/>
-    expandHanler = props.collapsePlace
+    expandHandler = props.collapsePlace
   } else {
     expandIcon = <ExpandIcon/>
-    expandHanler = props.expandPlace.bind(null, props.place.placeID)
+    expandHandler = props.expandPlace.bind(null, props.place.placeID)
   }
   
   let children = null
@@ -53,21 +57,23 @@ const Place = (props) => {
       })
     } else {
       const curr = props.place.weather.currently
-      children = <Day key={curr.time} day={curr} onClick={expandHanler} />
+      children = <Day key={curr.time} day={curr} onClick={expandHandler} />
     }
   }
 
   return (
-    <article>
+    <article className='place'>
       
-      <div className='place' onClick={expandHanler}>
+      <div className='place__title' onClick={expandHandler}>
         { placeName }
-        { expandIcon }
+        <div className='place__expand-icon place__expand-icon--place'>
+          { expandIcon }
+        </div>
       </div>
 
       {props.place.placeID === 0 ? null : btnDel}
       
-      <div className='dayslist'>
+      <div className='place__dayslist'>
         {children}
       </div>
 

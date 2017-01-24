@@ -11,30 +11,26 @@ const Temperature = (props) => {
   if( props.daily ){
 
     return(
-      <div className='temp'>
-        <p className='temperature'>
-          <span>{Math.round(day.temperatureMax) + '°C'}</span><br/>
-          <span>{Math.round(day.temperatureMin) + '°C'}</span><br/>
-        </p>
-      </div>
+      <p className='day-tile__item__content day-tile__item-temperature__content'>
+        <span>{Math.round(day.temperatureMax) + '°C'}</span><br/>
+        <span>{Math.round(day.temperatureMin) + '°C'}</span><br/>
+      </p>
     )
 
   } else {
 
     return (
-      <div className='temp'>
-        <p className='temperature'>
-          <span>
-            <TemperatureIcon/>
-            {Math.round(day.temperature) + degree}
-          </span>
-          <br/>
-          <span>
-            <ApparentTemperatureIcon/>
-            {Math.round(day.apparentTemperature) + degree}
-          </span>
-        </p>
-      </div>
+      <p className='day-tile__item__content day-tile__item-temperature__content'>
+        <span>
+          <TemperatureIcon/>
+          {Math.round(day.temperature) + degree}
+        </span>
+        <br/>
+        <span>
+          <ApparentTemperatureIcon/>
+          {Math.round(day.apparentTemperature) + degree}
+        </span>
+      </p>
     )
 
   }

@@ -11,26 +11,26 @@ import TimeIcon from '_icons/TimeIcon'
 export default function HourlyIconHeader () {
 
     return(
-      <div className='hourly_icon_header'>
-        <div className='block clock'>
+      <div className='hourly__icon-header'>
+        <div className='hourly__cell clock'>
           <TimeIcon/>
         </div>
-        <div className='block tmprtr'>
+        <div className='hourly__cell tmprtr'>
           <TemperatureIcon/>
         </div>
-        <div className='block app_tmprtr'>
+        <div className='hourly__cell app_tmprtr'>
           <ApparentTemperatureIcon/>
         </div>
-        <div className='block wind'>
+        <div className='hourly__cell wind'>
           <WeatherIcons iconName={'wind'} />
         </div>
-        <div className='block cloudness'>
+        <div className='hourly__cell cloudness'>
           <WeatherIcons iconName={'cloudy'} />
         </div>
-        <div className='block precip'>
+        <div className='hourly__cell precip'>
           <DropIcon/>
         </div>
-        <div className='block precip_probab'>
+        <div className='hourly__cell precip_probab'>
           <PrecipProbabilityIcon/>
         </div>
       </div>

@@ -75,13 +75,17 @@ export const onWindowResize = (props) => {
   const {
     width,
     height,
-    orientation
+    orientation,
+    isNarrow,
+    isWide
   } = props
 
   return {
     type: ON_RESIZE,
-    width: width,
-    height: height,
-    orientation: orientation
+    width,
+    height,
+    orientation,
+    isNarrow,
+    isWide
   }
 }

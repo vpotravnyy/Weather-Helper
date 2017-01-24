@@ -2,11 +2,14 @@ import React, { PropTypes } from 'react'
 
 export default function CalendarDay (props) {
 
-  return(
-    <div>
-      <p className='date'>{props.dayOfWeek}<br/>{props.dateOrTime}</p>
-    </div>
+  return (
+    <p className='day-tile__item__content day-tile__item-date__content'>
+      {props.dayOfWeek}
+      <br/>
+      {props.dateOrTime}
+    </p>
   )
+
 }
 
 CalendarDay.propTypes = {

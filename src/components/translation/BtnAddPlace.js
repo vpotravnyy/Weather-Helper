@@ -14,13 +14,13 @@ function BtnAddPlace (props) {
 
   if (width > 480){
     return (
-      <button className='add' onClick={addPlace}>
+      <button onClick={addPlace} className='header__button'>
         <span> { formatMessage( msg ) } </span>
       </button>
     )
   } else {
     return (
-      <button className='add' onClick={confirmAdd}>
+      <button onClick={confirmAdd} className='header__button header__button--with-icon'>
         <AddIcon/>
       </button>
     )
