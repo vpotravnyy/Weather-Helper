@@ -1,8 +1,10 @@
 import React, { PropTypes } from 'react'
-import moment from 'moment'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import WindArrowIcon from '_icons/WindArrowIcon'
+
+import isHourBriefView from '_utils/isHourBriefView'
 
 import WindSpeedTxt from '_translation/WindSpeedTxt'
 import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
@@ -18,8 +20,9 @@ const Hour = (props) => {
     windBearing,
     cloudCover
   } = props.hour
-  const degree = props.viewport.isVeryNarrow ? '°' : '°C'
-  const percent = props.viewport.isVeryNarrow ? '' : '%'
+  const isBrief = isHourBriefView(props.viewport)
+  const degree = isBrief ? '' : '°C'
+  const percent = isBrief ? '' : '%'
 
     return(
       <div className='hourly__hour'>
@@ -37,7 +40,7 @@ const Hour = (props) => {
         </div>
         <div className='hourly__cell wind_speed'>
           {
-            props.viewport.isVeryNarrow
+            isBrief
              ? <span>{ Math.round(windSpeed) }</span>
              : <WindSpeedTxt speed={ Math.round(windSpeed) } />
           }
@@ -47,7 +50,7 @@ const Hour = (props) => {
         </div>
         <div className='hourly__cell precip'>
           {
-            props.viewport.isVeryNarrow
+            isBrief
              ? <span>{ Math.round(precipIntensity) }</span>
              : <PrecipIntensityTxt intensity={ Math.round(precipIntensity) } />
           }

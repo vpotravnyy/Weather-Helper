@@ -20,7 +20,7 @@ export default () => {
     viewPort.isNarrow = true
   } else if( viewPort.width <= 960 ) {
     document.body.className = 'is_normal'
-    viewPort.isNarrow = true
+    viewPort.isNormal = true
   } else if( viewPort.width > 960 ) {
     document.body.className = 'is_wide'
     viewPort.isWide = true

@@ -67,12 +67,16 @@ body * {
   display: inline-block;
   width: 100%;
   min-width: 240px;
-  max-width: 480px;
   background-color: #eee;
   border: 1px solid #e0e0e0;
   box-shadow: 0 1px 5px #ccc;
   margin-top: 8px;
   padding: 3px;
+  vertical-align: top;
+}
+
+.collapsed_place {
+  max-width: 360px;
 }
 .place__title {
   padding: 7px;
@@ -114,19 +118,17 @@ body * {
 .day-tile {
   position: relative;
 }
-.day-tile__item {
-  display: inline-block;
-  width: 25%;
-  height: 72px;
-  vertical-align: middle;
-  text-align: center;
+.day-tile .icon {
+  width: 1em;
+  height: 1em;
 }
-.day-tile__item__content {
-  margin: 0 3px 5px 3px;
-  top: 50%;
-  position: relative;
-  transform: translateY(-50%);
+.day-tile__item__content,
+.day-tile__item-weather_icon .weather_icon  {
+  margin: 0;
+  display: inline-block;
   line-height: 125%;
+  max-width: 100%;
+  vertical-align: middle;
 }
 .day-tile__item-temperature__content {
   text-align: right;
@@ -139,11 +141,10 @@ body * {
   position: relative;
   margin: 0.2em 0;
 }
-.day-tile__item-temperature__temperature-icon,
-.day-tile__item-temperature__app-temperature-icon {
+.day-tile__item-temperature__content .icon {
   position: absolute;
-  left: 0px;
-  top: -1px;
+  right: 42px;
+  top: -2px;
   width: 1.4em;
   height: auto;
 }
@@ -153,15 +154,23 @@ body * {
 .day-tile__item-wind_and_precip__content {
   text-align: left;
 }
-.day-tile .icon {
-  width: 1em;
-  height: 1em;
+
+.day-tile__item:before,
+.hourly__icon-header .hourly__cell:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
 }
 
 .hourly {
   background-color: #fff;
   margin: 0 0.1em;
   box-shadow: 0 0 3px 3px #bbb;
+  border-top: 1px solid transparent;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 .hourly__icon-header,
 .hourly__hour {
@@ -174,9 +183,6 @@ body * {
   line-height: 1.7em;
   text-align: center;
   vertical-align: bottom;
-}
-.hourly__icon-header {
-  padding-top: 6px;
 }
 .hourly__icon-header .hourly__cell {
   height: 2em;
@@ -195,19 +201,13 @@ body * {
   width: 25%;
   position: relative;
 }
-.hourly__icon-header .icon {
+.hourly__icon-header .icon,
+.hourly__icon-header .weather_icon {
   display: inline-block;
   position: relative;
   width: 1.4em;
   height: 1.4em;
-}
-.hourly__icon-header .weather_icon.wind {
-  width: 2em;
-  height: 2em;
-  top: -5px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  vertical-align: middle;
 }
 .hourly__icon-header .cloudy {
   width: 2em;
@@ -236,4 +236,63 @@ body * {
 }
 .is_very_narrow .day-tile__item-temperature__content {
   width: 2.7em;
+}
+.is_very_narrow .day-tile__item-temperature__content .icon {
+  right: 28px;
+}
+
+.is_normal .day_wrapper {
+  display: inline-block;
+  width: 12.5%;
+  vertical-align: top;
+}
+.is_normal .day-tile {
+  margin-bottom: 0.5em;
+}
+.is_normal .day-tile__item {
+  display: block;
+  width: 100%;
+}
+.is_normal .hourly__icon-header,
+.is_normal .hourly__hour {
+  display: inline-block;
+  width: 2em;
+  vertical-align: top;
+
+}
+.is_normal .hourly__cell {
+  display: block;
+  height: 2em;
+  line-height: 2em;
+  width: 100%;
+}
+.is_normal .hourly__cell.wind {
+  height: 4em;
+}
+.is_normal .hourly__cell.tmprtr,
+.is_normal .hourly__cell.wind,
+.is_normal .hourly__cell.wind_bearing,
+.is_normal .hourly__cell.cloudness {
+  border-top: 1px solid #ccc;
+  border-left: none;
+}
+
+
+
+
+
+.collapsed_place .day_wrapper {
+  display: block;
+  width: 100%;
+}
+.collapsed_place .day-tile {
+  margin: 0;
+}
+.day-tile__item,
+.collapsed_place .day-tile__item {
+  display: inline-block;
+  width: 25%;
+  height: 72px;
+  vertical-align: middle;
+  text-align: center;
 }

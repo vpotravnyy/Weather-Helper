@@ -76,7 +76,9 @@ export const onWindowResize = (props) => {
     width,
     height,
     orientation,
+    isVeryNarrow,
     isNarrow,
+    isNormal,
     isWide
   } = props
 
@@ -85,7 +87,9 @@ export const onWindowResize = (props) => {
     width,
     height,
     orientation,
+    isVeryNarrow,
     isNarrow,
+    isNormal,
     isWide
   }
 }

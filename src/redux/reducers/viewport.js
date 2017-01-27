@@ -6,7 +6,9 @@ export default (viewport = getViewPort(), action) => {
     width,
     height,
     orientation,
+    isVeryNarrow,
     isNarrow,
+    isNormal,
     isWide
   } = action
 
@@ -17,7 +19,9 @@ export default (viewport = getViewPort(), action) => {
         width,
         height,
         orientation,
+        isVeryNarrow,
         isNarrow,
+        isNormal,
         isWide
       }
 

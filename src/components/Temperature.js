@@ -6,7 +6,7 @@ import ApparentTemperatureIcon from '_icons/ApparentTemperatureIcon'
 
 const Temperature = (props) => {
   const day = props.day
-  const degree = props.width > 320 ? '°C' : '°'
+  const degree = props.viewport.isVeryNarrow ? '°' : '°C'
 
   if( props.daily ){
 
@@ -38,12 +38,12 @@ const Temperature = (props) => {
 
 Temperature.propTypes = {
   day: PropTypes.object.isRequired,
-  width: PropTypes.number.isRequired
+  viewport: PropTypes.object.isRequired
 }
 
 function mapStateToProps (state) {
   return {
-    width: state.viewport.width
+    viewport: state.viewport
   }
 }
 

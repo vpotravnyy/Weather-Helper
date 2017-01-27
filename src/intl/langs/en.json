@@ -4,5 +4,7 @@
   "BTN_ADD_PLACE": "Add place",
   "BTN_REMOVE": "Remove",
   "WIND_SPEED": " {speed}m/s",
-  "PRECIP_INTENSITY": " {intensity}mm"
+  "PRECIP_INTENSITY": " {intensity}mm",
+  "WIND_SPEED_UNIT": "m/s",
+  "PRECIP_INTENSITY_UNIT": "mm"
 }
