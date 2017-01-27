@@ -2,6 +2,7 @@
   "TITLE": "My Weather",
   "CURRENT_POSITION": "Current position",
   "BTN_ADD_PLACE": "Add place",
+  "BTN_PLACES": "Places",
   "BTN_REMOVE": "Remove",
   "WIND_SPEED": " {speed}m/s",
   "PRECIP_INTENSITY": " {intensity}mm",

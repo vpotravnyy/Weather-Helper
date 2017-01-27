@@ -25,7 +25,8 @@ else
         'isExpanded': true,
         'expandedDay': -1
       }
-    ]
+    ],
+    arePlacesChanging: false
   }
 }
 
