@@ -3,6 +3,7 @@ export default () => {
     width: window.innerWidth,
     height: window.innerHeight
   }
+
   if(viewPort.height > viewPort.width){
     viewPort.orientation = 'portrait'
   } else {
