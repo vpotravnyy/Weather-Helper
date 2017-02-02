@@ -14,15 +14,17 @@ import Hourly from '_components/Hourly'
 
 import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
 
+import Now from '_translation/Now'
+
 function Day (props) {
 
   const day = props.day
   const time = moment(day.time * 1000)
-  const dayOfWeek = time.isSame(moment(), 'day')
+  let dayOfWeek = time.isSame(moment(), 'day')
    ? time.calendar().split(' ')[0]
    : time.format("ddd")
-  const formatStr = props.daily ? "DD.MM" : "HH:mm"
-  const dateOrTime = time.format(formatStr)
+  dayOfWeek =  props.daily ? dayOfWeek : <Now/>
+  const dateOrTime = props.daily ? time.format("DD.MM") : ""
   const style = props.onClick || !props.daily ? { cursor: 'pointer' } : {}
 
   const expandCollapseIcon = props.onClick

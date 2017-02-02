@@ -5,9 +5,19 @@ import {
 } from '_constants/languages'
 
 let initialState
-if( window.localStorage.state )
+if( window.localStorage.weatherHelper )
 {
-  initialState = JSON.parse(window.localStorage.getItem("state"))
+  initialState = JSON.parse(window.localStorage.getItem("weatherHelper"))
+  initialState.places = initialState.places.map(place => {
+    return {
+      ... place,
+      "weather": null,
+      'isFetching': false,
+      'isExpanded': false,
+      'expandedDay': -1
+    }
+  })
+  initialState.isMapVisible = false
 }
 else
 {
@@ -22,11 +32,11 @@ else
         "lng": undefined,
         "weather": null,
         'isFetching': false,
-        'isExpanded': true,
+        'isExpanded': false,
         'expandedDay': -1
       }
     ],
-    arePlacesChanging: false
+    isMapVisible: false
   }
 }
 

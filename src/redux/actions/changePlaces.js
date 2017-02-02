@@ -1,16 +1,16 @@
 import {
-  CHANGE_PLACES,
-  PLACES_CHANGED
+  SHOW_MAP,
+  HIDE_MAP
 } from '_constants/actions'
 
-export const changePlaces = () => {
+export const showMap = () => {
   return {
-    type: CHANGE_PLACES
+    type: SHOW_MAP
   }
 }
 
-export const placesChanged = () => {
+export const hideMap = () => {
   return {
-    type: PLACES_CHANGED
+    type: HIDE_MAP
   }
 }

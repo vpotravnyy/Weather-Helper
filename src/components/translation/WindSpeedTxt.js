@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl'
+import { WIND_SPEED } from '_intl/defaultMessages.json'
 
 const WindSpeedTxt = (props) => {
   return (
-    <FormattedMessage
-      id = "WIND_SPEED"
-      description = "WindSpeed in m/s"
-      defaultMessage = " {speed}m/s"
+    <FormattedMessage { ...WIND_SPEED }
       values = {{
         speed: props.speed.toString()
       }}

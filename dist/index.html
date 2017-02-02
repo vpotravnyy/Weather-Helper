@@ -11,7 +11,26 @@
   <body>
     <div id="root"></div>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.uk,Intl.~locale.ru"></script>
-    <script src="/bundle.js"></script>
-    <script src="/google" async defer></script>
+    <script src="/bundle.js" async defer></script>
+    <script>
+      (function(){
+        var source = null
+        if( Array.isArray(navigator.languages) && navigator.languages.length > 0 ) source = navigator.languages
+        else if( navigator.language ) source = navigator.language
+        else if( navigator.browserLanguage ) source = navigator.browserLanguage
+        var reg = null, lang
+        if ( Array.isArray(source) ) source = source[0]
+        if ( source.length > 4 && source.indexOf('-') > -1 ) {
+          lang = source.split('-')[0]
+          reg = source.split('-')[1]
+        } else {
+          lang = source.substr(0, 2)
+        }
+        var google = document.createElement("script")
+        google.src = "/google?language=" + lang + "&region=" + reg + "&libraries=places"
+        document.head.appendChild(google)
+      })()
+    </script>
+    <!--<script src="/google" async defer></script>-->
   </body>
 </html>

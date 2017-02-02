@@ -29,7 +29,7 @@ app.use('/coords', function(req, res){
 })
 app.use('/google', function(req, res){
   if( isTrusted(req, res) ){
-    var apiServerHost = "https://maps.googleapis.com/maps/api/js?key=" + secret.google + "&libraries=places"
+    var apiServerHost = "https://maps.googleapis.com/maps/api/js?key=" + secret.google +"&"+ req._parsedUrl.query
     var url = apiServerHost
     req.pipe( request(url) ).pipe( res )
   }

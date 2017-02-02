@@ -1,11 +1,13 @@
 {
-  "TITLE": "My Weather",
+  "BTN_REMOVE": "Remove place",
   "CURRENT_POSITION": "Current position",
-  "BTN_ADD_PLACE": "Add place",
+  "ENTER_NEW_PLACE_NAME": "Enter new place name:",
+  "WHAT_ARE_YOU_LOOKING_FOR": "What are you looking for?",
   "BTN_PLACES": "Places",
-  "BTN_REMOVE": "Remove",
-  "WIND_SPEED": " {speed}m/s",
+  "TITLE": "My Weather",
   "PRECIP_INTENSITY": " {intensity}mm",
+  "WIND_SPEED": " {speed}m/s",
   "WIND_SPEED_UNIT": "m/s",
-  "PRECIP_INTENSITY_UNIT": "mm"
+  "PRECIP_INTENSITY_UNIT": "mm",
+  "NOW": "Now"
 }

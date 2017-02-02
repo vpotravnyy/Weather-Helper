@@ -1,11 +1,13 @@
 {
-  "TITLE": "Моя погода",
+  "BTN_REMOVE": "Удалить место",
   "CURRENT_POSITION": "Там, где Вы сейчас",
-  "BTN_ADD_PLACE": "Добавить место",
+  "ENTER_NEW_PLACE_NAME": "Введите имя нового места:",
+  "WHAT_ARE_YOU_LOOKING_FOR": "Что ищете?",
   "BTN_PLACES": "Места",
-  "BTN_REMOVE": "Удалить",
-  "WIND_SPEED": " {speed}м/с",
+  "TITLE": "Моя погода",
   "PRECIP_INTENSITY": " {intensity}мм",
+  "WIND_SPEED": " {speed}м/с",
   "WIND_SPEED_UNIT": "м/с",
-  "PRECIP_INTENSITY_UNIT": "мм"
+  "PRECIP_INTENSITY_UNIT": "мм",
+  "NOW": "Сейчас"
 }

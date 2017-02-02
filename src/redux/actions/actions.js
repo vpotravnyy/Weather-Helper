@@ -12,9 +12,12 @@ import {
 
 import { CALL_API } from 'redux-api-middleware'
 
-export const addPlace = () => {
+export const addPlace = (place) => {
   return {
-    type: ADD_PLACE
+    type: ADD_PLACE,
+    placeName: place.name,
+    lat: place.lat,
+    lng: place.lng
   }
 }
 export const removePlace = (placeID) => {

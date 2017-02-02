@@ -1,26 +1,21 @@
 import React, { PropTypes } from 'react';
 import { injectIntl, intlShape } from 'react-intl'
 import AddIcon from '_icons/AddIcon'
-
-const msg = {
-  id: "BTN_PLACES",
-  defaultMessage: "Places",
-  description: "Btn 'Places' message"
-}
+import { BTN_PLACES } from '_intl/defaultMessages.json'
 
 function BtnPlaces (props) {
   const { formatMessage } = props.intl
-  const { changePlaces, viewport } = props
+  const { showMap, viewport } = props
 
   if ( viewport.isNormal || viewport.isWide ){
     return (
-      <button onClick={changePlaces} className='header__button'>
-        <span> { formatMessage( msg ) } </span>
+      <button onClick={showMap} className='header__button'>
+        <span> { formatMessage( BTN_PLACES ) } </span>
       </button>
     )
   } else {
     return (
-      <button onClick={changePlaces} className='header__button header__button--with-icon'>
+      <button onClick={showMap} className='header__button header__button--with-icon'>
         <AddIcon/>
       </button>
     )
@@ -29,7 +24,7 @@ function BtnPlaces (props) {
 
 BtnPlaces.propTypes = {
   intl: PropTypes.object.isRequired,
-  changePlaces: PropTypes.func.isRequired,
+  showMap: PropTypes.func.isRequired,
   viewport: PropTypes.object.isRequired
 }
 

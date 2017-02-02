@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { changePlaces } from '_actions/changePlaces'
+import { showMap } from '_actions/changePlaces'
 import { changeLang } from '_actions/langChange'
 
 import PlaceList from '_components/PlaceList'
@@ -14,13 +14,13 @@ class Container extends Component {
   render () {
     const {
       lang,
-      changePlaces,
+      showMap,
       changeLang,
       viewport,
-      arePlacesChanging
+      isMapVisible
     } = this.props
     const langHandler = changeLang.bind(null, lang)
-    const addClass = arePlacesChanging ? " blur-me" : ''
+    const addClass = isMapVisible ? " blur-me" : ''
 
     return (
       <div className='container'>
@@ -29,13 +29,13 @@ class Container extends Component {
             <img src="/img/poweredby.png" className='header__img' />
           </a>
           <button onClick={langHandler} className='header__button header__button--lang'>{lang.toUpperCase()}</button>
-          <BtnPlaces key={viewport.key} changePlaces={changePlaces} viewport={viewport} />
+          <BtnPlaces key={viewport.key} showMap={showMap} viewport={viewport} />
           <span className='header__title'>
             <HeaderTitle />
           </span>
         </header>
         
-        { arePlacesChanging ? <MapComponent /> : <PlaceList /> }
+        { isMapVisible ? <MapComponent /> : <PlaceList /> }
       </div>
     )
   }
@@ -43,7 +43,7 @@ class Container extends Component {
 
 Container.propTypes = {
   lang: PropTypes.string.isRequired,
-  changePlaces: PropTypes.func.isRequired,
+  showMap: PropTypes.func.isRequired,
   changeLang: PropTypes.func.isRequired,
   viewport: PropTypes.object.isRequired
 }
@@ -52,13 +52,13 @@ function mapStateToProps (state) {
   return {
     lang: state.lang,
     viewport: state.viewport,
-    arePlacesChanging: state.arePlacesChanging
+    isMapVisible: state.isMapVisible
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    changePlaces: () => dispatch( changePlaces() ),
+    showMap: () => dispatch( showMap() ),
     changeLang: () => dispatch( changeLang() )
   }
 }

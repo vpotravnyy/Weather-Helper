@@ -1,13 +1,10 @@
 import React from 'react';
 import { FormattedMessage, intlShape } from 'react-intl'
+import { CURRENT_POSITION } from '_intl/defaultMessages.json'
 
 const CurrentPlaceTxt = () => {
   return (
-    <FormattedMessage
-      id = "CURRENT_POSITION"
-      defaultMessage = "Current position"
-      description = "Title of the day article"
-    />
+    <FormattedMessage { ...CURRENT_POSITION } />
   )
 }
 

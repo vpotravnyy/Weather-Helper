@@ -1,16 +1,6 @@
 import React, { PropTypes } from 'react'
 import { injectIntl, intlShape } from 'react-intl'
-
-const windMsg = {
-  id: "WIND_SPEED_UNIT",
-  description: "WindSpeed unit is m/s",
-  defaultMessage: "m/s"
-}
-const precipMsg = {
-  id: "PRECIP_INTENSITY_UNIT",
-  description: "Precipitation intensity unit is mm",
-  defaultMessage: "mm"
-}
+import { WIND_SPEED_UNIT, PRECIP_INTENSITY_UNIT } from '_intl/defaultMessages.json'
 
 const Units = (props) => {
   const { formatMessage } = props.intl
@@ -30,20 +20,19 @@ const Units = (props) => {
           { ' ' }
         </div>
         <div className='hourly__cell wind_speed'>
-          { formatMessage( windMsg ) }
+          { formatMessage( WIND_SPEED_UNIT ) }
         </div>
         <div className='hourly__cell cloudness'>
           { '%' }
         </div>
         <div className='hourly__cell precip'>
-          { formatMessage( precipMsg ) }
+          { formatMessage( PRECIP_INTENSITY_UNIT ) }
         </div>
         <div className='hourly__cell precip_probab'>
           { '%' }
         </div>
       </div>
     )
-
 }
 
 export default injectIntl( Units )

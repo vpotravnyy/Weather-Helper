@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { removePlace } from '_actions/actions'
 import { expandPlace, collapsePlace } from '_actions/expandPlace'
 import { expandDay, collapseDay } from '_actions/expandDay'
 
@@ -9,7 +8,6 @@ import Day from '_components/Day'
 import Hourly from '_components/Hourly'
 
 import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
-import BtnDeleteTxt from '_translation/BtnDeleteTxt'
 
 import CollapseIcon from '_icons/CollapseIcon'
 import ExpandIcon from '_icons/ExpandIcon'
@@ -17,12 +15,6 @@ import ExpandIcon from '_icons/ExpandIcon'
 import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
 
 const Place = (props) => {
-  const removePlace = props.removePlace.bind(null, props.place.placeID)
-  const btnDel = (
-    <button onClick={removePlace} className='place__btn-remove'>
-      <BtnDeleteTxt />
-    </button>
-  )
   const placeName = props.place.placeName === "Current position"
     ? <CurrentPlaceTxt /> : props.place.placeName
 
@@ -78,8 +70,6 @@ const Place = (props) => {
           { expandIcon }
         </div>
       </div>
-
-      {props.place.placeID === 0 ? null : btnDel}
       
       <div className='place__dayslist clearfix'>
         {children}
@@ -95,7 +85,6 @@ Place.propTypes = {
   place: PropTypes.object.isRequired,
   expandedDay: PropTypes.number.isRequired,
   viewport: PropTypes.object.isRequired,
-  removePlace: PropTypes.func.isRequired,
   expandPlace: PropTypes.func.isRequired,
   collapsePlace: PropTypes.func.isRequired,
   expandDay: PropTypes.func.isRequired,
@@ -110,7 +99,6 @@ function mapStateToProps(state){
 
 function mapDispatchToProps (dispatch) {
   return {
-    removePlace: (place) => dispatch(removePlace(place)),
     expandPlace: (placeID) => dispatch(expandPlace(placeID)),
     collapsePlace: () => dispatch(collapsePlace()),
     expandDay: (data) => dispatch(expandDay(data)),

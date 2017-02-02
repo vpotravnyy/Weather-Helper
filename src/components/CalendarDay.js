@@ -13,6 +13,9 @@ export default function CalendarDay (props) {
 }
 
 CalendarDay.propTypes = {
-  dayOfWeek: PropTypes.string.isRequired,
+  dayOfWeek: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+  ]).isRequired,
   dateOrTime: PropTypes.string.isRequired
 }

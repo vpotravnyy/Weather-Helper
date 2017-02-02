@@ -24,10 +24,10 @@ export default function (places = initialState.places, action) {
       return [
         ...places,
         {
-          "placeName": 'CityName' + newID,
+          "placeName": action.placeName,
           "placeID": newID,
-          "lat": undefined,
-          "lng": undefined,
+          "lat": action.lat,
+          "lng": action.lng,
           "weather": null,
           "isExpanded": false,
           "expandedDay": -1

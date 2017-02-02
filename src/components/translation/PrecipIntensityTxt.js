@@ -1,12 +1,10 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage, intlShape } from 'react-intl'
+import { PRECIP_INTENSITY } from '_intl/defaultMessages.json'
 
 const PrecipIntensityTxt = (props) => {
   return (
-    <FormattedMessage
-      id = "PRECIP_INTENSITY"
-      description = "Precipitation Intensity in mm"
-      defaultMessage = " {intensity}mm"
+    <FormattedMessage { ...PRECIP_INTENSITY }
       values = {{
         intensity: props.intensity.toString()
       }}

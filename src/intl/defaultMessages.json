@@ -1,0 +1,57 @@
+{
+  "BTN_REMOVE": {
+    "id": "BTN_REMOVE",
+    "description": "Btn 'Remove' label",
+    "defaultMessage": "Remove place"
+  },
+  "CURRENT_POSITION": {
+    "id": "CURRENT_POSITION",
+    "defaultMessage": "Current position",
+    "description": "Title of the day article"
+  },
+  "ENTER_NEW_PLACE_NAME": {
+    "id": "ENTER_NEW_PLACE_NAME",
+    "defaultMessage": "Enter new place name:",
+    "description": "Promt user to define name of new position"
+  },
+  "WHAT_ARE_YOU_LOOKING_FOR": {
+    "id": "WHAT_ARE_YOU_LOOKING_FOR",
+    "defaultMessage": "What are you looking for?",
+    "description": "Search Box placeholder"
+  },
+  "BTN_PLACES": {
+    "id": "BTN_PLACES",
+    "defaultMessage": "Places",
+    "description": "Btn 'Places' message"
+  },
+  "TITLE": {
+    "id": "TITLE",
+    "defaultMessage": "My Weather",
+    "description": "Title of the header"
+  },
+  "PRECIP_INTENSITY": {
+    "id": "PRECIP_INTENSITY",
+    "description": "Precipitation Intensity in mm",
+    "defaultMessage": " {intensity}mm"
+  },
+  "WIND_SPEED": {
+    "id": "WIND_SPEED",
+    "description": "WindSpeed in m/s",
+    "defaultMessage": " {speed}m/s"
+  },
+  "WIND_SPEED_UNIT": {
+    "id": "WIND_SPEED_UNIT",
+    "description": "WindSpeed unit is m/s",
+    "defaultMessage": "m/s"
+  },
+  "PRECIP_INTENSITY_UNIT": {
+    "id": "PRECIP_INTENSITY_UNIT",
+    "description": "Precipitation intensity unit is mm",
+    "defaultMessage": "mm"
+  },
+  "NOW": {
+    "id": "NOW",
+    "description": "Present time",
+    "defaultMessage": "Now"
+  }
+}
