@@ -4,33 +4,30 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Weather Helper">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>My Weather</title>
     <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
     <div id="root"></div>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.uk,Intl.~locale.ru"></script>
-    <script src="/bundle.js" async defer></script>
     <script>
       (function(){
         var source = null
         if( Array.isArray(navigator.languages) && navigator.languages.length > 0 ) source = navigator.languages
         else if( navigator.language ) source = navigator.language
         else if( navigator.browserLanguage ) source = navigator.browserLanguage
-        var reg = null, lang
         if ( Array.isArray(source) ) source = source[0]
         if ( source.length > 4 && source.indexOf('-') > -1 ) {
-          lang = source.split('-')[0]
-          reg = source.split('-')[1]
+          window.language = source.split('-')[0]
         } else {
-          lang = source.substr(0, 2)
+          window.language = source.substr(0, 2)
         }
         var google = document.createElement("script")
-        google.src = "/google?language=" + lang + "&region=" + reg + "&libraries=places"
+        google.src = "/google?language=" + window.language + "&libraries=places"
         document.head.appendChild(google)
       })()
     </script>
-    <!--<script src="/google" async defer></script>-->
+    <script src="/bundle.js" async defer></script>
   </body>
 </html>

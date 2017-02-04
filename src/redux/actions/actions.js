@@ -75,24 +75,9 @@ export const getWeather = (props) => {
 }
 
 export const onWindowResize = (props) => {
-  const {
-    width,
-    height,
-    orientation,
-    isVeryNarrow,
-    isNarrow,
-    isNormal,
-    isWide
-  } = props
 
   return {
     type: ON_RESIZE,
-    width,
-    height,
-    orientation,
-    isVeryNarrow,
-    isNarrow,
-    isNormal,
-    isWide
+    ...props
   }
 }

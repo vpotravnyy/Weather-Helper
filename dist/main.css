@@ -1,10 +1,12 @@
 html, body {
   height: 100%;
+  min-width: 240px;
 }
 body {
   font-family: sans-serif;
   background-color: #f9f9f9;
   margin: 0;
+  min-width: 240px;
 }
 body * {
   box-sizing: border-box;
@@ -19,12 +21,14 @@ body * {
 .container {
   width: 100%;
 }
-
+.main {
+  max-width: 1800px;
+  margin: 0 auto;
+}
 .header {
   position: relative;
   text-align: center;
   height: 2em;
-  max-height: 9vw;
   border-bottom: 1px solid #ccc;
   background-color: #eee;
   line-height: 2em;
@@ -70,21 +74,20 @@ body * {
   position: relative;
   display: inline-block;
   width: 100%;
-  min-width: 240px;
+  min-width: 200px;
   background-color: #eee;
   border: 1px solid #ccc;
   box-shadow: 0 1px 5px #ccc;
-  margin: 8px 0 0 8px;
   padding: 3px;
   vertical-align: top;
 }
 
-.collapsed_place {
-  max-width: 360px;
-}
 .place__title {
+  position: relative;
   padding: 7px;
   cursor: pointer;
+}
+.place__title span {
   font-weight: bold;
   font-size: 1.1em;
 }
@@ -98,7 +101,7 @@ body * {
   fill: #000;
 }
 .place__expand-icon--place {
-  top: 0.8em;
+  bottom: -1.1em;
 }
 .place__expand-icon--day {
   bottom: -1.1em;
@@ -141,6 +144,7 @@ body * {
   width: 100%;
   position: relative;
   margin: 0.2em 0;
+  min-width: 60px;
 }
 .day-tile__item-temperature__content .icon {
   position: absolute;
@@ -148,6 +152,16 @@ body * {
   top: -2px;
   width: 1.4em;
   height: auto;
+}
+.day-tile__item-temperature__content .icon.moon {
+  right: 45px;
+  top: 1px;
+  width: 1em;
+}
+.day-tile__item-temperature__content .weather_icon {
+  width: 1.6em;
+  top: -5px;
+  right: 39px;  
 }
 .day-tile__item-date__content:first-letter {
   text-transform: capitalize;
@@ -217,10 +231,6 @@ body * {
   top: -6px;
 }
 
-.is_very_narrow .header,
-.is_narrow .header {
-  font-size: 4.666vw;
-}
 .is_narrow .day-tile__item-wind_and_precip {
   width: 28%;
 }
@@ -241,45 +251,91 @@ body * {
 .is_very_narrow .day-tile__item-temperature__content .icon {
   right: 28px;
 }
+.is_very_narrow .day-tile__item-temperature__content span {
+  min-width: 45px;
+}
 
-.is_normal .day_wrapper {
+.is_middle .day_wrapper,
+.is_wide .day_wrapper,
+.is_ultrawide .day_wrapper {
   display: inline-block;
   width: 12.5%;
   vertical-align: top;
 }
-.is_normal .day-tile {
+.is_middle .day-tile,
+.is_wide .day-tile,
+.is_ultrawide .day-tile {
   margin-bottom: 0.5em;
 }
-.is_normal .day-tile__item {
+.is_middle .day-tile__item,
+.is_wide .day-tile__item,
+.is_ultrawide .day-tile__item {
   display: block;
   width: 100%;
 }
-.is_normal .hourly__icon-header,
-.is_normal .hourly__hour {
+.is_middle .hourly__icon-header,
+.is_wide .hourly__icon-header,
+.is_ultrawide .hourly__icon-header,
+.is_middle .hourly__hour,
+.is_wide .hourly__hour,
+.is_ultrawide .hourly__hour {
   display: inline-block;
   width: 2em;
   vertical-align: top;
 
 }
-.is_normal .hourly__cell {
+.is_middle .hourly__cell,
+.is_wide .hourly__cell,
+.is_ultrawide .hourly__cell {
   display: block;
   height: 2em;
   line-height: 2em;
   width: 100%;
 }
-.is_normal .hourly__cell.wind {
+.is_middle .hourly__cell.wind,
+.is_wide .hourly__cell.wind,
+.is_ultrawide .hourly__cell.wind {
   height: 4em;
 }
-.is_normal .hourly__cell.tmprtr,
-.is_normal .hourly__cell.wind,
-.is_normal .hourly__cell.wind_bearing,
-.is_normal .hourly__cell.cloudness {
+.is_middle .hourly__cell.tmprtr,
+.is_middle .hourly__cell.wind,
+.is_middle .hourly__cell.wind_bearing,
+.is_middle .hourly__cell.cloudness,
+.is_wide .hourly__cell.tmprtr,
+.is_wide .hourly__cell.wind,
+.is_wide .hourly__cell.wind_bearing,
+.is_wide .hourly__cell.cloudness,
+.is_ultrawide .hourly__cell.tmprtr,
+.is_ultrawide .hourly__cell.wind,
+.is_ultrawide .hourly__cell.wind_bearing,
+.is_ultrawide .hourly__cell.cloudness {
   border-top: 1px solid #ccc;
   border-left: none;
 }
 
+place_expanded
 
+.is_very_narrow .collapsed_place {
+  margin: 0 2px 6px 0;
+}
+.is_narrow .collapsed_place {
+  margin: 0 4px 8px 0;
+}
+.is_middle .collapsed_place,
+.is_wide .collapsed_place,
+.is_ultrawide .collapsed_place {
+  margin: 0 8px 8px 0;
+}
 
+.is_very_narrow .place_expanded {
+  margin-bottom: 6px;
+}
+.is_narrow .place_expanded,
+.is_middle .place_expanded,
+.is_wide .place_expanded,
+.is_ultrawide .place_expanded {
+  margin-bottom: 6px;
+}
 
 
 .collapsed_place .day_wrapper {
@@ -351,4 +407,43 @@ body * {
 }
 .close-control .close {
   fill: #696969;
+}
+
+.expanded-place {
+  background-color: yellow;
+}
+.collapsed-places {
+  background-color: lightblue;
+}
+.is_very_narrow .expanded-place,
+.is_very_narrow .collapsed-places {
+  padding: 6px 0 0 2px;
+}
+.is_narrow .expanded-place,
+.is_narrow .collapsed-places {
+  padding: 8px 0 0 4px;
+}
+.is_middle .expanded-place,
+.is_wide .expanded-place,
+.is_ultrawide .expanded-place,
+.is_middle .collapsed-places,
+.is_wide .collapsed-places,
+.is_ultrawide .collapsed-places {
+  padding: 8px 0 0 8px;
+}
+.is_ultrawide .expanded-place,
+.is_ultrawide .collapsed-places {
+  display: inline-block;
+}
+.is_wide .collapsed-places,
+.is_ultrawide .collapsed-places {
+  float: left;
+  width: 30%;
+  vertical-align: top;
+}
+.is_wide .expanded-place,
+.is_ultrawide .expanded-place {
+  float: right;
+  width: 70%;
+  vertical-align: top;
 }

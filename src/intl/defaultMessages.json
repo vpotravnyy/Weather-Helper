@@ -46,8 +46,8 @@
   },
   "PRECIP_INTENSITY_UNIT": {
     "id": "PRECIP_INTENSITY_UNIT",
-    "description": "Precipitation intensity unit is mm",
-    "defaultMessage": "mm"
+    "description": "Precipitation intensity unit is mm/h",
+    "defaultMessage": "mm/h"
   },
   "NOW": {
     "id": "NOW",

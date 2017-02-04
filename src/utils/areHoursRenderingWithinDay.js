@@ -1,5 +1,4 @@
-export default (isDayExpanded, vieport) => {
-  if ( !isDayExpanded ) return false
-  if ( vieport.isNormal ) return false
-  return true
+export default (viewport) => {
+  if ( viewport.isNarrow || viewport.isVeryNarrow ) return true
+  return false
 }

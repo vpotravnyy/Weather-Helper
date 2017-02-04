@@ -4,7 +4,7 @@ import moment from 'moment'
 
 import WindArrowIcon from '_icons/WindArrowIcon'
 
-import isHourBriefView from '_utils/isHourBriefView'
+import areUnitsInOwnDiv from '_utils/areUnitsInOwnDiv'
 
 import WindSpeedTxt from '_translation/WindSpeedTxt'
 import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
@@ -20,9 +20,9 @@ const Hour = (props) => {
     windBearing,
     cloudCover
   } = props.hour
-  const isBrief = isHourBriefView(props.viewport)
-  const degree = isBrief ? '' : '°C'
-  const percent = isBrief ? '' : '%'
+  const showUnitsInOwnDiv = areUnitsInOwnDiv(props.viewport)
+  const degree = showUnitsInOwnDiv ? '' : '°C'
+  const percent = showUnitsInOwnDiv ? '' : '%'
 
     return(
       <div className='hourly__hour'>
@@ -40,7 +40,7 @@ const Hour = (props) => {
         </div>
         <div className='hourly__cell wind_speed'>
           {
-            isBrief
+            showUnitsInOwnDiv
              ? <span>{ Math.round(windSpeed) }</span>
              : <WindSpeedTxt speed={ Math.round(windSpeed) } />
           }
@@ -50,9 +50,9 @@ const Hour = (props) => {
         </div>
         <div className='hourly__cell precip'>
           {
-            isBrief
-             ? <span>{ Math.round(precipIntensity) }</span>
-             : <PrecipIntensityTxt intensity={ Math.round(precipIntensity) } />
+            showUnitsInOwnDiv
+             ? <span>{ Math.round(10 * precipIntensity)/10 }</span>
+             : <PrecipIntensityTxt intensity={ Math.round(10 * precipIntensity)/10 } />
           }
         </div>
         <div className='hourly__cell precip_probab'>

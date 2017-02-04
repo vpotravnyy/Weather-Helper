@@ -10,26 +10,28 @@ import MapComponent from '_components/MapComponent'
 import HeaderTitle from '_translation/HeaderTitle'
 import BtnPlaces from '_translation/BtnPlaces'
 
+import { VERY_NARROW_MAX_WIDTH, MINIMAL_WIDTH } from '_constants/viewportWidths'
+
 class Container extends Component {
   render () {
     const {
       lang,
       showMap,
       changeLang,
-      viewport,
-      isMapVisible
+      isMapVisible,
+      viewport
     } = this.props
     const langHandler = changeLang.bind(null, lang)
     const addClass = isMapVisible ? " blur-me" : ''
 
     return (
-      <div className='container'>
-        <header className={'header' + addClass}>
+      <div className='container' >
+        <header className={'header' + addClass} style={fontSize()}>
           <a href="https://darksky.net/poweredby/" target="_blank" className='header__link'>
             <img src="/img/poweredby.png" className='header__img' />
           </a>
           <button onClick={langHandler} className='header__button header__button--lang'>{lang.toUpperCase()}</button>
-          <BtnPlaces key={viewport.key} showMap={showMap} viewport={viewport} />
+          <BtnPlaces showMap={showMap} />
           <span className='header__title'>
             <HeaderTitle />
           </span>
@@ -38,6 +40,14 @@ class Container extends Component {
         { isMapVisible ? <MapComponent /> : <PlaceList /> }
       </div>
     )
+
+    function fontSize(){
+      if ( viewport.isVeryNarrow && viewport.width >= MINIMAL_WIDTH ) {
+        return { fontSize: 1.4 * viewport.width / VERY_NARROW_MAX_WIDTH + 'em' }
+      } else if ( viewport.isVeryNarrow && viewport.width < MINIMAL_WIDTH) {
+        return { fontSize: 1.4 * MINIMAL_WIDTH / VERY_NARROW_MAX_WIDTH + 'em' }
+      } else return null
+    }
   }
 }
 
@@ -51,8 +61,8 @@ Container.propTypes = {
 function mapStateToProps (state) {
   return {
     lang: state.lang,
-    viewport: state.viewport,
-    isMapVisible: state.isMapVisible
+    isMapVisible: state.isMapVisible,
+    viewport: state.viewport
   }
 }
 

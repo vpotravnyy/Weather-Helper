@@ -5,10 +5,11 @@ import TemperatureIcon from '_icons/TemperatureIcon'
 import ApparentTemperatureIcon from '_icons/ApparentTemperatureIcon'
 import WindArrowIcon from '_icons/WindArrowIcon'
 import DropIcon from '_icons/DropIcon'
+import SnowIcon from '_icons/SnowIcon'
 import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
 import TimeIcon from '_icons/TimeIcon'
 
-export default function HourlyIconHeader () {
+export default function HourlyIconHeader (props) {
 
     return(
       <div className='hourly__icon-header'>
@@ -28,7 +29,7 @@ export default function HourlyIconHeader () {
           <WeatherIcons iconName={'cloudy'} />
         </div>
         <div className='hourly__cell precip'>
-          <DropIcon/>
+          { props.precipType === "snow" ? <SnowIcon /> : <DropIcon /> }
         </div>
         <div className='hourly__cell precip_probab'>
           <PrecipProbabilityIcon/>

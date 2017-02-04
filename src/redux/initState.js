@@ -4,6 +4,16 @@ import {
   RU
 } from '_constants/languages'
 
+let browserLanguage = EN
+switch (window.language) {
+  case UK:
+    browserLanguage = UK
+    break;
+  case RU:
+    browserLanguage = RU
+    break;
+}
+
 let initialState
 if( window.localStorage.weatherHelper )
 {
@@ -22,7 +32,7 @@ if( window.localStorage.weatherHelper )
 else
 {
   initialState = {
-    "lang": UK,
+    "lang": browserLanguage,
     "viewport": null,
     "places": [
       {

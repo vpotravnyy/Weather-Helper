@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import TemperatureIcon from '_icons/TemperatureIcon'
 import ApparentTemperatureIcon from '_icons/ApparentTemperatureIcon'
+import SunIcon from '_icons/SunIcon'
+import MoonIcon from '_icons/MoonIcon'
 
 const Temperature = (props) => {
   const day = props.day
@@ -12,8 +14,15 @@ const Temperature = (props) => {
 
     return(
       <p className='day-tile__item__content day-tile__item-temperature__content'>
-        <span>{Math.round(day.temperatureMax) + '°C'}</span><br/>
-        <span>{Math.round(day.temperatureMin) + '°C'}</span><br/>
+        <span>
+          <SunIcon />
+          {Math.round(day.temperatureMax) + degree}
+        </span>
+        <br/>
+        <span>
+          <MoonIcon />
+          {Math.round(day.temperatureMin) + degree}
+        </span>
       </p>
     )
 

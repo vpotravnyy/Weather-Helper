@@ -8,8 +8,9 @@ export default (viewport = getViewPort(), action) => {
     orientation,
     isVeryNarrow,
     isNarrow,
-    isNormal,
-    isWide
+    isMiddle,
+    isWide,
+    isUltrawide
   } = action
 
   switch (action.type) {
@@ -21,8 +22,9 @@ export default (viewport = getViewPort(), action) => {
         orientation,
         isVeryNarrow,
         isNarrow,
-        isNormal,
-        isWide
+        isMiddle,
+        isWide,
+        isUltrawide
       }
 
     default:

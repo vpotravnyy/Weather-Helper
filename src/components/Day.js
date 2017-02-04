@@ -37,11 +37,20 @@ function Day (props) {
     : null
 
   let daySummary = null
-  if ( !props.viewport.isNormal ) daySummary = <WeatherSummary summary={day.summary} />
+  if ( areHoursRenderingWithinDay(props.viewport) ) {
+    daySummary = <WeatherSummary summary={day.summary} />
+  }
 
   let dayHourly = null
-  if ( areHoursRenderingWithinDay(props.expanded, props.viewport) ) {
-    dayHourly = <Hourly day={day.time} hourly={props.hourly} viewport={props.viewport} />
+  if ( areHoursRenderingWithinDay(props.viewport) && props.expanded ) {
+    dayHourly = (
+      <Hourly
+        day={day.time}
+        hourly={props.hourly}
+        viewport={props.viewport}
+        precipType={day.precipType}
+      />
+    )
   }
 
   return(
@@ -59,7 +68,7 @@ function Day (props) {
             <Temperature day={day} daily={props.daily} />
           </div>
           <div className='day-tile__item day-tile__item-wind_and_precip'>
-            <WindAndPrecip day={day} />
+            <WindAndPrecip day={day} viewport={props.viewport} />
           </div>
         </div>
         {props.daily && expandCollapseIcon}

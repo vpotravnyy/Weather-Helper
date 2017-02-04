@@ -6,7 +6,7 @@ import HourUnits from '_components/HourUnits'
 import HourlyIconHeader from '_components/HourlyIconHeader'
 import WeatherSummary from '_components/WeatherSummary'
 
-import isHourBriefView from '_utils/isHourBriefView'
+import areUnitsInOwnDiv from '_utils/areUnitsInOwnDiv'
 
 export default function Hourly (props) {
   const time = moment(props.day * 1000)
@@ -17,13 +17,13 @@ export default function Hourly (props) {
     }
     return memo
   }, [])
-  const isBrief = isHourBriefView(props.viewport)
+  const showUnitsInOwnDiv = areUnitsInOwnDiv(props.viewport)
 
   return(
     <div className='hourly clearfix'>
       {props.summary && <WeatherSummary summary={props.summary} />}
-      <HourlyIconHeader/>
-      {isBrief && <HourUnits />}
+      <HourlyIconHeader precipType={props.precipType} />
+      {showUnitsInOwnDiv && <HourUnits />}
       {hours}
     </div>
   )
@@ -33,5 +33,6 @@ export default function Hourly (props) {
 Hourly.propTypes = {
   hourly: PropTypes.object.isRequired,
   viewport: PropTypes.object.isRequired,
-  day: PropTypes.number.isRequired
+  day: PropTypes.number.isRequired,
+  precipType: PropTypes.string
 }
