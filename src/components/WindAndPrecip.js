@@ -5,8 +5,8 @@ import DropIcon from '_icons/DropIcon'
 import SnowIcon from '_icons/SnowIcon'
 import PrecipProbabilityIcon from '_icons/PrecipProbabilityIcon'
 
-import WindSpeedTxt from '_translation/WindSpeedTxt'
-import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
+import { FormattedMessage } from 'react-intl'
+import { PRECIP_INTENSITY, WIND_SPEED } from '_intl/defaultMessages.json'
 
 export default function WindAndPrecip (props) {
   const { day, viewport } = props
@@ -17,14 +17,24 @@ export default function WindAndPrecip (props) {
       {
         viewport.isVeryNarrow
           ? <span> { Math.round(day.windSpeed) }</span>
-          : <WindSpeedTxt speed={ Math.round(day.windSpeed) } />
+          : <FormattedMessage
+              { ...WIND_SPEED }
+              values = {{
+                speed: Math.round(day.windSpeed).toString()
+              }}
+            />
       }
       <br/>
       { day.precipType === "snow" ? <SnowIcon /> : <DropIcon /> }
       {
         viewport.isVeryNarrow
           ? <span> { Math.round(10 * day.precipIntensity)/10 }</span>
-          : <PrecipIntensityTxt intensity={ Math.round(10 * day.precipIntensity)/10 } />
+          : <FormattedMessage
+              { ...PRECIP_INTENSITY }
+              values = {{
+                intensity: ( Math.round(10 * day.precipIntensity)/10 ).toString()
+              }}
+            />
       }
       <br/>
       <PrecipProbabilityIcon />

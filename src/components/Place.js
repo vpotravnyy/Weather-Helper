@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
 
 import { expandPlace, collapsePlace } from '_actions/expandPlace'
 import { expandDay, collapseDay } from '_actions/expandDay'
@@ -7,18 +8,22 @@ import { expandDay, collapseDay } from '_actions/expandDay'
 import Day from '_components/Day'
 import Hourly from '_components/Hourly'
 
-import CurrentPlaceTxt from '_translation/CurrentPlaceTxt'
+import { CURRENT_POSITION } from '_intl/defaultMessages.json'
 
 import CollapseIcon from '_icons/CollapseIcon'
 import ExpandIcon from '_icons/ExpandIcon'
 
 import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
+import scrollToTop from '_utils/scrollToTop'
+
 import { MINIMAL_WIDTH, WIDE_MAX_WIDTH } from '_constants/viewportWidths'
 
 const Place = (props) => {
   const viewport = props.viewport
+  const timezone = props.place.weather ? props.place.weather.timezone : null
   const placeName = props.place.placeName === "Current position"
-    ? <CurrentPlaceTxt /> : <span>{props.place.placeName}</span>
+    ? <FormattedMessage { ...CURRENT_POSITION } />
+    : <span>{props.place.placeName}</span>
 
   let expandIcon, expandHandler, addClass
   if( props.place.isExpanded ){
@@ -41,13 +46,14 @@ const Place = (props) => {
       children = props.place.weather.daily.data.map((day, i) => {
         let expanded, clickHandler
         if( i < 2 ){
-          if( props.expandedDay === i ){
+          if( props.place.expandedDay === i ){
             expanded = true
             clickHandler = props.collapseDay
             if ( !areHoursRenderingWithinDay(viewport) ){
               hourlyView = (
                 <Hourly
                   day={day.time}
+                  timezone={timezone}
                   hourly={props.place.weather.hourly}
                   summary={day.summary}
                   viewport={viewport}
@@ -67,18 +73,36 @@ const Place = (props) => {
           expanded = false
           clickHandler = null
         }
-        return <Day key={day.time} day={day} expanded={expanded} daily hourly={props.place.weather.hourly} onClick={clickHandler} />
+        return (
+          <Day
+            key={day.time}
+            day={day}
+            timezone={timezone}
+            expanded={expanded}
+            daily
+            hourly={props.place.weather.hourly}
+            onClick={clickHandler}
+          />
+        )
       })
-      width = style().expanded
+      width = getArticleWidth().expandedPlace
     } else {
       const curr = props.place.weather.currently
-      children = <Day key={curr.time} day={curr} onClick={expandHandler} />
-      width = style().collapsed
+      children = (
+        <Day
+          key={curr.time}
+          day={curr}
+          timezone={timezone}
+          onClick={expandHandler}
+        />
+      )
+      width = getArticleWidth().collapsedPlace
+      addClass += props.place.hasExpandedView ? ' hasExpandedView' : ''
     }
   }
 
   return (
-    <article className={'place' + addClass} style={width} >
+    <article className={'place' + addClass} style={{width: width}} >
       
       <div className='place__title' onClick={expandHandler}>
         { placeName }
@@ -97,35 +121,34 @@ const Place = (props) => {
 
     </article>
   )
-  function style(){
-    let width = viewport.width
-    width = width < MINIMAL_WIDTH ? MINIMAL_WIDTH : width
-    width = width > WIDE_MAX_WIDTH ? WIDE_MAX_WIDTH : width
-    let expanded = null, collapsed = null
+  function getArticleWidth(){
+    const width = width < MINIMAL_WIDTH ? MINIMAL_WIDTH
+      : width > WIDE_MAX_WIDTH ? WIDE_MAX_WIDTH
+        : viewport.width
+    let expandedPlace = null, collapsedPlace = null
     if ( viewport.isVeryNarrow ){
-      expanded = collapsed = { width: width - 4 }
+      expandedPlace = collapsedPlace = width - 4
     } else if ( viewport.isNarrow ) {
-      expanded = collapsed = { width: width - 8 }
+      expandedPlace = collapsedPlace = width - 8
     } else if ( viewport.isMiddle ) {
-      expanded = { width: width - 16 }
-      collapsed = { width: (width - 24) / 2 }
+      expandedPlace = width - 16
+      collapsedPlace = (width - 24) / 2
     } else if ( viewport.isWide ) {
-      expanded = { width: width * 0.7 - 16 }
-      collapsed = { width: width * 0.3 - 16 }
+      expandedPlace = width * 0.7 - 16
+      collapsedPlace = width * 0.3 - 16
     } else if ( viewport.isUltrawide ) {
-      expanded = { width: width * 0.7 - 16 }
-      collapsed = { width: width * 0.3 - 16 }
+      expandedPlace = width * 0.7 - 16
+      collapsedPlace = width * 0.3 - 16
     }
     return {
-      expanded,
-      collapsed
+      expandedPlace,
+      collapsedPlace
     }
   }
 }
 
 Place.propTypes = {
   place: PropTypes.object.isRequired,
-  expandedDay: PropTypes.number.isRequired,
   viewport: PropTypes.object.isRequired,
   expandPlace: PropTypes.func.isRequired,
   collapsePlace: PropTypes.func.isRequired,
@@ -141,7 +164,10 @@ function mapStateToProps(state){
 
 function mapDispatchToProps (dispatch) {
   return {
-    expandPlace: (placeID) => dispatch(expandPlace(placeID)),
+    expandPlace: (placeID) => {
+      dispatch(expandPlace(placeID))
+      scrollToTop()
+    },
     collapsePlace: () => dispatch(collapsePlace()),
     expandDay: (data) => dispatch(expandDay(data)),
     collapseDay: () => dispatch(collapseDay())

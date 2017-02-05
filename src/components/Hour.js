@@ -6,8 +6,8 @@ import WindArrowIcon from '_icons/WindArrowIcon'
 
 import areUnitsInOwnDiv from '_utils/areUnitsInOwnDiv'
 
-import WindSpeedTxt from '_translation/WindSpeedTxt'
-import PrecipIntensityTxt from '_translation/PrecipIntensityTxt'
+import { FormattedMessage } from 'react-intl'
+import { PRECIP_INTENSITY, WIND_SPEED } from '_intl/defaultMessages.json'
 
 const Hour = (props) => {
   const {
@@ -27,7 +27,7 @@ const Hour = (props) => {
     return(
       <div className='hourly__hour'>
         <div className='hourly__cell clock'>
-          { moment(time * 1000).format("HH") }
+          { moment.tz(time * 1000, props.timezone).format("HH") }
         </div>
         <div className='hourly__cell tmprtr'>
           { Math.round(temperature) + degree }
@@ -42,7 +42,12 @@ const Hour = (props) => {
           {
             showUnitsInOwnDiv
              ? <span>{ Math.round(windSpeed) }</span>
-             : <WindSpeedTxt speed={ Math.round(windSpeed) } />
+             : <FormattedMessage
+                 { ...WIND_SPEED }
+                 values = {{
+                   speed: Math.round(windSpeed).toString()
+                 }}
+               />
           }
         </div>
         <div className='hourly__cell cloudness'>
@@ -52,7 +57,12 @@ const Hour = (props) => {
           {
             showUnitsInOwnDiv
              ? <span>{ Math.round(10 * precipIntensity)/10 }</span>
-             : <PrecipIntensityTxt intensity={ Math.round(10 * precipIntensity)/10 } />
+             : <FormattedMessage
+                 { ...PRECIP_INTENSITY }
+                 values = {{
+                   intensity: ( Math.round(10 * precipIntensity)/10 ).toString()
+                 }}
+               />
           }
         </div>
         <div className='hourly__cell precip_probab'>

@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
+import 'moment-timezone'
 import { connect } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
 
 import WeatherIcons from '_icons/WeatherIcons'
 import CollapseIcon from '_icons/CollapseIcon'
@@ -14,16 +16,16 @@ import Hourly from '_components/Hourly'
 
 import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
 
-import Now from '_translation/Now'
+import { NOW } from '_intl/defaultMessages.json'
 
 function Day (props) {
 
   const day = props.day
-  const time = moment(day.time * 1000)
+  const time = moment.tz(day.time * 1000, props.timezone)
   let dayOfWeek = time.isSame(moment(), 'day')
    ? time.calendar().split(' ')[0]
    : time.format("ddd")
-  dayOfWeek =  props.daily ? dayOfWeek : <Now/>
+  dayOfWeek =  props.daily ? dayOfWeek : <FormattedMessage { ...NOW } />
   const dateOrTime = props.daily ? time.format("DD.MM") : ""
   const style = props.onClick || !props.daily ? { cursor: 'pointer' } : {}
 
@@ -46,6 +48,7 @@ function Day (props) {
     dayHourly = (
       <Hourly
         day={day.time}
+        timezone={props.timezone}
         hourly={props.hourly}
         viewport={props.viewport}
         precipType={day.precipType}
@@ -83,7 +86,8 @@ Day.propTypes = {
   viewport: PropTypes.object.isRequired,
   expanded: PropTypes.bool,
   onClick: PropTypes.func,
-  daily: PropTypes.bool
+  daily: PropTypes.bool,
+  timezone: PropTypes.string
 }
 
 function mapStateToProps(state){

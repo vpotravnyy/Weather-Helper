@@ -6,28 +6,27 @@ const PlaceList = (props) => {
   let expandedPlace = null, collapsedPlace = null
   const places = props.places.map(p => {
     if (p.isExpanded) {
-      expandedPlace = (
-        <section className="expanded-place">
-          <Place key={p.placeID} place={p} expandedDay={p.expandedDay} />
-        </section>
-      )
+      expandedPlace = <Place key={p.placeID} place={p} />
       if ( props.viewport.isWide || props.viewport.isUltrawide ){
         const place = {
           ...p,
-          isExpanded: false
+          isExpanded: false,
+          hasExpandedView: true
         }
-        collapsedPlace = <Place key={p.placeID} place={place} expandedDay={p.expandedDay} />
+        collapsedPlace = <Place key={p.placeID} place={place} />
       }
       return collapsedPlace
     } else {
-      return <Place key={p.placeID} place={p} expandedDay={p.expandedDay} />
+      return <Place key={p.placeID} place={p} />
     }
   })
 
   return (
     <main className='main clearfix'>
       {
-        expandedPlace
+        <section className="expanded-place">
+          {expandedPlace}
+        </section>
       }
       {
         places.length > 0 && 

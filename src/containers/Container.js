@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { FormattedMessage } from 'react-intl'
 
 import { showMap } from '_actions/changePlaces'
 import { changeLang } from '_actions/langChange'
@@ -7,8 +8,7 @@ import { changeLang } from '_actions/langChange'
 import PlaceList from '_components/PlaceList'
 import MapComponent from '_components/MapComponent'
 
-import HeaderTitle from '_translation/HeaderTitle'
-import BtnPlaces from '_translation/BtnPlaces'
+import { BTN_PLACES, TITLE } from '_intl/defaultMessages.json'
 
 import { VERY_NARROW_MAX_WIDTH, MINIMAL_WIDTH } from '_constants/viewportWidths'
 
@@ -31,9 +31,11 @@ class Container extends Component {
             <img src="/img/poweredby.png" className='header__img' />
           </a>
           <button onClick={langHandler} className='header__button header__button--lang'>{lang.toUpperCase()}</button>
-          <BtnPlaces showMap={showMap} />
+          <button onClick={showMap} className='header__button'>
+            <FormattedMessage { ...BTN_PLACES } />
+          </button>
           <span className='header__title'>
-            <HeaderTitle />
+            <FormattedMessage { ...TITLE } className={'header__title'} />
           </span>
         </header>
         

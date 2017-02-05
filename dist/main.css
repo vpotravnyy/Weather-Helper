@@ -77,11 +77,13 @@ body * {
   min-width: 200px;
   background-color: #eee;
   border: 1px solid #ccc;
-  box-shadow: 0 1px 5px #ccc;
+  box-shadow: 0 0 3px 1px  #ccc;
   padding: 3px;
   vertical-align: top;
 }
-
+.hasExpandedView {
+  box-shadow: 0 0 5px 2px #55f;
+}
 .place__title {
   position: relative;
   padding: 7px;
@@ -313,8 +315,6 @@ body * {
   border-left: none;
 }
 
-place_expanded
-
 .is_very_narrow .collapsed_place {
   margin: 0 2px 6px 0;
 }
@@ -409,12 +409,6 @@ place_expanded
   fill: #696969;
 }
 
-.expanded-place {
-  background-color: yellow;
-}
-.collapsed-places {
-  background-color: lightblue;
-}
 .is_very_narrow .expanded-place,
 .is_very_narrow .collapsed-places {
   padding: 6px 0 0 2px;
