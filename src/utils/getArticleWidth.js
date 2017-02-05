@@ -1,9 +1,10 @@
 import { MINIMAL_WIDTH, WIDE_MAX_WIDTH } from '_constants/viewportWidths'
 
 export default (viewport) => {
-  const width = width < MINIMAL_WIDTH ? MINIMAL_WIDTH
-              : width > WIDE_MAX_WIDTH ? WIDE_MAX_WIDTH
+  const width = viewport.width < MINIMAL_WIDTH ? MINIMAL_WIDTH
+              : viewport.width > WIDE_MAX_WIDTH ? WIDE_MAX_WIDTH
               : viewport.width
+  console.log('getArticleWidth: ', width, MINIMAL_WIDTH )
   let forExpandedPlace = null, forCollapsedPlace = null
   if ( viewport.isVeryNarrow ){
     forExpandedPlace = forCollapsedPlace = width - 4
