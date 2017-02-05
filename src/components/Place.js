@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { FormattedMessage } from 'react-intl'
+import moment from 'moment'
+import 'moment-timezone'
 
 import { expandPlace, collapsePlace } from '_actions/expandPlace'
 import { expandDay, collapseDay } from '_actions/expandDay'
@@ -15,12 +17,16 @@ import ExpandIcon from '_icons/ExpandIcon'
 
 import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
 import scrollToTop from '_utils/scrollToTop'
+import formatMinutesToHhMm from '_utils/formatMinutesToHhMm'
 
 import { MINIMAL_WIDTH, WIDE_MAX_WIDTH } from '_constants/viewportWidths'
 
 const Place = (props) => {
   const viewport = props.viewport
   const timezone = props.place.weather ? props.place.weather.timezone : null
+  const gmtOffset = timezone
+    ? ' GMT' + formatMinutesToHhMm(-moment.tz.zone(timezone).offset(Date.now()))
+    : ''
   const placeName = props.place.placeName === "Current position"
     ? <FormattedMessage { ...CURRENT_POSITION } />
     : <span>{props.place.placeName}</span>
@@ -106,6 +112,7 @@ const Place = (props) => {
       
       <div className='place__title' onClick={expandHandler}>
         { placeName }
+        <span className='gmt-offset' >{ gmtOffset }</span>
         <br/>
         { !areHoursRenderingWithinDay(viewport) && <i> { expandPlaceName } </i> }
         <div className='place__expand-icon place__expand-icon--place'>

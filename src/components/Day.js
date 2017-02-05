@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
-import 'moment-timezone'
 import { connect } from 'react-redux'
 import { FormattedMessage } from 'react-intl'
 

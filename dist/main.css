@@ -93,6 +93,11 @@ body * {
   font-weight: bold;
   font-size: 1.1em;
 }
+.place__title .gmt-offset {
+  font-weight: normal;
+  float: right;
+  font-size: 0.8em;
+}
 .place__expand-icon {
   position: absolute;
   width: 2.3em;

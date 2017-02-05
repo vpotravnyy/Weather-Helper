@@ -12,7 +12,6 @@ export default function Hourly (props) {
   const time = moment.tz(props.day * 1000, props.timezone)
   const hours = props.hourly.data.reduce((memo, item) => {
     const hour = moment.tz(item.time * 1000, props.timezone)
-    console.log('Hourly: ', hour.format())
     if( time.isSame(hour, 'day')
      || time.isSame(moment.tz(item.time * 1000 - 1, props.timezone), 'day') ) {
       memo.push( <Hour key={item.time} hour={item} timezone={props.timezone} /> )
