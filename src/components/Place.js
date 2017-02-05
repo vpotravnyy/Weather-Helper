@@ -18,8 +18,7 @@ import ExpandIcon from '_icons/ExpandIcon'
 import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
 import scrollToTop from '_utils/scrollToTop'
 import formatMinutesToHhMm from '_utils/formatMinutesToHhMm'
-
-import { MINIMAL_WIDTH, WIDE_MAX_WIDTH } from '_constants/viewportWidths'
+import getArticleWidth from '_utils/getArticleWidth'
 
 const Place = (props) => {
   const viewport = props.viewport
@@ -91,7 +90,7 @@ const Place = (props) => {
           />
         )
       })
-      width = getArticleWidth().expandedPlace
+      width = getArticleWidth(viewport).forExpandedPlace
     } else {
       const curr = props.place.weather.currently
       children = (
@@ -102,7 +101,7 @@ const Place = (props) => {
           onClick={expandHandler}
         />
       )
-      width = getArticleWidth().collapsedPlace
+      width = getArticleWidth(viewport).forCollapsedPlace
       addClass += props.place.hasExpandedView ? ' hasExpandedView' : ''
     }
   }
@@ -128,30 +127,6 @@ const Place = (props) => {
 
     </article>
   )
-  function getArticleWidth(){
-    const width = width < MINIMAL_WIDTH ? MINIMAL_WIDTH
-      : width > WIDE_MAX_WIDTH ? WIDE_MAX_WIDTH
-        : viewport.width
-    let expandedPlace = null, collapsedPlace = null
-    if ( viewport.isVeryNarrow ){
-      expandedPlace = collapsedPlace = width - 4
-    } else if ( viewport.isNarrow ) {
-      expandedPlace = collapsedPlace = width - 8
-    } else if ( viewport.isMiddle ) {
-      expandedPlace = width - 16
-      collapsedPlace = (width - 24) / 2
-    } else if ( viewport.isWide ) {
-      expandedPlace = width * 0.7 - 16
-      collapsedPlace = width * 0.3 - 16
-    } else if ( viewport.isUltrawide ) {
-      expandedPlace = width * 0.7 - 16
-      collapsedPlace = width * 0.3 - 16
-    }
-    return {
-      expandedPlace,
-      collapsedPlace
-    }
-  }
 }
 
 Place.propTypes = {

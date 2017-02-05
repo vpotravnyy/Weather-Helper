@@ -3,19 +3,20 @@ import Place from '_components/Place'
 import { connect } from 'react-redux'
 
 const PlaceList = (props) => {
-  let expandedPlace = null, collapsedPlace = null
+  let expandedPlace = null
   const places = props.places.map(p => {
     if (p.isExpanded) {
       expandedPlace = <Place key={p.placeID} place={p} />
       if ( props.viewport.isWide || props.viewport.isUltrawide ){
-        const place = {
+        const data = {
           ...p,
           isExpanded: false,
           hasExpandedView: true
         }
-        collapsedPlace = <Place key={p.placeID} place={place} />
+        return <Place key={p.placeID} place={data} />
+      } else {
+        return null
       }
-      return collapsedPlace
     } else {
       return <Place key={p.placeID} place={p} />
     }

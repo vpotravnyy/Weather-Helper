@@ -1,55 +1,29 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { FormattedMessage } from 'react-intl'
 
 import { showMap } from '_actions/changePlaces'
 import { changeLang } from '_actions/langChange'
 
+import Header from '_components/Header'
 import PlaceList from '_components/PlaceList'
 import MapComponent from '_components/MapComponent'
 
-import { BTN_PLACES, TITLE } from '_intl/defaultMessages.json'
-
-import { VERY_NARROW_MAX_WIDTH, MINIMAL_WIDTH } from '_constants/viewportWidths'
-
 class Container extends Component {
   render () {
-    const {
-      lang,
-      showMap,
-      changeLang,
-      isMapVisible,
-      viewport
-    } = this.props
-    const langHandler = changeLang.bind(null, lang)
-    const addClass = isMapVisible ? " blur-me" : ''
+    const { isMapVisible } = this.props
 
     return (
       <div className='container' >
-        <header className={'header' + addClass} style={fontSize()}>
-          <a href="https://darksky.net/poweredby/" target="_blank" className='header__link'>
-            <img src="/img/poweredby.png" className='header__img' />
-          </a>
-          <button onClick={langHandler} className='header__button header__button--lang'>{lang.toUpperCase()}</button>
-          <button onClick={showMap} className='header__button'>
-            <FormattedMessage { ...BTN_PLACES } />
-          </button>
-          <span className='header__title'>
-            <FormattedMessage { ...TITLE } className={'header__title'} />
-          </span>
-        </header>
-        
+        <Header
+          lang={this.props.lang}
+          showMap={this.props.showMap}
+          changeLang={this.props.changeLang}
+          viewport={this.props.viewport}
+          isMapVisible={isMapVisible}
+        />
         { isMapVisible ? <MapComponent /> : <PlaceList /> }
       </div>
     )
-
-    function fontSize(){
-      if ( viewport.isVeryNarrow && viewport.width >= MINIMAL_WIDTH ) {
-        return { fontSize: 1.4 * viewport.width / VERY_NARROW_MAX_WIDTH + 'em' }
-      } else if ( viewport.isVeryNarrow && viewport.width < MINIMAL_WIDTH) {
-        return { fontSize: 1.4 * MINIMAL_WIDTH / VERY_NARROW_MAX_WIDTH + 'em' }
-      } else return null
-    }
   }
 }
 
