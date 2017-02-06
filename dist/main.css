@@ -446,3 +446,8 @@ body * {
   width: 70%;
   vertical-align: top;
 }
+.tips {
+  white-space: pre-wrap;
+  font-style: italic;
+  color: #696969;
+}

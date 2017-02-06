@@ -9,7 +9,7 @@ import PlaceList from '_components/PlaceList'
 import MapComponent from '_components/MapComponent'
 
 class Container extends Component {
-  render () {
+  render() {
     const { isMapVisible } = this.props
 
     return (
@@ -21,7 +21,14 @@ class Container extends Component {
           viewport={this.props.viewport}
           isMapVisible={isMapVisible}
         />
-        { isMapVisible ? <MapComponent /> : <PlaceList /> }
+        {
+          isMapVisible
+            ? <MapComponent />
+            : <PlaceList
+                places={this.props.places}
+                viewport={this.props.viewport}
+              />
+        }
       </div>
     )
   }
@@ -31,21 +38,23 @@ Container.propTypes = {
   lang: PropTypes.string.isRequired,
   showMap: PropTypes.func.isRequired,
   changeLang: PropTypes.func.isRequired,
-  viewport: PropTypes.object.isRequired
+  viewport: PropTypes.object.isRequired,
+  places: PropTypes.object.isRequired
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     lang: state.lang,
     isMapVisible: state.isMapVisible,
-    viewport: state.viewport
+    viewport: state.viewport,
+    places: state.places
   }
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
-    showMap: () => dispatch( showMap() ),
-    changeLang: () => dispatch( changeLang() )
+    showMap: () => dispatch(showMap()),
+    changeLang: () => dispatch(changeLang())
   }
 }
 

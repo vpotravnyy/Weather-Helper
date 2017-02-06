@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react'
+import { FormattedMessage } from 'react-intl'
+
 import Place from '_components/Place'
-import { connect } from 'react-redux'
+
+import { TIPS } from '_intl/defaultMessages.json'
 
 const PlaceList = (props) => {
   let expandedPlace = null
   const places = props.places.map(p => {
     if (p.isExpanded) {
       expandedPlace = <Place key={p.placeID} place={p} />
-      if ( props.viewport.isWide || props.viewport.isUltrawide ){
+      //  For big screen show expanded place twice - expanded AND collapsed
+      if (props.viewport.isWide || props.viewport.isUltrawide) {
         const data = {
           ...p,
           isExpanded: false,
@@ -17,22 +21,31 @@ const PlaceList = (props) => {
       } else {
         return null
       }
+
     } else {
       return <Place key={p.placeID} place={p} />
     }
+
   })
 
   return (
     <main className='main clearfix'>
       {
+        expandedPlace &&
         <section className="expanded-place">
           {expandedPlace}
         </section>
       }
       {
-        places.length > 0 && 
+        places.length > 0 &&
         <section className="collapsed-places clearfix">
           {places}
+          {
+            places.length === 1 &&
+            <div className="tips">
+              <FormattedMessage { ...TIPS } />
+            </div>
+          }
         </section>
       }
     </main>
@@ -44,11 +57,4 @@ PlaceList.propTypes = {
   viewport: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state) {
-  return {
-    places: state.places,
-    viewport: state.viewport
-  }
-}
-
-export default connect(mapStateToProps)(PlaceList)
+export default PlaceList

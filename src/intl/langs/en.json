@@ -9,5 +9,6 @@
   "WIND_SPEED": " {speed}m/s",
   "WIND_SPEED_UNIT": "m/s",
   "PRECIP_INTENSITY_UNIT": "mm/h",
-  "NOW": "Now"
+  "NOW": "Now",
+  "TIPS": "\nFeel free to:\n\n- expand/collapse place clicking on place name ('Current position');\n\n- expand/collapse day clicking on day with arrow above bottom line;\n\n- add/remove places using button 'Place'; \n\n- change language using button 'EN'."
 }
