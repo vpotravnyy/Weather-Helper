@@ -6,7 +6,7 @@ import { changeLang } from '_actions/langChange'
 
 import Header from '_components/Header'
 import PlaceList from '_components/PlaceList'
-import MapComponent from '_components/MapComponent'
+import MapContainer from '_containers/MapContainer'
 
 class Container extends Component {
   render() {
@@ -23,7 +23,7 @@ class Container extends Component {
         />
         {
           isMapVisible
-            ? <MapComponent />
+            ? <MapContainer />
             : <PlaceList
                 places={this.props.places}
                 viewport={this.props.viewport}
@@ -39,7 +39,7 @@ Container.propTypes = {
   showMap: PropTypes.func.isRequired,
   changeLang: PropTypes.func.isRequired,
   viewport: PropTypes.object.isRequired,
-  places: PropTypes.object.isRequired
+  places: PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {

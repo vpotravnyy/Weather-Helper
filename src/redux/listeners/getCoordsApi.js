@@ -1,4 +1,4 @@
-import { getCoords } from '_actions/actions'
+import { getCoords } from '_actions/getCoords'
 
 export default function getCoordsApiInit ( store ) {
   getCoordsApiData( store )

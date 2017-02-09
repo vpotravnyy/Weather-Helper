@@ -1,4 +1,4 @@
-import { getWeather } from '_actions/actions'
+import { getWeather } from '_actions/getWeather'
 
 export default function getWeatherApiInit ( store ) {
   getWeatherApi( store )

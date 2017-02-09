@@ -7,7 +7,6 @@ import WeatherIcons from '_icons/WeatherIcons'
 import CollapseIcon from '_icons/CollapseIcon'
 import ExpandIcon from '_icons/ExpandIcon'
 
-import WeatherSummary from '_components/WeatherSummary'
 import CalendarDay from '_components/CalendarDay'
 import Temperature from '_components/Temperature'
 import WindAndPrecip from '_components/WindAndPrecip'
@@ -17,33 +16,34 @@ import areHoursRenderingWithinDay from '_utils/areHoursRenderingWithinDay'
 
 import { NOW } from '_intl/defaultMessages.json'
 
-function Day (props) {
+function Day(props) {
 
   const day = props.day
   const time = moment.tz(day.time * 1000, props.timezone)
-  let dayOfWeek = time.isSame(moment(), 'day')
-   ? time.calendar().split(' ')[0]
-   : time.format("ddd")
-  dayOfWeek =  props.daily ? dayOfWeek : <FormattedMessage { ...NOW } />
+  const dayOfWeek = !props.daily
+    ? <FormattedMessage { ...NOW } />
+    : time.isSame(moment(), 'day')
+      ? time.calendar().split(' ')[0]
+      : time.format("ddd")
   const dateOrTime = props.daily ? time.format("DD.MM") : ""
-  const style = props.onClick || !props.daily ? { cursor: 'pointer' } : {}
+  const style = props.onClick || !props.daily ? { cursor: 'pointer' } : null
 
   const expandCollapseIcon = props.onClick
     ? (
-        <div className='place__expand-icon place__expand-icon--day'>
-          {props.expanded && <CollapseIcon/>}
-          {!props.expanded && props.onClick && <ExpandIcon/>}
-        </div>
-      )
+      <div className='place__expand-icon place__expand-icon--day'>
+        {props.expanded && <CollapseIcon />}
+        {!props.expanded && props.onClick && <ExpandIcon />}
+      </div>
+    )
     : null
 
   let daySummary = null
-  if ( areHoursRenderingWithinDay(props.viewport) ) {
-    daySummary = <WeatherSummary summary={day.summary} />
+  if (areHoursRenderingWithinDay(props.viewport)) {
+    daySummary = <p className="day__summary"> {day.summary} </p>
   }
 
   let dayHourly = null
-  if ( areHoursRenderingWithinDay(props.viewport) && props.expanded ) {
+  if (areHoursRenderingWithinDay(props.viewport) && props.expanded) {
     dayHourly = (
       <Hourly
         day={day.time}
@@ -55,7 +55,7 @@ function Day (props) {
     )
   }
 
-  return(
+  return (
     <div className="day_wrapper clearfix">
       <div className="day" onClick={props.onClick} style={style} >
         {daySummary}
@@ -67,7 +67,7 @@ function Day (props) {
             <WeatherIcons iconName={day.icon} />
           </div>
           <div className='day-tile__item day-tile__item-temperature'>
-            <Temperature day={day} daily={props.daily} />
+            <Temperature day={day} daily={props.daily} viewport={props.viewport} />
           </div>
           <div className='day-tile__item day-tile__item-wind_and_precip'>
             <WindAndPrecip day={day} viewport={props.viewport} />
@@ -81,18 +81,13 @@ function Day (props) {
 }
 
 Day.propTypes = {
-  day: PropTypes.object.isRequired,
-  viewport: PropTypes.object.isRequired,
-  expanded: PropTypes.bool,
-  onClick: PropTypes.func,
   daily: PropTypes.bool,
-  timezone: PropTypes.string
+  day: PropTypes.object.isRequired,
+  expanded: PropTypes.bool,
+  hourly: PropTypes.object,
+  onClick: PropTypes.func,
+  timezone: PropTypes.string.isRequired,
+  viewport: PropTypes.object.isRequired
 }
 
-function mapStateToProps(state){
-  return {
-    viewport: state.viewport
-  }
-}
-
-export default connect( mapStateToProps )( Day )
+export default Day

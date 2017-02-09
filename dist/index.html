@@ -24,10 +24,12 @@
           window.language = source.substr(0, 2)
         }
         var google = document.createElement("script")
-        google.src = "/google?language=" + window.language + "&libraries=places"
+        google.src = window.location.href + "google?language=" + window.language + "&libraries=places"
         document.head.appendChild(google)
+        var bundle = document.createElement("script")
+        bundle.src = window.location.href + "bundle.js"
+        document.head.appendChild(bundle)
       })()
     </script>
-    <script src="/bundle.js" async defer></script>
   </body>
 </html>

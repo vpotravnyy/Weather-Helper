@@ -50,10 +50,4 @@ Temperature.propTypes = {
   viewport: PropTypes.object.isRequired
 }
 
-function mapStateToProps (state) {
-  return {
-    viewport: state.viewport
-  }
-}
-
-export default connect(mapStateToProps)(Temperature)
+export default Temperature

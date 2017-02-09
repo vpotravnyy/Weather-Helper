@@ -75,10 +75,26 @@ export default function (places = initialState.places, action) {
       return setCoords(places, undefined, undefined, true)
 
     case GET_COORDS_SUCCESS:
-      return setCoords(places, action.payload.location.lat, action.payload.location.lng, false)
+      if( action.payload.error ){
+        alert( action.payload.msg )
+        return places
+      } else if ( action.error ) {
+        alert( action.payload.message, action.payload.name )
+        return places
+      } else {
+        return setCoords(places, action.payload.location.lat, action.payload.location.lng, false)
+      }
 
     case GET_COORDS_FAILURE:
-      return setCoords(places, "error", "error", false)
+      if( action.payload.error ){
+        alert( action.payload.msg )
+        return places
+      } else if ( action.error ) {
+        alert( action.payload.message, action.payload.name )
+        return places
+      } else {
+        return setCoords(places, "error", "error", false)
+      }
 
     case GET_WEATHER_REQUEST:
       if(action.error){
@@ -89,13 +105,21 @@ export default function (places = initialState.places, action) {
 
     case GET_WEATHER_SUCCESS:
       if(action.error){
-        return setWeather(places, action.meta, 'error', false)
+        alert( 'Get weather error!' )
+        return places
+      } else if( action.payload.error ){
+        alert( action.payload.msg )
+        return places
+      } else if ( action.error ) {
+        alert( action.payload.message, action.payload.name )
+        return places
       } else {
         return setWeather(places, action.meta, action.payload, false)
       }
 
     case GET_WEATHER_FAILURE:
-      return setWeather(places, action.meta, action.payload, false)
+      alert( 'Get weather failure!' )
+      return places
 
     default:
       return places

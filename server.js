@@ -4,7 +4,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
 var config = require('./webpack.config')
 var secret = require('./secret.json')
-var request = require('request')
+var proxy = require('express-http-proxy')
 var Express = require('express')
 var app = new Express()
 var port = 3127
@@ -13,50 +13,40 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
-app.use('/weather', function(req, res){
-  if( isTrusted(req, res) ){
-    var apiServerHost = "https://api.darksky.net/forecast/" + secret.darksky
-    var url = apiServerHost + req.url
-    req.pipe( request(url) ).pipe( res )
+app.use('/weather', proxy("https://api.darksky.net/forecast/", {
+  forwardPath: function(req, res){
+    if( isTrusted(req, res) ){
+      return "https://api.darksky.net/forecast/" + secret.darksky + req.url
+    } else sendDeclineMsg(res)
   }
-})
-app.use('/coords', function(req, res){
-  if( isTrusted(req, res) ){
-    var apiServerHost = "https://www.googleapis.com/geolocation/v1/geolocate?key=" + secret.google
-    var url = apiServerHost
-    req.pipe( request(url) ).pipe( res )
+}))
+app.use('/coords', proxy("https://www.googleapis.com/geolocation/v1/geolocate?key=", {
+  forwardPath: function(req, res){
+    if( isTrusted(req, res) ){
+      return "https://www.googleapis.com/geolocation/v1/geolocate?key=" + secret.google
+    } else {
+      sendDeclineMsg(res)
+      return null
+    }
   }
-})
-app.use('/google', function(req, res){
-  if( isTrusted(req, res) ){
-    var apiServerHost = "https://maps.googleapis.com/maps/api/js?key=" + secret.google +"&"+ req._parsedUrl.query
-    var url = apiServerHost
-    req.pipe( request(url) ).pipe( res )
+  // ,intercept: function(rsp, data, req, res, callback) {
+  //   data = JSON.parse(data.toString('utf8'));
+  //   console.log("intercept: ", JSON.stringify(data))
+  //   callback(null, JSON.stringify(data))
+  // }  
+}))
+app.use('/google', proxy("https://maps.googleapis.com/maps/api/js?key=", {
+  forwardPath: function(req, res){
+    if( isTrusted(req, res) ){
+      return "https://maps.googleapis.com/maps/api/js?key=" + secret.google +"&"+ req._parsedUrl.query
+    } else {
+      sendDeclineMsg(res)
+      return null
+    }
   }
-})
+}))
 
 app.use(Express.static(__dirname + '/dist'))
-
-// Catch all requests and forward them to index.html
-// app.use(function (req, res) {
-//   var file,
-//       type
-//   switch (req.url) {
-//     case "/main.css":
-//       file = __dirname + '/dist/main.css'
-//       type = 'text/css'
-//       break;
-//     default:
-//       file = __dirname + '/dist/index.html'
-//       type = 'text/html'
-//       break;
-//   }
-//   fs.readFile(file, (err, indexData) => {
-//     if (err) throw err
-//     res.set('Content-Type', type)
-//     res.send(indexData)
-//   })
-// })
 
 app.listen(port, function (error) {
   if (error) {
@@ -68,11 +58,13 @@ app.listen(port, function (error) {
 
 function isTrusted(req, res){
   if(secret.corsWhiteList.indexOf( req.header('Referer') ) === -1) {
-    res.json({
-      error: true,
-      msg: 'Cross origin requests are not allowed.'
-    })
     return false
   }
   else return true
+}
+function sendDeclineMsg(res){
+  return res.json({
+    "error": true,
+    "msg": "Cross origin requests are not allowed."
+  })
 }

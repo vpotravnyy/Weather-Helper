@@ -2,3 +2,4 @@ node_modules
 initial
 .vscode
 secret.json
+prodServer

@@ -98,6 +98,9 @@ body * {
   float: right;
   font-size: 0.8em;
 }
+.place__title i {
+  font-size: 0.95em;
+}
 .place__expand-icon {
   position: absolute;
   width: 2.3em;
@@ -359,7 +362,10 @@ body * {
   text-align: center;
 }
 
-
+.map_container {
+  width: 100%;
+  height: 100%;
+}
 .map,
 .map_blur-background {
   position: absolute;
@@ -404,6 +410,14 @@ body * {
 }
 .infowindow__content {
   text-align: center;
+}
+.infowindow__btn {
+  border: none;
+  margin: 3px;
+  border-radius: 0.1em;
+  box-shadow: 1px 1px 1.2px 1.2px #aaa;
+  background-color: #f3f3f3;
+  padding: 3px 10px;
 }
 .close-control {
   margin-right: 10px;

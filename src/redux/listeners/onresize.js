@@ -1,4 +1,4 @@
-import { onWindowResize } from '_actions/actions'
+import { onWindowResize } from '_actions/onWindowResize'
 import getViewPort from '_utils/getViewPort'
 
 

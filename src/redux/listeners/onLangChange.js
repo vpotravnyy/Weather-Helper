@@ -1,5 +1,6 @@
 import moment from 'moment'
-import { getWeather } from '_actions/actions'
+import 'moment-timezone'
+import { getWeather } from '_actions/getWeather'
 import {
   EN,
   UK,
