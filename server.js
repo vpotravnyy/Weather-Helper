@@ -57,9 +57,7 @@ app.listen(port, function (error) {
 })
 
 function isTrusted(req, res){
-  if(secret.corsWhiteList.indexOf( req.header('Referer') ) === -1) {
-    return false
-  }
+  if(secret.corsWhiteList.indexOf( req.header('Referer') ) === -1)  return false
   else return true
 }
 function sendDeclineMsg(res){
