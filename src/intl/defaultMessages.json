@@ -14,9 +14,9 @@
     "defaultMessage": "Enter new place name:",
     "description": "Promt user to define name of new position"
   },
-  "WHAT_ARE_YOU_LOOKING_FOR": {
-    "id": "WHAT_ARE_YOU_LOOKING_FOR",
-    "defaultMessage": "What are you looking for?",
+  "WHAT_PLACE_WOULD_YOU_ADD": {
+    "id": "WHAT_PLACE_WOULD_YOU_ADD",
+    "defaultMessage": "What place would you add?",
     "description": "Search Box placeholder"
   },
   "BTN_PLACES": {

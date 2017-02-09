@@ -3,3 +3,4 @@ initial
 .vscode
 secret.json
 prodServer
+npm-debug.log

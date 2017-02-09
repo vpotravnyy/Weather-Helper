@@ -1,3 +1,11 @@
+import initialState from '_redux/initState'
+
+import addRemovePlaces from '_reducers/addRemovePlaces'
+import expandCollapsePlace from '_reducers/expandCollapsePlace'
+import expandCollapseDay from '_reducers/expandCollapseDay'
+import getCoords from '_reducers/getCoords'
+import getWeather from '_reducers/getWeather'
+
 import {
   ADD_PLACE,
   REMOVE_PLACE,
@@ -13,139 +21,33 @@ import {
   GET_WEATHER_FAILURE
 } from '_constants/actions'
 
-import getNewPlaceId from '_utils/getNewPlaceId'
-import initialState from '_redux/initState'
-
-export default function (places = initialState.places, action) {
+export default function placeReducer (places = initialState.places, action) {
+  
   switch (action.type) {
 
     case ADD_PLACE:
-      var newID = getNewPlaceId(places)
-      return [
-        ...places,
-        {
-          "placeName": action.placeName,
-          "placeID": newID,
-          "lat": action.lat,
-          "lng": action.lng,
-          "weather": null,
-          "isExpanded": false,
-          "expandedDay": -1
-        }
-      ]
-
     case REMOVE_PLACE:
-      return places.filter(item => item.placeID !== action.placeID)
+      return addRemovePlaces(places, action)
 
     case EXPAND_PLACE:
-      return places.map(item => {
-        return {
-          ...item,
-          isExpanded: item.placeID === action.placeID,
-          expandedDay: -1
-        }
-      })
-
     case COLLAPSE_PLACE:
-      return places.map(item => {
-        return {
-          ...item,
-          isExpanded: false,
-          expandedDay: -1
-        }
-      })
+      return expandCollapsePlace(places, action)
 
     case EXPAND_DAY:
-      return places.map(item => {
-        return {
-          ...item,
-          expandedDay: item.placeID === action.placeID ? action.dayIndex : -1
-        }
-      })
-
     case COLLAPSE_DAY:
-      return places.map(item => {
-        return {
-          ...item,
-          expandedDay: -1
-        }
-      })
+      return expandCollapseDay(places, action)
 
     case GET_COORDS_REQUEST:
-      return setCoords(places, undefined, undefined, true)
-
     case GET_COORDS_SUCCESS:
-      if( action.payload.error ){
-        alert( action.payload.msg )
-        return places
-      } else if ( action.error ) {
-        alert( action.payload.message, action.payload.name )
-        return places
-      } else {
-        return setCoords(places, action.payload.location.lat, action.payload.location.lng, false)
-      }
-
     case GET_COORDS_FAILURE:
-      if( action.payload.error ){
-        alert( action.payload.msg )
-        return places
-      } else if ( action.error ) {
-        alert( action.payload.message, action.payload.name )
-        return places
-      } else {
-        return setCoords(places, "error", "error", false)
-      }
+      return getCoords(places, action)
 
     case GET_WEATHER_REQUEST:
-      if(action.error){
-        return setWeather(places, action.meta, 'error', false)
-      } else {
-        return setWeather(places, action.meta, null, true)
-      }
-
     case GET_WEATHER_SUCCESS:
-      if(action.error){
-        alert( 'Get weather error!' )
-        return places
-      } else if( action.payload.error ){
-        alert( action.payload.msg )
-        return places
-      } else if ( action.error ) {
-        alert( action.payload.message, action.payload.name )
-        return places
-      } else {
-        return setWeather(places, action.meta, action.payload, false)
-      }
-
     case GET_WEATHER_FAILURE:
-      alert( 'Get weather failure!' )
-      return places
+      return getWeather(places, action)
 
     default:
       return places
   }
-}
-
-function setCoords (places, lat, lng, isFetching) {
-  return places.map(p => {
-    if(p.placeID === 0){
-      return {
-        ...p,
-        "lat": lat,
-        "lng": lng,
-        'isFetching': isFetching
-      }
-    } else return p
-  })
-}
-function setWeather (places, placeID, payload, isFetching) {
-  return places.map(p => {
-    if(p.placeID === placeID){
-      return {
-        ...p,
-        "weather": payload,
-        'isFetching': isFetching
-      }
-    } else return p
-  })
 }

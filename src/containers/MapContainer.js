@@ -17,7 +17,7 @@ import {
   BTN_REMOVE,
   CURRENT_POSITION,
   ENTER_NEW_PLACE_NAME,
-  WHAT_ARE_YOU_LOOKING_FOR
+  WHAT_PLACE_WOULD_YOU_ADD
 } from '_intl/defaultMessages.json'
 
 class MapComponent extends Component {
@@ -136,7 +136,7 @@ class MapComponent extends Component {
           id="pac-input"
           className="controls search"
           type="text"
-          placeholder={this.formatMessage( WHAT_ARE_YOU_LOOKING_FOR )}
+          placeholder={this.formatMessage( WHAT_PLACE_WOULD_YOU_ADD )}
           ref={searchInput => {
             if( this.searchInput || !searchInput ) return
             this.searchInput = searchInput
