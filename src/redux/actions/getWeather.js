@@ -13,7 +13,7 @@ export const getWeather = (props) => {
     lng,
     lang
   } = props
-  
+
   return {
     [CALL_API]: {
       endpoint: "weather/"+ lat +","+ lng +"?units=si&lang="+ lang +"&exclude=minutely,flags",
@@ -26,15 +26,15 @@ export const getWeather = (props) => {
       types: [
         {
           type: GET_WEATHER_REQUEST,
-          meta: placeID
+          meta: { placeID }
         },
         {
           type: GET_WEATHER_SUCCESS,
-          meta: placeID
+          meta: { placeID }
         },
         {
           type: GET_WEATHER_FAILURE,
-          meta: placeID
+          meta: { placeID }
         }
       ]
     }

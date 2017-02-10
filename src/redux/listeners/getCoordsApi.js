@@ -9,7 +9,7 @@ function getCoordsApiData (store) {
   const { places } = store.getState()
 
   if(!places[0].lat && !places[0].isFetching){
-    store.dispatch( getCoords() )
+    store.dispatch( getCoords(0) )
   }
 
 }
