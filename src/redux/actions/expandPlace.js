@@ -10,8 +10,9 @@ export const expandPlace = (placeID) => {
   }
 }
 
-export const collapsePlace = () => {
+export const collapsePlace = (placeID) => {
   return {
-    type: COLLAPSE_PLACE
+    type: COLLAPSE_PLACE,
+    placeID
   }
 }

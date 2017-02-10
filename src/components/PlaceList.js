@@ -11,7 +11,7 @@ const PlaceList = (props) => {
   const expandedPlace = props.places.filter(p => p.isExpanded)[0]
   const collapsedPlaces = props.places
     .filter(p => (
-      isViewportWide() ? true : !p.isExpanded
+      isViewportWide(props.viewport) ? true : !p.isExpanded
     ))
     .map(p => !p.isExpanded ? p : {
       ...p,
