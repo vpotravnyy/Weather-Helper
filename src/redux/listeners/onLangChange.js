@@ -1,13 +1,9 @@
 import moment from 'moment'
 import 'moment-timezone'
 import { getWeather } from '_actions/getWeather'
-import {
-  EN,
-  UK,
-  RU
-} from '_constants/languages'
+import languages from '_constants/languages'
 
-moment.locale([EN, UK, RU])
+moment.locale(languages)
 
 let oldLang = undefined
 
@@ -34,7 +30,7 @@ function changeLang (store) {
     })
 
     moment.locale( lang )
-    
+
     oldLang = lang
   }
 }

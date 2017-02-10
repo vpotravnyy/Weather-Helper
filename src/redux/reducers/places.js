@@ -1,4 +1,4 @@
-import initialState from '_redux/initState'
+import getInitialState from '_redux/getInitialState'
 
 import addRemovePlaces from '_reducers/addRemovePlaces'
 import expandCollapsePlace from '_reducers/expandCollapsePlace'
@@ -21,8 +21,9 @@ import {
   GET_WEATHER_FAILURE
 } from '_constants/actions'
 
-export default function placeReducer (places = initialState.places, action) {
-  
+const initialState = getInitialState().places
+
+export default function placeReducer (places = initialState, action) {
   switch (action.type) {
 
     case ADD_PLACE:

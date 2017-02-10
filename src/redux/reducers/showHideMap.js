@@ -1,8 +1,10 @@
 import { SHOW_MAP, HIDE_MAP } from '_constants/actions'
 
-import initialState from '_redux/initState'
+import getInitialState from '_redux/getInitialState'
 
-export default function (isMapVisible = initialState.isMapVisible, action) {
+const initialState = getInitialState().isMapVisible
+
+export default function (isMapVisible = initialState, action) {
   switch (action.type) {
 
     case SHOW_MAP:
