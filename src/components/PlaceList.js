@@ -5,49 +5,41 @@ import PlaceContainer from '_containers/PlaceContainer'
 
 import { TIPS } from '_intl/defaultMessages.json'
 
+const isViewportWide = viewport => viewport.isWide || viewport.isUltrawide
+
 const PlaceList = (props) => {
-  let expandedPlace = null
-  const places = props.places.map(p => {
-    if (p.isExpanded) {
-      expandedPlace = <PlaceContainer key={p.placeID} place={p} />
-      //  For big screen show expanded place twice - expanded AND collapsed
-      if (props.viewport.isWide || props.viewport.isUltrawide) {
-        const data = {
-          ...p,
-          isExpanded: false,
-          hasExpandedView: true
-        }
-        return <PlaceContainer key={p.placeID} place={data} />
-      } else {
-        return null
-      }
-
-    } else {
-      return <PlaceContainer key={p.placeID} place={p} />
-    }
-
-  })
+  const expandedPlace = props.places.filter(p => p.isExpanded)[0]
+  const collapsedPlaces = props.places
+    .filter(p => (
+      isViewportWide() ? true : !p.isExpanded
+    ))
+    .map(p => !p.isExpanded ? p : {
+      ...p,
+      isExpanded: false,
+      hasExpandedView: true
+    })
 
   return (
     <main className='main clearfix'>
-      {
-        expandedPlace &&
-        <section className="expanded-place">
-          {expandedPlace}
+      {expandedPlace && (
+        <section className='expanded-place'>
+          <PlaceContainer place={expandedPlace} />
         </section>
-      }
-      {
-        places.length > 0 &&
-        <section className="collapsed-places clearfix">
-          {places}
-          {
-            places.length === 1 &&
-            <div className="tips">
-              <FormattedMessage { ...TIPS } />
-            </div>
-          }
+      )}
+
+      {collapsedPlaces.length && (
+        <section className='collapsed-places clearfix'>
+          {collapsedPlaces.map(p => (
+            <PlaceContainer key={p.placeID} place={p} />
+          ))}
         </section>
-      }
+      )}
+
+      {collapsedPlaces.length === 1 && ( // I've broke nesting - fix ur styles
+        <div className='tips'>
+          <FormattedMessage {...TIPS} />
+        </div>
+      )}
     </main>
   )
 }
