@@ -16,7 +16,7 @@ export const getWeather = (props) => {
 
   return {
     [CALL_API]: {
-      endpoint: "weather/"+ lat +","+ lng +"?units=si&lang="+ lang +"&exclude=minutely,flags",
+      endpoint: `weather/${lat},${lng}?units=si&lang=${lang}&exclude=minutely,flags`,
       method: 'GET',
       headers: {
         'Accept': 'text/plain',
