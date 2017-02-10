@@ -5,32 +5,27 @@ import languages from '_constants/languages'
 
 moment.locale(languages)
 
-let oldLang = undefined
-
-export default function onLangChangeListener ( store ) {
-  changeLang( store )
-  return store.subscribe(() => { changeLang( store ) })
+export default function onLangChangeListener (store) {
+  changeLang(store)
+  return store.subscribe(() => {
+    const states = store.liftedStore.getState().computedStates
+    const oldState = states[states.length - 2].state
+    const newState = states[states.length - 1].state
+    if (oldState.lang !== newState.lang) {
+      changeLang(store)
+    }
+  })
 }
+
+const hasWeather = place => place.lat > -90 && place.lat < 90 && place.weather !== null && !place.isFetching
 
 function changeLang (store) {
   const { lang, places } = store.getState()
+  moment.locale(lang)
 
-  if( lang !== oldLang ){
-
-    places.forEach( p => {
-    if(p.lat > -90 && p.lat < 90 && p.weather !== null && !p.isFetching){
-        const props = {
-          placeID: p.placeID,
-          lat: p.lat,
-          lng: p.lng,
-          lang: lang
-        }
-        store.dispatch( getWeather(props) )
-      }
-    })
-
-    moment.locale( lang )
-
-    oldLang = lang
-  }
+  places
+    .filter(hasWeather)
+    .forEach(({ placeID, lat, lng }) =>
+      store.dispatch(getWeather({ placeID, lat, lng, lang })
+    ))
 }

@@ -1,23 +1,18 @@
 import { getWeather } from '_actions/getWeather'
 
-export default function getWeatherApiInit ( store ) {
-  getWeatherApi( store )
-  return store.subscribe(() => { getWeatherApi( store ) })
+export default function getWeatherApiInit (store) {
+  getWeatherApi(store)
+  return store.subscribe(() => { getWeatherApi(store) })
 }
+
+const needWeather = place => place.weather === null && !place.isFetching && place.lat > -90 && place.lat < 90
 
 function getWeatherApi (store) {
   const { places, lang } = store.getState()
 
-  places.forEach( p => {
-    if(p.lat > -90 && p.lat < 90 && p.weather === null && !p.isFetching){
-      const props = {
-        placeID: p.placeID,
-        lat: p.lat,
-        lng: p.lng,
-        lang: lang
-      }
-      store.dispatch( getWeather(props) )
-    }
-  })
-
+  places
+    .filter(needWeather)
+    .forEach(({ placeID, lat, lng }) =>
+      store.dispatch(getWeather({ placeID, lat, lng, lang })
+    ))
 }
