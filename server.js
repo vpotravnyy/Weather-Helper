@@ -5,6 +5,7 @@ var webpackHotMiddleware = require('webpack-hot-middleware')
 var config = require('./webpack.config')
 var secret = require('./secret.json')
 var proxy = require('express-http-proxy')
+var includes = require('lodash/includes')
 var Express = require('express')
 var app = new Express()
 var port = 3127
@@ -36,7 +37,7 @@ app.use('/coords', proxy("https://www.googleapis.com/geolocation/v1/geolocate?ke
   //   data = JSON.parse(data.toString('utf8'));
   //   console.log("intercept: ", JSON.stringify(data))
   //   callback(null, JSON.stringify(data))
-  // }  
+  // }
 }))
 app.use('/google', proxy("https://maps.googleapis.com/maps/api/js?key=", {
   forwardPath: function(req, res){
@@ -60,7 +61,7 @@ app.listen(port, function (error) {
 })
 
 function isTrusted(referer){
-  return secret.corsWhiteList.includes(referer)
+  return includes(secret.corsWhiteList, referer)
 }
 function sendDeclineMsg(res){
   res.json({
